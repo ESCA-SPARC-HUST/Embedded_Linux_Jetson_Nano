@@ -52,7 +52,7 @@ int initialize(int sound_stream, int sample_format, int sample_rate, int channel
 
 
 
-int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample) { 
+int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording) { 
     // Implement recording audio until the end time set 
     // Allocate buffer for audio data
     char *buffer = (char *)malloc(frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels);
@@ -83,17 +83,15 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     
     // Record audio data 
     int err;
-    int n = 0;
-    while (n < 500) {
+    while (*recording == 1) {
         if (err = snd_pcm_readi(handle, buffer, frame_to_capture) != frame_to_capture) {
             printf("Error reading from PCM device: %s\n", snd_strerror(err));
             break;
         }
-
+        printf("recording\n");
         // Write the recorded audio data to the output file
         fwrite(buffer, sizeof(char) , frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels, output_file);
         // printf("Recording! %d\n", n);
-        n++;
     }
     printf("Recording stopped.\nFinish!!");
 
@@ -112,7 +110,6 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     fclose(output_file);
     free(buffer);
     printf("Recording finished. Audio saved to recorded.wav\n");
-    // printf("TIME RECORDED: %d seconds\n", duration);
     return EXIT_SUCCESS;
 }
 

@@ -19,43 +19,33 @@ int CHANNELS = 2;
 int BITS_PER_SAMPLE  = 16;
 int SAMPLE_FORMAT = SND_PCM_FORMAT_S16_LE; 
 
-int LIFE_TIME = 0;
-int STOP = 0;
-int START = 0, END = 0; 
-int wait_t = 0;
-// int status = 0;
+
+// control recoding status
+int* recording;
+int status = 0;;
+
 
 
 //define for multi-threading
-int check = 0;
-pthread_t tid1, tid2, tid3;
+pthread_t tid1, tid2;
 pthread_attr_t attr;
 
 
-void* handler2 (void* data) {
+void *recording_handler (void* data) {
     initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
-    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE);
+    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording);
     snd_pcm_close(handle);
 }
 
 
-void* handler3 (void* data) {
-    pthread_t tid = pthread_self();
-    printf("Hello from thread 3, the process: %u\n", getpid());
-
-}
-
-
-
-
-
-void* handler1 (void* data) {
-     int server_fd, new_socket;
+void* main_socket (void* data) {
+    int server_fd, new_socket;
     ssize_t valread;
     struct sockaddr_in address;
     int opt = 1;
+    recording = &status;
     socklen_t addrlen = sizeof(address);
-    char tcp_queue[1024] = { 0 };
+    char buffer[8] = { 0 };
  
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -95,43 +85,35 @@ void* handler1 (void* data) {
         perror("accept");
         exit(EXIT_FAILURE);
     }
-
-    if(fork() == 0) {
-
-    valread = read(new_socket, tcp_queue,
-                   1024 - 1); // subtract 1 for the null
+    valread = read(new_socket, buffer,
+                   8 - 1); // subtract 1 for the null
                               // terminator at the end
-    printf("%s\n", tcp_queue);
-    if(strcmp(tcp_queue, "start") == 0) {
-        if(pthread_create(&tid2, NULL, handler2, NULL)) {
+    printf("The buffer: %s\n", buffer);
+    if(strcmp(buffer, "start") == 0) {
+        status = 1;
+        if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
         perror("Failure!");
         exit(2);
     }
     }
-    if(strcmp(tcp_queue, "end") == 0) {
-        if(pthread_create(&tid3, NULL, handler3, NULL)) {
-        perror("Failure!");
-        exit(3);
+    if(strcmp(buffer, "end") == 0) {
+        status = 0;
     }
-    }
-    sleep(5);
+    for(int i = 0; i < 7; ++i)
+        buffer[i] = NULL;
+    // sleep(5);
     // closing the connected socket
     close(new_socket);
-    }
-    else {
-    // closing the listening socket
-    close(new_socket);
-    }
-
     }
     return 0;
 }
 
 
+
 int main(int argc, char * argv[])
 {
-    // void* status;
-    if(pthread_create(&tid1, NULL, handler1, NULL)) {
+    void* status;
+    if(pthread_create(&tid1, NULL, main_socket, NULL)) {
         perror("Failure!");
         exit(1);
     }
