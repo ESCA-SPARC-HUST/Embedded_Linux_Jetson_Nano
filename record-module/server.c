@@ -22,7 +22,7 @@ int SAMPLE_FORMAT = SND_PCM_FORMAT_S16_LE;
 
 // control recoding status
 int* recording;
-int status = 0;;
+int status = 0;
 
 
 
