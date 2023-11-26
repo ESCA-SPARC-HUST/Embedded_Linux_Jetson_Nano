@@ -10,6 +10,7 @@ QT += widgets
 SOURCES += \
         component/chart/audiochart.cpp \
         controller/audiocontroller.cpp \
+        controller/monitorbackend.cpp \
         core/audioengine.cpp \
         main.cpp
 
@@ -30,5 +31,6 @@ HEADERS += \
     component/chart/audiochart.h \
     config/config.h \
     controller/audiocontroller.h \
+    controller/monitorbackend.h \
     core/audiochart.h \
     core/audioengine.h
