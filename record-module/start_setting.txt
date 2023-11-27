@@ -1,5 +1,5 @@
 /home/minkeisme/Workplace/SPARC/ESCA/Embedded_Linux_Jetson_Nano/record-module/data
-10000
+96000
 16
 2
 2

@@ -23,8 +23,9 @@ int TIME_RECORD = 5;
 char RECORD_LOCATION[BUFFER_SIZE/4];
 
 // control recoding status
-int* recording;
-int status = 0;
+int *recording;
+int status = 0; 
+
 
 //define for multi-threading
 pthread_t tid1, tid2;
@@ -55,6 +56,7 @@ int main(int argc, char * argv[]) {
 }
 
 void setup() {
+    recording = &status; 
     FILE* file = fopen("start_setting.txt", "r");
     char content[BUFFER_SIZE/4];
     fseek(file, 0, SEEK_SET);
@@ -108,6 +110,7 @@ void *recording_handler (void* data) {
     initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
     implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
     snd_pcm_close(handle);
+    return NULL;
 }
 
 void* main_socket (void* data) {
@@ -115,7 +118,6 @@ void* main_socket (void* data) {
     ssize_t valread;
     struct sockaddr_in address;
     int opt = 1;
-    recording = &status;
     socklen_t addrlen = sizeof(address);
     char buffer[BUFFER_SIZE] = { 0 };
  
@@ -188,6 +190,14 @@ void* main_socket (void* data) {
             SAMPLE_RATE = atoi(content);
             strcat(content, "\n");
             update_settings(2, content);
+            // if (status == 1) {
+            //     status = 0; 
+            //     status = 1;
+            //     if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
+            //         perror("Re-recording failed");
+            //         exit(2);
+            //     }
+            // }
             // debug();
         } 
         else if(command == SAMPLE_WIDTH) {
