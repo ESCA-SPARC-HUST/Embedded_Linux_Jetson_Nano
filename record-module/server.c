@@ -6,11 +6,10 @@
 #include <string.h>
 #include <sys/socket.h>
 #include "record.h"
-#include "command.h"
+
 
 //define for socket
 #define PORT 8080
-#define BUFFER_SIZE 1024
 
 // define for collecting data
 #define FRAME_TO_CAPTURE 1024
@@ -20,11 +19,12 @@ int CHANNELS = 2;
 int BITS_PER_SAMPLE  = 16;
 int SAMPLE_FORMAT = SND_PCM_FORMAT_S16_LE; 
 
-char RECORD_LOCATION[BUFFER_SIZE/4];
 
 // control recoding status
 int* recording;
 int status = 0;
+
+
 
 //define for multi-threading
 pthread_t tid1, tid2;
@@ -33,7 +33,7 @@ pthread_attr_t attr;
 
 void *recording_handler (void* data) {
     initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
-    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
+    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording);
     snd_pcm_close(handle);
 }
 
@@ -45,7 +45,7 @@ void* main_socket (void* data) {
     int opt = 1;
     recording = &status;
     socklen_t addrlen = sizeof(address);
-    char buffer[BUFFER_SIZE] = { 0 };
+    char buffer[8] = { 0 };
  
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -78,52 +78,32 @@ void* main_socket (void* data) {
 
     while(1) {
 
-        if ((new_socket
-            = accept(server_fd, (struct sockaddr*)&address,
-                    &addrlen))
-            < 0) {
-            perror("accept");
-            exit(EXIT_FAILURE);
-        }
-        valread = read(new_socket, buffer,
-                    BUFFER_SIZE - 1); // subtract 1 for the null
-                                // terminator at the end
-        printf("The buffer: %s\n", buffer);
-
-        char content[BUFFER_SIZE/4];
-        char command;
-        sscanf(buffer, "-%c^%s", &command, content);
-        printf("Command: %c\n", command);
-        printf("Content: %s\n", content);
-
-        if(command == START) {
-            status = 1;
-            if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
-                perror("Failure!");
-                exit(2);
-            }
-        }
-        else if(command == END) {
-            status = 0;
-        }
-        else if(command == LOCATION) {
-            strcpy(RECORD_LOCATION, content); 
-            printf("Location: %s\n", RECORD_LOCATION);
-        }
-        else if(command == NCHANNELS) {
-            CHANNELS = atoi(content);
-        }
-        else if(command == FRAME_RATE) {
-            SAMPLE_RATE = atoi(content);
-        } 
-        else if(command == SAMPLE_WIDTH) {
-            BITS_PER_SAMPLE = atoi(content);
-        }
-
-        for(int i = 0; i < BUFFER_SIZE; ++i) buffer[i] = 0;
-        // sleep(5);
-        // closing the connected socket
-        close(new_socket);
+    if ((new_socket
+         = accept(server_fd, (struct sockaddr*)&address,
+                  &addrlen))
+        < 0) {
+        perror("accept");
+        exit(EXIT_FAILURE);
+    }
+    valread = read(new_socket, buffer,
+                   8 - 1); // subtract 1 for the null
+                              // terminator at the end
+    printf("The buffer: %s\n", buffer);
+    if(strcmp(buffer, "start") == 0) {
+        status = 1;
+        if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
+        perror("Failure!");
+        exit(2);
+    }
+    }
+    if(strcmp(buffer, "end") == 0) {
+        status = 0;
+    }
+    for(int i = 0; i < 7; ++i)
+        buffer[i] = NULL;
+    // sleep(5);
+    // closing the connected socket
+    close(new_socket);
     }
     return 0;
 }

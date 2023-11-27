@@ -52,7 +52,7 @@ int initialize(int sound_stream, int sample_format, int sample_rate, int channel
 
 
 
-int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording, char location[]) { 
+int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording) { 
     // Implement recording audio until the end time set 
     // Allocate buffer for audio data
     char *buffer = (char *)malloc(frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels);
@@ -67,7 +67,7 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     time_t curr;  
     time(&curr);
     struct tm* curr_t = localtime(&curr);
-    sprintf(filename, "%s/audio-%d-%d-%d_%02d%02d%02d.wav", location, curr_t->tm_year + 1900, curr_t->tm_mon + 1, curr_t->tm_mday, curr_t->tm_hour, curr_t->tm_min, curr_t->tm_sec);
+    sprintf(filename, "/home/gianghandsome/record-module/Embedded_Linux_Jetson_Nano/record-module/data/audio-%d-%d-%d_%02d%02d%02d.wav", curr_t->tm_year + 1900, curr_t->tm_mon + 1, curr_t->tm_mday, curr_t->tm_hour, curr_t->tm_min, curr_t->tm_sec);
     FILE *output_file = fopen(filename, "wb");
     if (output_file == NULL) {
         printf("Cannot open output file\n");
