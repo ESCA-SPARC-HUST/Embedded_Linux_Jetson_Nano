@@ -6,14 +6,20 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+
+#define BUFFER_SIZE 1024 
 #define PORT 8080
  
 int main(int argc, char const* argv[])
 {
+    char message[BUFFER_SIZE];
+
+    strcpy(message, argv[1]); 
+    printf("%s\n", message);
+
     int status, valread, client_fd;
     struct sockaddr_in serv_addr;
-    char* hello = "end";
-    char buffer[1024] = { 0 };
+    char buffer[BUFFER_SIZE] = { 0 };
     if ((client_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Socket creation error \n");
         return -1;
@@ -38,9 +44,9 @@ int main(int argc, char const* argv[])
         printf("\nConnection Failed \n");
         return -1;
     }
-    send(client_fd, hello, strlen(hello), 0);
-    printf("Hello message sent\n");
-    valread = read(client_fd, buffer, 1024 - 1); // subtract 1 for the null terminator at the end
+    send(client_fd, message, strlen(message), 0);
+    printf("\"message\" message sent\n");
+    valread = read(client_fd, buffer, BUFFER_SIZE - 1); // subtract 1 for the null terminator at the end
     printf("%s\n", buffer);
  
     // closing the connected socket
