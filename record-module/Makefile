@@ -1,8 +1,7 @@
 CC=gcc
 CFLAGS=-I.
 
-server: server.c record.c
+all: server.c record.c client.c
 	$(CC) -o server server.c record.c -lasound -lpthread $(CFLAGS)
-	
-client: client.c
 	$(CC) -o client client.c -lpthread $(CFLAGS)
+	
