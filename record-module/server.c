@@ -223,6 +223,8 @@ void* main_socket (void* data) {
         // sleep(5);
         // closing the connected socket
         close(new_socket);
+
+        usleep(100000);
     }
     return 0;
 }

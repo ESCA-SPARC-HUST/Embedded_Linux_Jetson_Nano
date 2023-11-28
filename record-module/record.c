@@ -56,7 +56,7 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     long weight = 0;
     // Implement recording audio until the end time set 
     // Allocate buffer for audio data
-    char *buffer = malloc(frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels);
+    char *buffer = (char *)malloc(frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels);
     
     if (buffer == NULL) {
         printf("Cannot allocate buffer\n");
@@ -82,7 +82,7 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     double anchor;
     // Start recording
     printf("Recording started.\n");
-    
+
     // Record audio data 
     int err;
     while (*recording == 1) {
@@ -100,7 +100,9 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     fseek(output_file, 0L, SEEK_END);         
   
     // calculating the size of the file 
-    long int data_size = ftell(output_file); 
+    unsigned long int data_size = ftell(output_file);
+
+    printf("Data size: %ld\n\n", data_size);     
 
     // Write the WAV header to the file
     fseek(output_file, 0L, SEEK_SET);
