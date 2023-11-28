@@ -34,7 +34,6 @@ pthread_attr_t attr;
 void *main_socket (void* data);
 void *recording_handler (void* data);
 void setup();
-void update_settings(int n, char replace_content[]);
 
 // void debug() {
 //     printf("Location: %s\n", RECORD_LOCATION);
@@ -56,7 +55,6 @@ int main(int argc, char * argv[]) {
 }
 
 void setup() {
-    recording = &status; 
     FILE* file = fopen("start_setting.txt", "r");
     char content[BUFFER_SIZE/4];
     fseek(file, 0, SEEK_SET);
@@ -90,30 +88,21 @@ void setup() {
     fclose(file);
 }
 
-void update_settings(int n, char replace_content[]) {
-    FILE *file = fopen("start_setting.txt", "r");
-    char content[16][128];
-    int no_line = 1; 
-    while (fgets(content[no_line], sizeof(content[no_line]), file)) {
-        no_line++; 
-    }
-    fclose(file);
-    strcpy(content[n], replace_content);
-    file = fopen("start_setting.txt", "w");
-    for(int i = 1; i < no_line; i++) {
-        fputs(content[i], file);
-    }
-    fclose(file);
-}
-
 void *recording_handler (void* data) {
     initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
     implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
     snd_pcm_close(handle);
-    return NULL;
+    pthread_exit(NULL); 
+}
+
+void *debugger(void *data) {
+    initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
+    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
+    snd_pcm_close(handle);
 }
 
 void* main_socket (void* data) {
+    recording = &status; 
     int server_fd, new_socket;
     ssize_t valread;
     struct sockaddr_in address;
@@ -165,59 +154,25 @@ void* main_socket (void* data) {
 
         if(command == START) {
             status = 1;
+            // if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
+            //     perror("Failure!");
+            //     exit(2);
+            // }
+            pthread_create(&tid2, NULL, debugger, NULL);;
+        }
+        else if(command == END) {
+            status = 0;
+        }
+        else if(command == UPDATE) {
+            status = 0;
+            printf("\nUpdated!\n");
+            setup();
             if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
                 perror("Failure!");
                 exit(2);
             }
         }
-        else if(command == END) {
-            status = 0;
-        }
-        else if(command == LOCATION) {
-            strcpy(RECORD_LOCATION, content); 
-            printf("Location: %s\n", RECORD_LOCATION);
-            strcat(content, "\n");
-            update_settings(1, content);
-            // debug();
-        }
-        else if(command == NCHANNELS) {
-            CHANNELS = atoi(content);
-            strcat(content, "\n");
-            update_settings(5, content);
-            // debug();
-        }
-        else if(command == FRAME_RATE) {
-            SAMPLE_RATE = atoi(content);
-            strcat(content, "\n");
-            update_settings(2, content);
-            // if (status == 1) {
-            //     status = 0; 
-            //     status = 1;
-            //     if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
-            //         perror("Re-recording failed");
-            //         exit(2);
-            //     }
-            // }
-            // debug();
-        } 
-        else if(command == SAMPLE_WIDTH) {
-            BITS_PER_SAMPLE = atoi(content);
-            strcat(content, "\n");
-            update_settings(3, content);
-            // debug();
-        }
-        else if(command == SFORMAT) {
-            SAMPLE_FORMAT = atoi(content);
-            strcat(content, "\n");
-            update_settings(4, content);
-            // debug();
-        }
-        else if(command == RECORD_DURATION) {
-            TIME_RECORD = atoi(content);
-            strcat(content, "\n");
-            update_settings(5, content);
-            // debug();
-        }
+        
 
         for(int i = 0; i < BUFFER_SIZE; ++i) buffer[i] = 0;
         // sleep(5);

@@ -9,6 +9,7 @@
 #define END 'E' // command syntax: -
 #define LOCATION 'L'
 #define SFORMAT 'f'
+#define UPDATE 'U'
 
 // #define CANCEL_SCHEDULE "CSH"// command syntax:   -CSH
 

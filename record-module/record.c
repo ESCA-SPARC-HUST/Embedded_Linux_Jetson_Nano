@@ -1,8 +1,6 @@
 #include "record.h"
 
-
 int initialize(int sound_stream, int sample_format, int sample_rate, int channels) {
-
     int err;
     // Open the PCM device for recording
     if ((err = snd_pcm_open(&handle, "default", sound_stream, 0)) < 0) {
@@ -53,7 +51,6 @@ int initialize(int sound_stream, int sample_format, int sample_rate, int channel
 
 
 int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording, char location[]) { 
-    long weight = 0;
     // Implement recording audio until the end time set 
     // Allocate buffer for audio data
     char *buffer = (char *)malloc(frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels);
@@ -77,9 +74,6 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     }
     free(filename);
 
-    // Get the current time
-    time_t mark = time(NULL);
-    double anchor;
     // Start recording
     printf("Recording started.\n");
 
@@ -111,7 +105,7 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     // Clean up
     fclose(output_file);
     free(buffer);
-    printf("Recording finished. Audio saved to recorded.wav\n");
+    printf("Recording finished.\n");
     return EXIT_SUCCESS;
 }
 
