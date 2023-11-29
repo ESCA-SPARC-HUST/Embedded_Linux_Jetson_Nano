@@ -7,8 +7,10 @@ double MonitorBackend::getDisk() {
     return static_cast<double>(storage.bytesTotal()-storage.bytesAvailable())/storage.bytesTotal() * 100;
 }
 
+//----------------------------------------
+// Some function for ram/cpu/gpu
+//----------------------------------------
 
-// Some func for ram
 int MonitorBackend::parseLine(char* line){
     // This assumes that a digit will be found and the line ends in " Kb".
     int i = strlen(line);
@@ -18,7 +20,8 @@ int MonitorBackend::parseLine(char* line){
     i = atoi(p);
     return i;
 }
-double MonitorBackend::getRam(){ //Note: this value is in KB!
+double MonitorBackend::getRam(){
+    //Note: this value is in KB!
     FILE* file = fopen("/proc/meminfo", "r");
     int memFree = -1;
     int memTotal = -1;
@@ -88,12 +91,10 @@ MonitorBackend::MonitorBackend(QObject *parent) : QObject(parent) {
         disk_m_steps = getDisk();
         disk_usage = disk_m_steps;
 
-
-
         // Both
-        cpuChanged();
-        ramChanged();
-        diskChanged();
+        emit cpuChanged();
+        emit ramChanged();
+        emit diskChanged();
     });
 }
 
