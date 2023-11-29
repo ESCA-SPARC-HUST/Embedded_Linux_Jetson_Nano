@@ -169,9 +169,11 @@ void* main_socket (void* data) {
         }
         else if(command == UPDATE) {
             setup();
-            if(pthread_create(&ih1, NULL, interupt_handle1, NULL)) {
-                perror("Failure!");
-                exit(2);
+            if (status == 1) {
+                if(pthread_create(&ih1, NULL, interupt_handle1, NULL)) {
+                    perror("Failure!");
+                    exit(2);
+                }
             }
         }
         
