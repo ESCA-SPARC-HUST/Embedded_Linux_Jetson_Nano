@@ -15,7 +15,6 @@ public:
     Q_PROPERTY(QString cpuText READ cpuText NOTIFY cpuChanged)
     Q_PROPERTY(int ramPercentage READ ramPercentage NOTIFY ramChanged)
     Q_PROPERTY(QString ramText READ ramText NOTIFY ramChanged)
-
     Q_PROPERTY(QString diskText READ diskText NOTIFY diskChanged)
 
 public:
@@ -24,7 +23,6 @@ public:
 signals:
     void cpuChanged();
     void ramChanged();
-
     void diskChanged();
 
 private:

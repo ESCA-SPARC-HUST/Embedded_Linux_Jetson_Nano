@@ -1,7 +1,105 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource lang="qml" prefix="/layout">
         <file>main.qml</file>
         <file>screen1.qml</file>
         <file>screen2.qml</file>
+        <file>screen3.qml</file>
+        <file>screen4.qml</file>
     </qresource>
+    <qresource prefix="/importComponent">
+        <file>BottomBar.qml</file>
+        <file>TopBar.qml</file>
+        <file>CpuFrame.qml</file>
+        <file>UsageTextElement.qml</file>
+    </qresource>
+    <qresource prefix="/assets/images">
+        <file>robot.png</file>
+        <file>backgroundElipse1.png</file>
+        <file>outlineElipse1.png</file>
+    </qresource>
+    <qresource prefix="/importCpp">
+        <file>QtQuick/Studio/Components/ArcArrow.qml</file>
+        <file>QtQuick/Studio/Components/ArcItem.qml</file>
+        <file>QtQuick/Studio/Components/BorderItem.qml</file>
+        <file>QtQuick/Studio/Components/FlipableItem.qml</file>
+        <file>QtQuick/Studio/Components/GroupItem.qml</file>
+        <file>QtQuick/Studio/Components/IsoItem.qml</file>
+        <file>QtQuick/Studio/Components/PieItem.qml</file>
+        <file>QtQuick/Studio/Components/plugins.qmltypes</file>
+        <file>QtQuick/Studio/Components/qmldir</file>
+        <file>QtQuick/Studio/Components/RectangleItem.qml</file>
+        <file>QtQuick/Studio/Components/StraightArrow.qml</file>
+        <file>QtQuick/Studio/Components/SvgPathItem.qml</file>
+        <file>QtQuick/Studio/Components/TriangleItem.qml</file>
+        <file>QtQuick/Studio/Effects/BlendEffect.qml</file>
+        <file>QtQuick/Studio/Effects/BlendItem.qml</file>
+        <file>QtQuick/Studio/Effects/BrightnessContrastEffect.qml</file>
+        <file>QtQuick/Studio/Effects/BrightnessContrastItem.qml</file>
+        <file>QtQuick/Studio/Effects/ColorizeEffect.qml</file>
+        <file>QtQuick/Studio/Effects/ColorizeItem.qml</file>
+        <file>QtQuick/Studio/Effects/ColorOverlayEffect.qml</file>
+        <file>QtQuick/Studio/Effects/ColorOverlayItem.qml</file>
+        <file>QtQuick/Studio/Effects/DesaturationEffect.qml</file>
+        <file>QtQuick/Studio/Effects/DesaturationItem.qml</file>
+        <file>QtQuick/Studio/Effects/DirectionalBlurEffect.qml</file>
+        <file>QtQuick/Studio/Effects/DirectionalBlurItem.qml</file>
+        <file>QtQuick/Studio/Effects/DisplaceEffect.qml</file>
+        <file>QtQuick/Studio/Effects/DisplaceItem.qml</file>
+        <file>QtQuick/Studio/Effects/DropShadowEffect.qml</file>
+        <file>QtQuick/Studio/Effects/DropShadowItem.qml</file>
+        <file>QtQuick/Studio/Effects/FastBlurEffect.qml</file>
+        <file>QtQuick/Studio/Effects/FastBlurItem.qml</file>
+        <file>QtQuick/Studio/Effects/GammaAdjustEffect.qml</file>
+        <file>QtQuick/Studio/Effects/GammaAdjustItem.qml</file>
+        <file>QtQuick/Studio/Effects/GaussianBlurEffect.qml</file>
+        <file>QtQuick/Studio/Effects/GaussianBlurItem.qml</file>
+        <file>QtQuick/Studio/Effects/GlowEffect.qml</file>
+        <file>QtQuick/Studio/Effects/GlowItem.qml</file>
+        <file>QtQuick/Studio/Effects/HueSaturationEffect.qml</file>
+        <file>QtQuick/Studio/Effects/HueSaturationItem.qml</file>
+        <file>QtQuick/Studio/Effects/InnerShadowEffect.qml</file>
+        <file>QtQuick/Studio/Effects/InnerShadowItem.qml</file>
+        <file>QtQuick/Studio/Effects/LevelAdjustEffect.qml</file>
+        <file>QtQuick/Studio/Effects/LevelAdjustItem.qml</file>
+        <file>QtQuick/Studio/Effects/MaskedBlurEffect.qml</file>
+        <file>QtQuick/Studio/Effects/MaskedBlurItem.qml</file>
+        <file>QtQuick/Studio/Effects/MaskItem.qml</file>
+        <file>QtQuick/Studio/Effects/OpacityMaskEffect.qml</file>
+        <file>QtQuick/Studio/Effects/OpacityMaskItem.qml</file>
+        <file>QtQuick/Studio/Effects/plugins.qmltypes</file>
+        <file>QtQuick/Studio/Effects/qmldir</file>
+        <file>QtQuick/Studio/Effects/RadialBlurEffect.qml</file>
+        <file>QtQuick/Studio/Effects/RadialBlurItem.qml</file>
+        <file>QtQuick/Studio/Effects/RecursiveBlurEffect.qml</file>
+        <file>QtQuick/Studio/Effects/RecursiveBlurItem.qml</file>
+        <file>QtQuick/Studio/Effects/RotationItem.qml</file>
+        <file>QtQuick/Studio/Effects/SaturationItem.qml</file>
+        <file>QtQuick/Studio/Effects/ThresholdMaskEffect.qml</file>
+        <file>QtQuick/Studio/Effects/ThresholdMaskItem.qml</file>
+        <file>QtQuick/Studio/Effects/ZoomBlurEffect.qml</file>
+        <file>QtQuick/Studio/Effects/ZoomBlurItem.qml</file>
+        <file>QtQuick/Studio/EventSimulator/EventSimulator.qml</file>
+        <file>QtQuick/Studio/EventSimulator/EventSimulatorDelegate.qml</file>
+        <file>QtQuick/Studio/EventSimulator/plugins.qmltypes</file>
+        <file>QtQuick/Studio/EventSimulator/qmldir</file>
+        <file>QtQuick/Studio/EventSystem/EventListener.qml</file>
+        <file>QtQuick/Studio/EventSystem/EventSystem.qml</file>
+        <file>QtQuick/Studio/EventSystem/plugins.qmltypes</file>
+        <file>QtQuick/Studio/EventSystem/qmldir</file>
+        <file>QtQuick/Studio/LogicHelper/AndOperator.qml</file>
+        <file>QtQuick/Studio/LogicHelper/BidirectionalBinding.qml</file>
+        <file>QtQuick/Studio/LogicHelper/MinMaxMapper.qml</file>
+        <file>QtQuick/Studio/LogicHelper/NotOperator.qml</file>
+        <file>QtQuick/Studio/LogicHelper/OrOperator.qml</file>
+        <file>QtQuick/Studio/LogicHelper/plugins.qmltypes</file>
+        <file>QtQuick/Studio/LogicHelper/qmldir</file>
+        <file>QtQuick/Studio/LogicHelper/RangeMapper.qml</file>
+        <file>QtQuick/Studio/LogicHelper/StringMapper.qml</file>
+        <file>QtQuick/Studio/MultiText/MultiTextElement.qml</file>
+        <file>QtQuick/Studio/MultiText/MultiTextException.qml</file>
+        <file>QtQuick/Studio/MultiText/MultiTextItem.qml</file>
+        <file>QtQuick/Studio/MultiText/plugins.qmltypes</file>
+        <file>QtQuick/Studio/MultiText/qmldir</file>
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
 </RCC>
