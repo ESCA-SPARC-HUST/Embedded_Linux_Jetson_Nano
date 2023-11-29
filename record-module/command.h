@@ -5,11 +5,12 @@
 #define SAMPLE_WIDTH 'B'// command syntax:   -SW value
 #define NCHANNELS 'C' // command syntax: -CNL value 
 #define MODE 'm' // command syntax: -m value
-#define START 'S' // command syntax: -
-#define END 'E' // command syntax: -
-#define LOCATION 'L'
-#define SFORMAT 'f'
-#define UPDATE 'U'
+#define START 'S' // command syntax: -S 
+#define END 'E' // command syntax: -E
+#define LOCATION 'L'// location of audio file: -L path
+#define SFORMAT 'f' // sample format: -f value
+#define UPDATE 'U' // update settings: -U 
+#define DEVICE 'D' // device select: -D device 
 
 // #define CANCEL_SCHEDULE "CSH"// command syntax:   -CSH
 

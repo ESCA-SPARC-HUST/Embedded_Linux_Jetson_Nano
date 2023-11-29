@@ -21,6 +21,7 @@ int BITS_PER_SAMPLE  = 16;
 int SAMPLE_FORMAT = SND_PCM_FORMAT_S16_LE; 
 int TIME_RECORD = 5; 
 char RECORD_LOCATION[BUFFER_SIZE/4];
+char device[36];
 
 // control recoding status
 int *recording;
@@ -28,12 +29,14 @@ int status = 0;
 
 
 //define for multi-threading
-pthread_t tid1, tid2;
+pthread_t ms, rc, ih1;
 pthread_attr_t attr;
+pthread_mutex_t lock; 
 
 void *main_socket (void* data);
 void *recording_handler (void* data);
 void setup();
+void *interupt_handle1(void *data);
 
 // void debug() {
 //     printf("Location: %s\n", RECORD_LOCATION);
@@ -46,12 +49,13 @@ void setup();
 
 int main(int argc, char * argv[]) {
     setup();
+    pthread_mutex_init(&lock, NULL);
     void* status;
-    if(pthread_create(&tid1, NULL, main_socket, NULL)) {
+    if(pthread_create(&ms, NULL, main_socket, NULL)) {
         perror("Failure!");
         exit(1);
     }
-    pthread_join(tid1, NULL);
+    pthread_join(ms, NULL);
 }
 
 void setup() {
@@ -59,6 +63,10 @@ void setup() {
     char content[BUFFER_SIZE/4];
     fseek(file, 0, SEEK_SET);
     
+    fgets(content, sizeof(content), file);
+    content[strlen(content)-1] = '\0';
+    strcpy(device, content);
+
     fgets(content, sizeof(content), file);
     content[strlen(content)-1] = '\0';
     strcpy(RECORD_LOCATION, content);
@@ -78,6 +86,7 @@ void setup() {
     fgets(content, sizeof(content), file);
     TIME_RECORD = atoi(content);
 
+    printf("Device: %s %ld\n", device, strlen(device));
     printf("Location: %s\n", RECORD_LOCATION);
     printf("Sample rate: %d\n", SAMPLE_RATE);
     printf("Sample width: %d\n", BITS_PER_SAMPLE);
@@ -89,16 +98,12 @@ void setup() {
 }
 
 void *recording_handler (void* data) {
-    initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
+    pthread_mutex_lock(&lock);
+    initialize(device, SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
     implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
     snd_pcm_close(handle);
+    pthread_mutex_unlock(&lock);
     pthread_exit(NULL); 
-}
-
-void *debugger(void *data) {
-    initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
-    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
-    snd_pcm_close(handle);
 }
 
 void* main_socket (void* data) {
@@ -154,20 +159,17 @@ void* main_socket (void* data) {
 
         if(command == START) {
             status = 1;
-            // if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
-            //     perror("Failure!");
-            //     exit(2);
-            // }
-            pthread_create(&tid2, NULL, debugger, NULL);;
+            if(pthread_create(&rc, NULL, recording_handler, NULL)) {
+                perror("Failure!");
+                exit(2);
+            }
         }
         else if(command == END) {
             status = 0;
         }
         else if(command == UPDATE) {
-            status = 0;
-            printf("\nUpdated!\n");
             setup();
-            if(pthread_create(&tid2, NULL, recording_handler, NULL)) {
+            if(pthread_create(&ih1, NULL, interupt_handle1, NULL)) {
                 perror("Failure!");
                 exit(2);
             }
@@ -182,4 +184,15 @@ void* main_socket (void* data) {
         usleep(100000);
     }
     return 0;
+}
+
+void *interupt_handle1(void *data) {
+    status = 0;
+    sleep(1);
+    status = 1; 
+    if(pthread_create(&rc, NULL, recording_handler, NULL)) {
+        perror("Failure!");
+        exit(2);
+    }
+    else printf("Handling\n");
 }

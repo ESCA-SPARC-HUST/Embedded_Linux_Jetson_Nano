@@ -1,9 +1,17 @@
 #include "record.h"
 
-int initialize(int sound_stream, int sample_format, int sample_rate, int channels) {
+int initialize(char device[], int sound_stream, int sample_format, int sample_rate, int channels) {
     int err;
     // Open the PCM device for recording
     if ((err = snd_pcm_open(&handle, "default", sound_stream, 0)) < 0) {
+        /*
+        parameters: address of the device pointer, Name device, Mode, number of extra configs
+        How to get the name of the device: 
+            Name device would follow the format "plughw:X,Y"
+            Using terminal command: arecord -l 
+                X is the card number, Y is the device number
+        */
+
         printf("Cannot open PCM device: %s\n", snd_strerror(err));
         return EXIT_FAILURE;
     }
@@ -61,7 +69,7 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     }
 
     // Open the output file
-    char *filename = malloc(sizeof(char) * 36);
+    char *filename = malloc(sizeof(char) * 256);
 
     time_t curr;  
     time(&curr);
@@ -106,6 +114,7 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     fclose(output_file);
     free(buffer);
     printf("Recording finished.\n");
+    *recording = 2; 
     return EXIT_SUCCESS;
 }
 

@@ -22,32 +22,33 @@ int main(int argc, char *argv[]) {
     printf("-%c %s\n", cmd, argv[2]);
     if(cmd == LOCATION) {
         strcat(argv[2], "\n");
-        write_settings(1, argv[2]);
+        write_settings(2, argv[2]);
         // debug();
     }
     else if(cmd == NCHANNELS) {
         strcat(argv[2], "\n");
-        write_settings(5, argv[2]);
+        write_settings(6, argv[2]);
         // debug();
     }
     else if(cmd == FRAME_RATE) {
         strcat(argv[2], "\n");
-        write_settings(2, argv[2]);
+        write_settings(3, argv[2]);
     } 
     else if(cmd == SAMPLE_WIDTH) {
         strcat(argv[2], "\n");
-        write_settings(3, argv[2]);
-        // debug();
+        write_settings(4, argv[2]);
     }
     else if(cmd == SFORMAT) {
         strcat(argv[2], "\n");
-        write_settings(4, argv[2]);
-        // debug();
+        write_settings(5, argv[2]);
     }
     else if(cmd == RECORD_DURATION) {
         strcat(argv[2], "\n");
-        write_settings(6, argv[2]);
-        // debug();
+        write_settings(7, argv[2]);
+    }
+    else if(cmd == DEVICE) {
+        strcat(argv[2], "\n");
+        write_settings(1, argv[2]);
     }
     send_command();
     return 0;

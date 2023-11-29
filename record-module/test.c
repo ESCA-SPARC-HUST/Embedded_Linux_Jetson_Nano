@@ -20,6 +20,7 @@ int BITS_PER_SAMPLE  = 16;
 int SAMPLE_FORMAT = SND_PCM_FORMAT_S16_LE; 
 int TIME_RECORD = 5; 
 char RECORD_LOCATION[BUFFER_SIZE/4];
+char device[10];
 int *recording;
 int status = 0; 
 
@@ -28,6 +29,10 @@ void setup() {
     char content[BUFFER_SIZE/4];
     fseek(file, 0, SEEK_SET);
     
+    fgets(content, sizeof(content), file);
+    content[strlen(content)-1] = '\0';
+    strcpy(device, content);
+
     fgets(content, sizeof(content), file);
     content[strlen(content)-1] = '\0';
     strcpy(RECORD_LOCATION, content);
@@ -47,6 +52,7 @@ void setup() {
     fgets(content, sizeof(content), file);
     TIME_RECORD = atoi(content);
 
+    printf("Device: %s %ld\n", device, strlen(device));
     printf("Location: %s\n", RECORD_LOCATION);
     printf("Sample rate: %d\n", SAMPLE_RATE);
     printf("Sample width: %d\n", BITS_PER_SAMPLE);
@@ -58,7 +64,7 @@ void setup() {
 }
 
 void *recording_handler (void* data) {
-    initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
+    initialize(device, SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
     implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
     snd_pcm_close(handle);
     pthread_exit(NULL); 
@@ -69,13 +75,13 @@ int main() {
     pthread_t thread; 
     pthread_attr_t attr;
     size_t stacksize;
-    pthread_attr_init(&attr);
-    pthread_attr_getstacksize(&attr, &stacksize);
-    pthread_attr_setstacksize(&attr, stacksize*10);
-    pthread_create(&thread, &attr,recording_handler, NULL);
-    pthread_join(thread, NULL);
-    // initialize(SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
-    // implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
-    // snd_pcm_close(handle);
-    printf("Thread stack size = %ld bytes \n", stacksize);
+    // pthread_attr_init(&attr);
+    // pthread_attr_getstacksize(&attr, &stacksize);
+    // pthread_attr_setstacksize(&attr, stacksize*10);
+    // pthread_create(&thread, &attr,recording_handler, NULL);
+    // pthread_join(thread, NULL);
+    initialize("plughw:2,0",SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
+    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
+    snd_pcm_close(handle);
+    // printf("Thread stack size = %ld bytes \n", stacksize);
 }
