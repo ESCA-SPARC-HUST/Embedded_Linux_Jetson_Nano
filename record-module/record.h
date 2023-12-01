@@ -34,8 +34,8 @@ snd_pcm_t *handle;
 // int status = 0;
 
 
-int initialize(int sound_stream, int sample_format, int sample_rate, int channels);
+int initialize(char device[], int sound_stream, int sample_format, int sample_rate, int channels);
 
-int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording);
+int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording, char location[]);
 
 void writeWAVHeader(FILE *file, unsigned int sampleRate, unsigned short num_CHANNELS, unsigned short bits_per_sample, unsigned int data_size);
