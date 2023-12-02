@@ -33,7 +33,7 @@ AudioController::AudioController(QObject *parent) : QObject{parent}
 
 QVector<float> AudioController::bufferData() const
 {
-    qDebug() << "bufferdata(): " << m_bufferData;
+//    qDebug() << "bufferdata(): " << m_bufferData;
     return m_bufferData;
 }
 
@@ -42,7 +42,7 @@ void AudioController::setbufferData(const QVector<float> &newBufferData)
     if (m_bufferData == newBufferData)
         return;
     m_bufferData = newBufferData;
-    //    qDebug() << "minh o set: " << m_bufferData;
+
     emit bufferDataChanged();
 }
 
