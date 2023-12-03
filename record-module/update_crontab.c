@@ -13,27 +13,35 @@
 #define SEND_PORT 8080 
 #define message "-u"
 #define filename "time_schedule.txt"
+#define path " /home/minkeisme/Workplace/SPARC/ESCA/Embedded_Linux_Jetson_Nano/record-module/client"
 
 void write_settings(int n, char replace_content[]);
 void send_command();
+void delete_schedule(int n);
+void add_schedule(char content[]);
 
 int main(int argc, char *argv[]) {
     char cmd;
     if (argc > 1) {
         sscanf(argv[1], "-%c", &cmd);
         for (int i = 0; i < strlen(argv[2]); i++) {
-            if (argv[2][i] == '_') argv[2][i] = ' ';   
+            if (argv[2][i] == ':') argv[2][i] = ' ';   
         }
         printf("-%c %s\n", cmd, argv[2]);
     } 
-    printf("-%c %s\n", cmd, argv[2]);
     if(cmd == START_TIME) {
-        strcat(argv[2], "\n");
-        write_settings(1, argv[2]);
+        strcat(argv[2], path);
+        strcat(argv[2], " -S");
+        add_schedule(argv[2]);
     }
     else if (cmd == END_TIME) {
-        strcat(argv[2], "\n");
-        write_settings(1, argv[2]);
+        strcat(argv[2], path);
+        strcat(argv[2], " -E");
+        add_schedule(argv[2]);
+    }
+    else if (cmd == DELETE_SCHEDULE) {
+        int No = atoi(argv[2]);
+        delete_schedule(No);
     }
     send_command();
     return 0;
@@ -68,19 +76,26 @@ void send_command() {
     // printf("%s\n", buffer);
 }
 
-void write_settings(int n, char replace_content[]) {
+void delete_schedule(int n) {
     FILE *file = fopen(filename, "r");
-    char content[16][128];
+    char content[256][256];
     int no_line = 1; 
     while (fgets(content[no_line], sizeof(content[no_line]), file)) {
         no_line++; 
     }
     fclose(file);
-    strcpy(content[n], replace_content);
     file = fopen(filename, "w");
     for(int i = 1; i < no_line; i++) {
+        if (i == n || i == n + 1 ) continue; 
         fputs(content[i], file);
     }
+    fclose(file);
+}
+
+void add_schedule(char content[]) {
+    FILE *file = fopen(filename, "a");
+    if (ftell(file) != 0) fprintf(file, "\n");
+    fputs(content, file);
     fclose(file);
 }
 

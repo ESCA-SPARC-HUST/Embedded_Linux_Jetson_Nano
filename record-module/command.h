@@ -12,6 +12,7 @@
 #define UPDATE 'U' // update settings: -U 
 #define DEVICE 'D' // device select: -D device 
 #define UPDATE_SCHEDULE 'u'
+#define DELETE_SCHEDULE 'd'
 
 // #define CANCEL_SCHEDULE "CSH"// command syntax:   -CSH
 

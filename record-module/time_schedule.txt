@@ -1,4 +1,0 @@
-21 00 * * * /home/minkeisme/Workplace/SPARC/ESCA/Embedded_Linux_Jetson_Nano/record-module/client -S
-22 00 * * * /home/minkeisme/Workplace/SPARC/ESCA/Embedded_Linux_Jetson_Nano/record-module/client -E
-18 01 * * * /home/minkeisme/Workplace/SPARC/ESCA/Embedded_Linux_Jetson_Nano/record-module/client -S
-20 01 * * * /home/minkeisme/Workplace/SPARC/ESCA/Embedded_Linux_Jetson_Nano/record-module/client -E
