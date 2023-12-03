@@ -29,7 +29,7 @@ int status = 0;
 
 
 //define for multi-threading
-pthread_t ms, rc, ih1;
+pthread_t ms, rc, ih1, sche;
 pthread_attr_t attr;
 pthread_mutex_t lock; 
 
@@ -37,6 +37,7 @@ void *main_socket (void* data);
 void *recording_handler (void* data);
 void setup();
 void *interupt_handle1(void *data);
+void *set_schedule(void *data);
 
 // void debug() {
 //     printf("Location: %s\n", RECORD_LOCATION);
@@ -98,6 +99,7 @@ void setup() {
 }
 
 void *recording_handler (void* data) {
+    printf("\nRecording running...\n\n");
     pthread_mutex_lock(&lock);
     initialize(device, SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
     implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
@@ -149,7 +151,7 @@ void* main_socket (void* data) {
         }
         valread = read(new_socket, buffer, BUFFER_SIZE - 1); // subtract 1 for the null
                                 // terminator at the end
-        printf("The buffer: %s\n", buffer);
+        printf("\nThe buffer: %s\n", buffer);
 
         char content[BUFFER_SIZE/4];
         char command;
@@ -176,6 +178,12 @@ void* main_socket (void* data) {
                 }
             }
         }
+        else if (command == UPDATE_SCHEDULE) {
+            if (pthread_create(&sche, NULL, set_schedule, NULL)) {
+                perror("Failure!");
+                exit(2);
+            }
+        }
         
 
         for(int i = 0; i < BUFFER_SIZE; ++i) buffer[i] = 0;
@@ -189,6 +197,7 @@ void* main_socket (void* data) {
 }
 
 void *interupt_handle1(void *data) {
+    printf("\nHandle1 is working\n\n");
     status = 0;
     sleep(1);
     status = 1; 
@@ -197,4 +206,22 @@ void *interupt_handle1(void *data) {
         exit(2);
     }
     else printf("Handling\n");
+}
+
+void *set_schedule(void *data) {
+    printf("\nSet schedule is working\n\n");
+    char buffer[256];
+    char command[256*31] = "echo '";
+    FILE *file = fopen("time_schedule.txt", "r");
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        if (buffer[strlen(buffer) - 1] == '\n') {
+            buffer[strlen(buffer) - 1] = '\0';
+        }
+        strcat(buffer, "\\n");
+        strcat(command, buffer);
+    }
+    strcat(command, "' | crontab -");
+    
+    printf("%s\n", command);
+    system(command);
 }

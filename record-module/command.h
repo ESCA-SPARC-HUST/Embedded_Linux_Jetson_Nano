@@ -11,6 +11,7 @@
 #define SFORMAT 'f' // sample format: -f value
 #define UPDATE 'U' // update settings: -U 
 #define DEVICE 'D' // device select: -D device 
+#define UPDATE_SCHEDULE 'u'
 
 // #define CANCEL_SCHEDULE "CSH"// command syntax:   -CSH
 
