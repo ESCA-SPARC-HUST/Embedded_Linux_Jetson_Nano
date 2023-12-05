@@ -33,6 +33,8 @@ AudioEngine::AudioEngine(const QAudioDeviceInfo &deviceInfoInput, QAudioFormat f
 
     for(int i =0; i < m_inputDevice.size(); ++i) {
         qDebug() << "Input Giang: " << m_inputDevice[i];
+
+        emit inputDevice(m_inputDevice);
     }
 
 

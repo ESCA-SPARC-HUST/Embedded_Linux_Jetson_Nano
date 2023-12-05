@@ -1,31 +1,12 @@
 import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
+import QtQuick.Controls 2.15
 
 Rectangle {
     id: frame_22
     width: 1024
     height: 500
-    color: "#272D37"
-    property alias element4Text: element4.text
-    property alias uInt8Text: uInt8.text
-    property alias frequenceText: frequence.text
-    property alias element1Text: element1.text
-    property alias save_audio_file_asText: save_audio_file_as.text
-    property alias sample_rateText: sample_rate.text
-    property alias choose_deviceText: choose_device.text
-    property alias hzText: hz.text
-    property alias view_dataText: view_data.text
-    property alias view_data3Text: view_data3.text
-    property alias sampleFormatText: sampleFormat.text
-    property alias home_nguyen_hai_minhText: home_nguyen_hai_minh.text
-    property alias code_decText: code_dec.text
-    property alias element5Text: element5.text
-    property alias element2Text: element2.text
-    property alias element3Text: element3.text
-    property alias view_data2Text: view_data2.text
-    property alias view_data1Text: view_data1.text
-    property alias default1Text: default1.text
-    property alias elementText: element.text
+    color: "#141619"
 
     Rectangle {
         id: rectangle_55
@@ -33,7 +14,7 @@ Rectangle {
         y: 0
         width: 1024
         height: 500
-        color: "#272D37"
+        color: "#262e4b"
         radius: 32
     }
 
@@ -45,51 +26,12 @@ Rectangle {
     }
 
     Image {
-        id: rectangle_69
-        x: 20
-        y: 402
-        source: "/ui/assets/rec.png"
-    }
-
-    Image {
         id: rectangle_58
         x: 20
-        y: 139
+        y: 120
+        width: 989
+        height: 80
         source: "/ui/assets/rec.png"
-    }
-
-    Image {
-        id: rectangle_57
-        x: 20
-        y: 74
-        source: "/ui/assets/rec.png"
-    }
-
-    Rectangle {
-        id: rectangle_62
-        x: 705
-        y: 83
-        width: 242
-        height: 35
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
-        id: rectangle_72
-        x: 956
-        y: 82
-        width: 45
-        height: 35
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Image {
-        id: setting
-        x: 451
-        y: 8
-        source: "assets/setting.png"
     }
 
     Image {
@@ -104,22 +46,6 @@ Rectangle {
         x: 20
         y: 207
         source: "/ui/assets/rec.png"
-    }
-
-    Text {
-        id: save_audio_file_as
-        x: 49
-        y: 89
-        width: 223
-        height: 22
-        color: "#ffffff"
-        text: qsTr("Save audio file as")
-        font.pixelSize: 24
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.family: "Itim"
-        font.weight: Font.Normal
     }
 
     Text {
@@ -141,7 +67,7 @@ Rectangle {
     Text {
         id: choose_device
         x: 49
-        y: 224
+        y: 150
         width: 188
         height: 21
         color: "#ffffff"
@@ -202,168 +128,27 @@ Rectangle {
         font.weight: Font.Normal
     }
 
-    Text {
-        id: home_nguyen_hai_minh
-        width: 345
-        height: 23
-        color: "#ffffff"
-        text: qsTr("home/nguyen-hai-minh")
-        font.pixelSize: 18
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        anchors.verticalCenterOffset: -150
-        anchors.horizontalCenterOffset: 250
-        font.family: "Josefin Sans"
-        font.weight: Font.Light
-        anchors.centerIn: parent
-    }
+    Image {
+        id: rectangle_68
+        x: 677
+        y: 419
+        width: 224
+        height: 58
+        source: "/ui/assets/btn.png"
 
-    Item {
-        id: group_68
-        x: 839
-        y: 413
-        width: 141
-        height: 38
-        Image {
-            id: rectangle_68
-            x: 0
-            y: 0
-            source: "/ui/assets/btn.png"
-        }
-
-        Item {
-            id: group_60
-            x: 11
-            y: 2
-            width: 111
-            height: 30
-            Text {
-                id: view_data
-                x: -13
-                y: 0
-                width: 130
-                height: 30
-                color: "#e7fff9"
-                text: qsTr("View data")
-                font.pixelSize: 22
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.Wrap
-                font.family: "Jura"
-                font.weight: Font.Normal
-            }
-        }
-    }
-
-    Item {
-        id: group_69
-        x: 534
-        y: 414
-        width: 141
-        height: 38
-        Image {
-            id: rectangle_681
-            x: 0
-            y: 0
-            source: "/ui/assets/btn.png"
-        }
-
-        Item {
-            id: group_601
-            x: 11
-            y: 2
-            width: 111
-            height: 30
-            Text {
-                id: view_data1
-                x: -25
-                y: 0
-                width: 137
-                height: 30
-                color: "#e7fff9"
-                text: qsTr("View data")
-                font.pixelSize: 22
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.Wrap
-                font.family: "Jura"
-                font.weight: Font.Normal
-            }
-        }
-    }
-
-    Item {
-        id: group_70
-        x: 248
-        y: 413
-        width: 141
-        height: 38
-        Image {
-            id: rectangle_682
-            x: 0
-            y: 0
-            source: "/ui/assets/btn.png"
-        }
-
-        Item {
-            id: group_602
-            x: 11
-            y: 2
-            width: 111
-            height: 30
-            Text {
-                id: view_data2
-                x: -1
-                y: 1
-                width: 121
-                height: 30
-                color: "#e7fff9"
-                text: qsTr("View data")
-                font.pixelSize: 22
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.Wrap
-                font.family: "Jura"
-                font.weight: Font.Normal
-            }
-        }
-    }
-
-    Item {
-        id: group_71
-        x: 40
-        y: 413
-        width: 141
-        height: 38
-        Image {
-            id: rectangle_683
-            x: 0
-            y: 0
-            source: "/ui/assets/btn.png"
-        }
-
-        Item {
-            id: group_603
-            x: 15
-            y: 3
-            width: 111
-            height: 30
-            Text {
-                id: view_data3
-                x: -22
-                y: 0
-                width: 134
-                height: 30
-                color: "#e7fff9"
-                text: qsTr("View data")
-                font.pixelSize: 22
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.Wrap
-                font.family: "Jura"
-                font.weight: Font.Normal
-            }
+        Text {
+            x: 30
+            y: 7
+            width: 170
+            height: 42
+            color: "#ffffff"
+            text: qsTr("Save")
+            font.pixelSize: 24
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            font.family: "Itim"
+            font.weight: Font.Normal
         }
     }
 
@@ -450,88 +235,45 @@ Rectangle {
         }
     }
 
-    Item {
-        id: group_66
-        x: 385
-        y: 210
-        width: 114
+    ComboBox {
+        id: comboBox
+        x: 302
+        y: 143
+        width: 195
         height: 35
-        Rectangle {
-            id: rectangle_701
-            x: 0
-            y: 4
-            width: 114
-            height: 35
-            color: "#6935416c"
-            radius: 8
+        model: ["default", "hw:CARD=sofhdadsp,DEV=0", "alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_6__source"]
+
+        // Customizing the appearance of items in the ComboBox
+        delegate: Item {
+            width: comboBox.width
+            height: 30
+
+            Rectangle {
+                width: parent.width
+                height: parent.height
+                color: "lightblue" // Background color
+                border.color: "#e0a3339a"
+
+                Text {
+                    anchors.centerIn: parent
+                    text: modelData
+                    color: "white" // Set the text color
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        comboBox.currentIndex = index
+                    }
+                }
+            }
         }
 
-        Text {
-            id: element2
-            x: 90
-            y: 10
-            width: 21
-            height: 25
-            color: "#ffffff"
-            text: qsTr(">")
-            font.pixelSize: 26
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            rotation: 88.961
-            font.family: "Josefin Sans"
-            font.weight: Font.Light
-        }
-
-        Text {
-            id: default1
-            width: 77
-            height: 23
-            color: "#ffffff"
-            text: qsTr("Default")
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            anchors.verticalCenterOffset: 2
-            anchors.horizontalCenterOffset: -15
-            font.family: "Josefin Sans"
-            font.weight: Font.Light
-            anchors.centerIn: parent
-        }
-    }
-
-    Item {
-        id: group_64
-        x: 961
-        y: 393
-        width: 92
-        height: 35
-        Rectangle {
-            id: rectangle_702
-            x: -60
-            y: -111
-            width: 92
-            height: 35
-            color: "#6935416c"
-            radius: 8
-        }
-
-        Text {
-            id: element3
-            x: 8
-            y: -106
-            width: 21
-            height: 25
-            color: "#ffffff"
-            text: qsTr(">")
-            font.pixelSize: 26
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            rotation: 88.961
-            font.family: "Josefin Sans"
-            font.weight: Font.Light
+        //            Signal handler for item selection change
+        onCurrentIndexChanged: {
+            var selectedItem = model[currentIndex] // Get the selected item
+            console.log("Selected Item:", selectedItem)
+            // Add logic here
         }
     }
 
@@ -648,8 +390,8 @@ Rectangle {
 
     SvgPathItem {
         id: line_22_Stroke_
-        x: 492
-        y: 163
+        x: 493
+        y: 150
         width: 43
         height: 5
         strokeColor: "transparent"
@@ -661,5 +403,27 @@ Rectangle {
         strokeStyle: 1
         joinStyle: 0
     }
+
+    Rectangle {
+        id: rectangle_76
+        x: 389
+        y: 29
+        width: 246
+        height: 52
+        color: "#69000822"
+        radius: 8
+        Text {
+            x: 78
+            y: 8
+            color: "#ffffff"
+            text: qsTr("Setting")
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.pointSize: 24
+            font.bold: false
+        }
+    }
 }
+
+
 

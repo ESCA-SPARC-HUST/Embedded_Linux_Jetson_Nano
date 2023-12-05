@@ -108,5 +108,6 @@
         <file>ui/layout/transferLearning.qml</file>
         <file>ui/main.qml</file>
         <file>ui/layout/fileManager.qml</file>
+        <file>ui/assets/Untitled.png</file>
     </qresource>
 </RCC>

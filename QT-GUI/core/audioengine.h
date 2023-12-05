@@ -65,6 +65,8 @@ private:
     QList<QAudioDeviceInfo> m_availableAudioOutputDevices;
     QAudioOutput*       m_audioOutput = nullptr;
 
+signals:
+    void inputDevice(const QVector<QString>& m_inputDevice);
 
 };
 
