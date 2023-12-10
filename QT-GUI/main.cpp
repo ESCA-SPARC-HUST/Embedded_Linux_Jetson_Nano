@@ -6,7 +6,7 @@
 #include "controller/audiocontroller.h"
 #include "controller/monitorbackend.h"
 #include "component/chart/audiochart.h"
-
+#include "core/filemanager.h"
 
 
 
@@ -17,6 +17,11 @@ int main(int argc, char *argv[])
 #endif
 //    QGuiApplication app(argc, argv);
     QApplication app(argc, argv);
+
+    app.setOrganizationName("D-ESCA3");
+    app.setOrganizationDomain("sparc.com");
+    app.setApplicationName("D-ESCA3");
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -28,8 +33,9 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
- //    QVector<float> bufferData;
-
+    FileManager fileManager;
+    engine.rootContext()->setContextProperty("fileManager", &fileManager);
+    qmlRegisterType<FileManager>("FileManagerIm", 1, 0, "FileManager");
 
 
  //---------------------------

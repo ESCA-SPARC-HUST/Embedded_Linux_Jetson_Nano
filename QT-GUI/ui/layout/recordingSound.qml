@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Controls 2.15
+import QtQuick.Dialogs 1.0
+
 
 Rectangle {
     id: frame_1
@@ -20,7 +22,7 @@ Rectangle {
     Text {
         id: select_folder_to_store
         x: 24
-        y: 175
+        y: 155
         width: 312
         height: 24
         color: "#ffffff"
@@ -33,20 +35,20 @@ Rectangle {
         font.family: "Itim"
     }
 
-    TextInput {
-        id: home_nguyen_hai_minh
-        width: 332
-        height: 24
+    Text {
+        id: choose_file_text
+        width: 781
+        height: 100
         color: "#ffffff"
         text: qsTr("home/nguyen-hai-minh")
-        font.pixelSize: 26
-        horizontalAlignment: Text.AlignRight
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.Wrap
         font.weight: Font.Light
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: -350
-        anchors.verticalCenterOffset: -14
+        anchors.horizontalCenterOffset: -97
+        anchors.verticalCenterOffset: -10
         font.family: "Josefin Sans"
     }
 
@@ -154,10 +156,9 @@ Rectangle {
                 top: 100000
             }
 
-            //            onTextChanged: {
-
-            //                // Add handle
-            //            }
+            onTextChanged: {
+                // Add handle
+            }
         }
     }
 
@@ -169,6 +170,45 @@ Rectangle {
         height: 43
         color: "#6935416c"
         radius: 8
+
+        Text {
+            id: browser
+            width: 119
+            height: 23
+            color: "#ffffff"
+            text: qsTr("Browser")
+            font.pixelSize: 24
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            font.bold: true
+            font.weight: Font.Light
+            anchors.centerIn: parent
+            font.family: "Josefin Sans"
+        }
+
+        FileDialog {
+            id: choose_file_save_record
+            title: "Please choose a file"
+            onAccepted: {
+                console.log("You choose: " + choose_file_save_record.fileUrls)
+                // handle choose file
+                choose_file_text.text = "" + choose_file_save_record.fileUrls;
+            }
+            onRejected: {
+                console.log("Canceled")
+//                Qt.quit()
+            }
+        }
+
+        MouseArea {
+            id: mouseArea1
+            anchors.fill: parent
+
+            onClicked: {
+                choose_file_save_record.open();
+            }
+        }
     }
 
     Text {
@@ -212,28 +252,7 @@ Rectangle {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
-            onClicked: {
-            AudioObject.test()
-            }
         }
-    }
-
-    Text {
-        id: browser
-        width: 119
-        height: 23
-        color: "#ffffff"
-        text: qsTr("Browser")
-        font.pixelSize: 24
-        horizontalAlignment: Text.AlignRight
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.bold: true
-        font.weight: Font.Light
-        anchors.centerIn: parent
-        anchors.horizontalCenterOffset: 354
-        anchors.verticalCenterOffset: -9
-        font.family: "Josefin Sans"
     }
 
     Rectangle {

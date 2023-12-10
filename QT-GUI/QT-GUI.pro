@@ -17,6 +17,7 @@ SOURCES += \
         controller/monitorbackend.cpp \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
+        core/filemanager.cpp \
         main.cpp
 
 RESOURCES += qml.qrc \
@@ -45,6 +46,7 @@ HEADERS += \
     core/audio/audiofile.h \
     core/audiochart.h \
     core/audio/audioengine.h \
+    core/filemanager.h
 
 DISTFILES += \
     ../../../tessnewDESC/UI-D-ESCA-3/UI/cppImports/QtQuick/Studio/Components/ArcArrow.qml \
