@@ -150,6 +150,14 @@ Rectangle {
             font.family: "Itim"
             font.weight: Font.Normal
         }
+
+        MouseArea {
+            id: saveAudioParamsArea
+            anchors.fill: parent
+            onClicked: {
+            AudioObject.editRecordParameters("hw:2,0", "/home/minkeisme/Workplace/SPARC/ESCA/Embedded_Linux_Jetson_Nano/record-module/data", 44100, 16, 2);
+            }
+        }
     }
 
     SvgPathItem {

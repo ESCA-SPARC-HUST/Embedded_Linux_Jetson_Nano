@@ -8,6 +8,8 @@
 #include "component/chart/audiochart.h"
 
 
+
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -15,7 +17,6 @@ int main(int argc, char *argv[])
 #endif
 //    QGuiApplication app(argc, argv);
     QApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -27,13 +28,13 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
-//    QVector<float> bufferData;
+ //    QVector<float> bufferData;
 
 
 
-//---------------------------
-//  Connect to Audio
-//---------------------------
+ //---------------------------
+ //  Connect to Audio
+ //---------------------------
     QObject::connect(audioController->m_audiochart, &AudioChart::bufferUpdated, [&](const QVector<float>& newBuffer) {
         // Dữ liệu trong buffer đã được cập nhật
         //bufferData = newBuffer;
@@ -46,6 +47,9 @@ int main(int argc, char *argv[])
 //  Connect to Cpu file
 //----------------------------
     engine.rootContext()->setContextProperty("BackendObject", minitorBackend);
+
+// control audiocontroller
+    engine.rootContext()->setContextProperty("AudioObject", audioController);
 
 
     return app.exec();
