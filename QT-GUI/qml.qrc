@@ -93,7 +93,6 @@
         <file>ui/component/QtQuick/Studio/MultiText/qmldir</file>
         <file>ui/component/BottomBar.qml</file>
         <file>ui/component/CpuFrame.qml</file>
-        <file>ui/component/DiskUsageFrame.qml</file>
         <file>ui/component/GpuFrame.qml</file>
         <file>ui/component/RamFrame.qml</file>
         <file>ui/component/TopBar.qml</file>
