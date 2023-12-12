@@ -12,6 +12,7 @@
 #define RCV_PORT 8000
 #define SEND_PORT 8080 
 #define message "-U"
+#define filename "start_setting.txt"
 
 void write_settings(int n, char replace_content[]);
 void send_command();
@@ -84,7 +85,7 @@ void send_command() {
 }
 
 void write_settings(int n, char replace_content[]) {
-    FILE *file = fopen("start_setting.txt", "r");
+    FILE *file = fopen(filename, "r");
     char content[16][128];
     int no_line = 1; 
     while (fgets(content[no_line], sizeof(content[no_line]), file)) {
@@ -92,7 +93,7 @@ void write_settings(int n, char replace_content[]) {
     }
     fclose(file);
     strcpy(content[n], replace_content);
-    file = fopen("start_setting.txt", "w");
+    file = fopen(filename, "w");
     for(int i = 1; i < no_line; i++) {
         fputs(content[i], file);
     }
