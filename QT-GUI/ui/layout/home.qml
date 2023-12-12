@@ -124,7 +124,7 @@ Rectangle {
             width: 140
             height: 29
             color: "#ffffff"
-            text: qsTr("Process File")
+            text: qsTr("Process Data")
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
