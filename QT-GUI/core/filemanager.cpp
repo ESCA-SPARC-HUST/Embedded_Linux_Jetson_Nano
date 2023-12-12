@@ -49,7 +49,7 @@ void FileManager::updateFileList()
 
         m_fileList.append(fileMap);
     }
-//        qDebug() << "M File List" << m_fileList[0];
+    //        qDebug() << "M File List" << m_fileList[0];
 
     emit fileListChanged();
 }

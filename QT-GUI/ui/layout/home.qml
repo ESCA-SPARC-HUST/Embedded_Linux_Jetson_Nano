@@ -254,7 +254,7 @@ Rectangle {
                 id: system_config_ma
                 anchors.fill: parent
                 onClicked: {
-                    loader.source = "/ui/layout/screen3.qml"
+                    loader.source = "/ui/layout/systemConfig.qml"
                 }
             }
         }
