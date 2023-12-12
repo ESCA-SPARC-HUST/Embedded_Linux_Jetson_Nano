@@ -1,7 +1,9 @@
+QT = core
 QT += quick
 QT += qml
 QT += multimedia
 QT += widgets
+QT += network
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -9,16 +11,20 @@ QT += widgets
 
 SOURCES += \
         component/chart/audiochart.cpp \
+        component/file/filemanipulation.cpp \
+        component/socket/socket.cpp \
         controller/audiocontroller.cpp \
         controller/monitorbackend.cpp \
-        core/audioengine.cpp \
+        core/audio/audioengine.cpp \
+        core/audio/audiofile.cpp \
+        core/filemanager.cpp \
         main.cpp
 
 RESOURCES += qml.qrc \
 
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = ./importCpp
+QML_IMPORT_PATH = ./ui/component
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
@@ -30,11 +36,17 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     component/chart/audiochart.h \
-    config/config.h \
+    component/file/filemanipulation.h \
+    component/socket/socket.h \
+    config/audioconfig.h \
+    config/socketconfig.h \
+    config/fileconfig.h \
     controller/audiocontroller.h \
     controller/monitorbackend.h \
+    core/audio/audiofile.h \
     core/audiochart.h \
-    core/audioengine.h
+    core/audio/audioengine.h \
+    core/filemanager.h
 
 DISTFILES += \
     ../../../tessnewDESC/UI-D-ESCA-3/UI/cppImports/QtQuick/Studio/Components/ArcArrow.qml \

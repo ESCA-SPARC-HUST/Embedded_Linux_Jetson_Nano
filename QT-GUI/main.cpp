@@ -6,6 +6,8 @@
 #include "controller/audiocontroller.h"
 #include "controller/monitorbackend.h"
 #include "component/chart/audiochart.h"
+#include "core/filemanager.h"
+
 
 
 int main(int argc, char *argv[])
@@ -16,8 +18,12 @@ int main(int argc, char *argv[])
 //    QGuiApplication app(argc, argv);
     QApplication app(argc, argv);
 
+    app.setOrganizationName("D-ESCA3");
+    app.setOrganizationDomain("sparc.com");
+    app.setApplicationName("D-ESCA3");
+
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/layout/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/ui/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)
@@ -27,13 +33,14 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
-//    QVector<float> bufferData;
+    FileManager fileManager;
+    engine.rootContext()->setContextProperty("fileManager", &fileManager);
+    qmlRegisterType<FileManager>("FileManagerIm", 1, 0, "FileManager");
 
 
-
-//---------------------------
-//  Connect to Audio
-//---------------------------
+ //---------------------------
+ //  Connect to Audio
+ //---------------------------
     QObject::connect(audioController->m_audiochart, &AudioChart::bufferUpdated, [&](const QVector<float>& newBuffer) {
         // Dữ liệu trong buffer đã được cập nhật
         //bufferData = newBuffer;
@@ -46,6 +53,9 @@ int main(int argc, char *argv[])
 //  Connect to Cpu file
 //----------------------------
     engine.rootContext()->setContextProperty("BackendObject", minitorBackend);
+
+// control audiocontroller
+    engine.rootContext()->setContextProperty("AudioObject", audioController);
 
 
     return app.exec();
