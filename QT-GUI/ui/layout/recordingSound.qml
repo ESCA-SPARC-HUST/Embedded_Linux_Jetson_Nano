@@ -2,7 +2,8 @@ import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
-
+import QtCharts 2.6
+import QtMultimedia 5.15
 
 Rectangle {
     id: frame_1
@@ -21,8 +22,8 @@ Rectangle {
 
     Text {
         id: select_folder_to_store
-        x: 24
-        y: 155
+        x: 23
+        y: 120
         width: 312
         height: 24
         color: "#ffffff"
@@ -37,8 +38,8 @@ Rectangle {
 
     Text {
         id: choose_file_text
-        width: 781
-        height: 100
+        width: 552
+        height: 133
         color: "#ffffff"
         text: "home/nguyen-hai-minh/wavFile"
         font.pixelSize: 23
@@ -47,8 +48,8 @@ Rectangle {
         wrapMode: Text.NoWrap
         font.weight: Font.Light
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: -97
-        anchors.verticalCenterOffset: -10
+        anchors.horizontalCenterOffset: -213
+        anchors.verticalCenterOffset: -30
         font.family: "Josefin Sans"
     }
 
@@ -94,50 +95,10 @@ Rectangle {
     }
 
     Rectangle {
-        id: rectangle_76
-        x: 24
-        y: 34
-        width: 178
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
-        id: rectangle_77
-        x: 623
-        y: 34
-        width: 179
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
-        id: rectangle_78
-        x: 817
-        y: 34
-        width: 180
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
-        id: rectangle_75
-        x: 220
-        y: 37
-        width: 180
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
         id: rectangle_64
-        x: 623
+        x: 285
         y: 292
-        width: 189
+        width: 130
         height: 53
         color: "#6935416c"
         radius: 8
@@ -150,23 +111,25 @@ Rectangle {
             color: "#ffffff"
             text: "10 s"
             horizontalAlignment: Text.AlignHCenter
+            anchors.verticalCenterOffset: 1
+            anchors.horizontalCenterOffset: -1
             font.pointSize: 24
 
             onTextChanged: {
+
                 // Add handle
             }
         }
     }
 
-
     Text {
         id: set_time_to_start_record
         x: 25
         y: 306
-        width: 321
+        width: 254
         height: 24
         color: "#ffffff"
-        text: qsTr("Set time to start record")
+        text: qsTr("Time to start record")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -175,10 +138,62 @@ Rectangle {
         font.family: "Itim"
     }
 
+    ChartView {
+        x: 111
+        y: 71
+        title: "Line Chart"
+        width: 565
+        height: 393
+        anchors.verticalCenterOffset: 50
+        anchors.horizontalCenterOffset: 210
+        anchors.centerIn: parent
+        antialiasing: true
+
+        LineSeries {
+            id: series
+            name: "Real-time Data"
+            axisX: ValueAxis {
+                id: axisX
+                min: 1
+                max: 1028 // Giá trị tối đa hiển thị trên trục X
+                tickCount: 11
+            }
+            axisY: ValueAxis {
+                id: axisY
+                min: -105
+                max: 105
+                tickCount: 11
+            }
+        }
+
+        Timer {
+            interval: 1 // Mỗi 10ms cập nhật một lần // em chua biet dung nhieu cho toi uu
+            running: true
+            repeat: true
+            onTriggered: {
+
+                for (var i = 1028; i >= 0; i--) {
+                    var xValue = series.count
+                    // truc x la thoi gian ( tai thoi diem chay trong for :3)
+                    var yValue = audioDataFromCpp[i]
+                    //                  var yValue = Math.sin(xValue / 10);
+                    series.append(xValue, yValue)
+                }
+                // Cập nhật giá trị tối đa trên trục X nếu cần
+                if (xValue > axisX.max)
+                    axisX.max = xValue
+                axisX.min = xValue - 1028 //set lai gia tri toi da de chart chay lien tuc
+                // Cập nhật giá trị tối đa trên trục Y nếu cần
+                if (yValue > axisY.max)
+                    axisY.max = yValue
+            }
+        }
+    }
+
     Rectangle {
         id: rectangle
-        x: 685
-        y: 382
+        x: 73
+        y: 384
         width: 288
         height: 77
         color: "#f30b0836"
@@ -203,5 +218,31 @@ Rectangle {
         }
     }
 
+    //    Rectangle {
+    //        id: rectangle17
+    //        x: 703
+    //        y: 292
+    //        width: 288
+    //        height: 77
+    //        color: "#f30b0836"
+    //        radius: 22
 
+    //        Text {
+    //            id: view_Btn
+    //            x: 8
+    //            y: 1
+    //            width: 280
+    //            height: 68
+    //            color: "#ffffff"
+    //            text: qsTr("View data")
+    //            horizontalAlignment: Text.AlignHCenter
+    //            verticalAlignment: Text.AlignVCenter
+    //            font.pointSize: 22
+    //        }
+
+    //        MouseArea {
+    //            id: mouseArea17
+    //            anchors.fill: parent
+    //        }
+    //    }
 }
