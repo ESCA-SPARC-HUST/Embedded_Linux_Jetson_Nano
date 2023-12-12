@@ -11,6 +11,8 @@ Rectangle {
     height: 500
     color: "transparent"
 
+    property bool flag: false
+
     Rectangle {
         id: rectangle_55
         x: 0
@@ -139,6 +141,7 @@ Rectangle {
     }
 
     ChartView {
+        id: lineChart
         x: 111
         y: 71
         title: "Line Chart"
@@ -168,7 +171,7 @@ Rectangle {
 
         Timer {
             interval: 1 // Mỗi 10ms cập nhật một lần // em chua biet dung nhieu cho toi uu
-            running: true
+            running: flag
             repeat: true
             onTriggered: {
 
@@ -206,7 +209,7 @@ Rectangle {
             width: 280
             height: 68
             color: "#ffffff"
-            text: qsTr("Start/Stop Button")
+            text: flag ? "Stop" : "Start"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.pointSize: 22
@@ -215,6 +218,9 @@ Rectangle {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
+            onClicked: {
+                flag = !flag;
+            }
         }
     }
 

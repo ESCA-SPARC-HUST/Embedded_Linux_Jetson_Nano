@@ -112,5 +112,9 @@
         <file>ui/assets/recordIcon.png</file>
         <file>ui/assets/systemPerformanceIcon.png</file>
         <file>ui/assets/resultsData.png</file>
+        <file>ui/assets/baseLearningIcon.png</file>
+        <file>ui/assets/transferLearningIcon.png</file>
+        <file>ui/assets/processData.png</file>
+        <file>ui/assets/lotusIcon.png</file>
     </qresource>
 </RCC>

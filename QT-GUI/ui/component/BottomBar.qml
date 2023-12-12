@@ -149,11 +149,6 @@ Rectangle {
         width: 172
         height: 162
         source: "/ui/assets/robot.png"
-        focus: false
-        mirror: false
-        mipmap: false
-        autoTransform: false
-        asynchronous: false
         anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
         fillMode: Image.PreserveAspectCrop
