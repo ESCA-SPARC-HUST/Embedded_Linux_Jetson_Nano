@@ -34,6 +34,8 @@ public:
     void audioInputStop();
     void startAudioInput(QIODevice *device);
 
+    QList<QAudioDeviceInfo> m_availableAudioInputDevices;
+
     //    QAudio::Mode mode() const { return m_mode; }
     //    QAudio::State state()     const { return m_state; }
 
@@ -60,14 +62,16 @@ public:
 
 
 private:
-    QList<QAudioDeviceInfo> m_availableAudioInputDevices;
+
     QAudioInput*        m_audioInput = nullptr;
 
     QList<QAudioDeviceInfo> m_availableAudioOutputDevices;
     QAudioOutput*       m_audioOutput = nullptr;
 
+    //    QVector<QString>& m_inputDevice;
+
 signals:
-    void inputDevice(const QVector<QString>& m_inputDevice);
+    void inputDeviceSig(QVector<QString>& m_inputDevice);
 
 };
 

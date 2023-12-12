@@ -23,11 +23,12 @@ public:
     QVector<float> bufferData() const;
     void setbufferData(const QVector<float> &newBufferData);
     AudioChart *m_audiochart = nullptr;
+    AudioEngine *m_audio = nullptr;
 
 
 
-//    Q_INVOKABLE void startRecord();
-//    Q_INVOKABLE void endRecord();
+    //    Q_INVOKABLE void startRecord();
+    //    Q_INVOKABLE void endRecord();
     Q_INVOKABLE void editRecordParameters(QString device, QString path, int sampleRate, int bitsPerSample, int duration);
 
 
@@ -41,7 +42,7 @@ signals:
     void dataSent(const QString &);
 
 private:
-    AudioEngine *m_audio = nullptr;
+
     AudioFile *m_audio_file = nullptr;
     QVector<float> m_bufferData;
 };

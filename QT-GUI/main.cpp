@@ -3,10 +3,12 @@
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QtWidgets/QApplication>
+
 #include "controller/audiocontroller.h"
 #include "controller/monitorbackend.h"
 #include "component/chart/audiochart.h"
 #include "core/filemanager.h"
+#include "core/audio/audioengine.h"
 
 
 
@@ -15,7 +17,7 @@ int main(int argc, char *argv[])
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-//    QGuiApplication app(argc, argv);
+    //    QGuiApplication app(argc, argv);
     QApplication app(argc, argv);
 
     app.setOrganizationName("D-ESCA3");
@@ -33,14 +35,19 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
+    AudioEngine* audioEngine;
     FileManager fileManager;
-    engine.rootContext()->setContextProperty("fileManager", &fileManager);
+
+    //----------------------------
+    //  To Qml FileManager
+    //----------------------------
+    //    engine.rootContext()->setContextProperty("fileManager", &fileManager);
     qmlRegisterType<FileManager>("FileManagerIm", 1, 0, "FileManager");
 
 
- //---------------------------
- //  Connect to Audio
- //---------------------------
+    //---------------------------
+    //  Connect to Audio
+    //---------------------------
     QObject::connect(audioController->m_audiochart, &AudioChart::bufferUpdated, [&](const QVector<float>& newBuffer) {
         // Dữ liệu trong buffer đã được cập nhật
         //bufferData = newBuffer;
@@ -49,14 +56,22 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty("audioDataFromCpp", QVariant::fromValue(newBuffer));
     });
 
-//----------------------------
-//  Connect to Cpu file
-//----------------------------
+    //----------------------------
+    //  Connect to Cpu file
+    //----------------------------
     engine.rootContext()->setContextProperty("BackendObject", minitorBackend);
 
-// control audiocontroller
+    // control audiocontroller
     engine.rootContext()->setContextProperty("AudioObject", audioController);
 
+    //----------------------------
+    //  Connect to audio file list
+    //----------------------------
+    QObject::connect(audioController->m_audio, &AudioEngine::inputDeviceSig, [&](const QVector<QString>& newBuffer) {
+        // Dữ liệu trong buffer đã được cập nhật
+        engine.rootContext()->setContextProperty("audioDeviceList", QVariant::fromValue(newBuffer));
+
+    });
 
     return app.exec();
 }

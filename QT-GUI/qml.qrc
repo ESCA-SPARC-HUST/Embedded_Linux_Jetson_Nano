@@ -2,9 +2,7 @@
     <qresource prefix="/">
         <file>ui/assets/backgroundElipse1.png</file>
         <file>ui/assets/btn.png</file>
-        <file>ui/assets/Gravity Forces Blue Icon Game Presentation(1).svg</file>
         <file>ui/assets/Gravity Forces Blue Icon Game Presentation(10).svg</file>
-        <file>ui/assets/luffy.jpg</file>
         <file>ui/assets/outlineElipse1.png</file>
         <file>ui/assets/rec.png</file>
         <file>ui/assets/robot.png</file>
@@ -102,11 +100,17 @@
         <file>ui/layout/processData.qml</file>
         <file>ui/layout/recordingSound.qml</file>
         <file>ui/layout/screen2.qml</file>
-        <file>ui/layout/screen3.qml</file>
+        <file>ui/layout/systemConfig.qml</file>
         <file>ui/layout/systemPerformance.qml</file>
         <file>ui/layout/transferLearning.qml</file>
         <file>ui/main.qml</file>
         <file>ui/layout/fileManager.qml</file>
         <file>ui/assets/Untitled.png</file>
+        <file>ui/assets/Gravity Forces Blue Icon Game Presentation.png</file>
+        <file>ui/assets/fileManagerIcon.png</file>
+        <file>ui/assets/systemConfigIcon.png</file>
+        <file>ui/assets/recordIcon.png</file>
+        <file>ui/assets/systemPerformanceIcon.png</file>
+        <file>ui/assets/resultsData.png</file>
     </qresource>
 </RCC>

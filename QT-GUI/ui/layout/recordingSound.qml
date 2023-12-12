@@ -2,7 +2,8 @@ import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
-
+import QtCharts 2.6
+import QtMultimedia 5.15
 
 Rectangle {
     id: frame_1
@@ -21,8 +22,8 @@ Rectangle {
 
     Text {
         id: select_folder_to_store
-        x: 24
-        y: 155
+        x: 23
+        y: 120
         width: 312
         height: 24
         color: "#ffffff"
@@ -37,18 +38,18 @@ Rectangle {
 
     Text {
         id: choose_file_text
-        width: 781
-        height: 100
+        width: 552
+        height: 133
         color: "#ffffff"
-        text: qsTr("home/nguyen-hai-minh")
+        text: "home/nguyen-hai-minh/wavFile"
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
+        wrapMode: Text.NoWrap
         font.weight: Font.Light
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: -97
-        anchors.verticalCenterOffset: -10
+        anchors.horizontalCenterOffset: -213
+        anchors.verticalCenterOffset: -30
         font.family: "Josefin Sans"
     }
 
@@ -94,119 +95,29 @@ Rectangle {
     }
 
     Rectangle {
-        id: rectangle_76
-        x: 24
-        y: 34
-        width: 178
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
-        id: rectangle_77
-        x: 623
-        y: 34
-        width: 179
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
-        id: rectangle_78
-        x: 817
-        y: 34
-        width: 180
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
-        id: rectangle_75
-        x: 220
-        y: 37
-        width: 180
-        height: 53
-        color: "#6935416c"
-        radius: 8
-    }
-
-    Rectangle {
         id: rectangle_64
-        x: 623
+        x: 285
         y: 292
-        width: 189
+        width: 130
         height: 53
         color: "#6935416c"
         radius: 8
 
-        TextInput {
+        Text {
             id: textEdit
             anchors.centerIn: parent
             width: 140
             height: 40
             color: "#ffffff"
-            text: "0s"
+            text: "10 s"
             horizontalAlignment: Text.AlignHCenter
+            anchors.verticalCenterOffset: 1
+            anchors.horizontalCenterOffset: -1
             font.pointSize: 24
-            validator: IntValidator {
-                bottom: 0
-                top: 100000
-            }
 
             onTextChanged: {
+
                 // Add handle
-            }
-        }
-    }
-
-    Rectangle {
-        id: rectangle_83
-        x: 794
-        y: 218
-        width: 143
-        height: 43
-        color: "#6935416c"
-        radius: 8
-
-        Text {
-            id: browser
-            width: 119
-            height: 23
-            color: "#ffffff"
-            text: qsTr("Browser")
-            font.pixelSize: 24
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            font.bold: true
-            font.weight: Font.Light
-            anchors.centerIn: parent
-            font.family: "Josefin Sans"
-        }
-
-        FileDialog {
-            id: choose_file_save_record
-            title: "Please choose a file"
-            onAccepted: {
-                console.log("You choose: " + choose_file_save_record.fileUrls)
-                // handle choose file
-                choose_file_text.text = "" + choose_file_save_record.fileUrls;
-            }
-            onRejected: {
-                console.log("Canceled")
-//                Qt.quit()
-            }
-        }
-
-        MouseArea {
-            id: mouseArea1
-            anchors.fill: parent
-
-            onClicked: {
-                choose_file_save_record.open();
             }
         }
     }
@@ -215,10 +126,10 @@ Rectangle {
         id: set_time_to_start_record
         x: 25
         y: 306
-        width: 321
+        width: 254
         height: 24
         color: "#ffffff"
-        text: qsTr("Set time to start record")
+        text: qsTr("Time to start record")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -227,10 +138,62 @@ Rectangle {
         font.family: "Itim"
     }
 
+    ChartView {
+        x: 111
+        y: 71
+        title: "Line Chart"
+        width: 565
+        height: 393
+        anchors.verticalCenterOffset: 50
+        anchors.horizontalCenterOffset: 210
+        anchors.centerIn: parent
+        antialiasing: true
+
+        LineSeries {
+            id: series
+            name: "Real-time Data"
+            axisX: ValueAxis {
+                id: axisX
+                min: 1
+                max: 1028 // Giá trị tối đa hiển thị trên trục X
+                tickCount: 11
+            }
+            axisY: ValueAxis {
+                id: axisY
+                min: -105
+                max: 105
+                tickCount: 11
+            }
+        }
+
+        Timer {
+            interval: 1 // Mỗi 10ms cập nhật một lần // em chua biet dung nhieu cho toi uu
+            running: true
+            repeat: true
+            onTriggered: {
+
+                for (var i = 1028; i >= 0; i--) {
+                    var xValue = series.count
+                    // truc x la thoi gian ( tai thoi diem chay trong for :3)
+                    var yValue = audioDataFromCpp[i]
+                    //                  var yValue = Math.sin(xValue / 10);
+                    series.append(xValue, yValue)
+                }
+                // Cập nhật giá trị tối đa trên trục X nếu cần
+                if (xValue > axisX.max)
+                    axisX.max = xValue
+                axisX.min = xValue - 1028 //set lai gia tri toi da de chart chay lien tuc
+                // Cập nhật giá trị tối đa trên trục Y nếu cần
+                if (yValue > axisY.max)
+                    axisY.max = yValue
+            }
+        }
+    }
+
     Rectangle {
         id: rectangle
-        x: 685
-        y: 382
+        x: 73
+        y: 384
         width: 288
         height: 77
         color: "#f30b0836"
@@ -255,72 +218,31 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        id: rectangle_82
-        x: 943
-        y: 219
-        width: 45
-        height: 43
-        color: "#6935416c"
-        radius: 8
-    }
+    //    Rectangle {
+    //        id: rectangle17
+    //        x: 703
+    //        y: 292
+    //        width: 288
+    //        height: 77
+    //        color: "#f30b0836"
+    //        radius: 22
 
-    SvgPathItem {
-        id: vector
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 952
-        strokeColor: "transparent"
-        anchors.bottomMargin: 249
-        strokeStyle: 1
-        joinStyle: 0
-        anchors.rightMargin: 45
-        antialiasing: true
-        strokeWidth: 1
-        fillColor: "#ffffff"
-        anchors.topMargin: 228
-        path: "M 0 3.2857142857142856 C 0 1.4734375391687664 1.5134766027331352 0 3.375 0 L 10.341211259365082 0 C 11.34843784198165 0 12.3134765625 0.39017849309103825 13.025390625 1.0832588502338953 L 15.287694990634918 3.2857142857142856 L 23.625 3.2857142857142856 C 25.486523397266865 3.2857142857142856 27 4.759151824883052 27 6.571428571428571 L 27 19.714285714285715 C 27 21.526562460831233 25.486523397266865 23 23.625 23 L 3.375 23 C 1.5134766027331352 23 0 21.526562460831233 0 19.714285714285715 L 0 3.2857142857142856 Z M 3.375 2.4642857142857144 C 2.910937489941716 2.4642857142857144 2.53125 2.83392856163638 2.53125 3.2857142857142856 L 2.53125 19.714285714285715 C 2.53125 20.16607143836362 2.910937489941716 20.535714285714285 3.375 20.535714285714285 L 23.625 20.535714285714285 C 24.089062510058284 20.535714285714285 24.46875 20.16607143836362 24.46875 19.714285714285715 L 24.46875 6.571428571428571 C 24.46875 6.119642847350665 24.089062510058284 5.75 23.625 5.75 L 15.113672196865082 5.75 C 14.554687801748514 5.75 14.016796231269836 5.5343751566750665 13.621288418769836 5.149330513817923 L 11.237695634365082 2.823660714285714 C 11.000390946865082 2.5926339285714284 10.678711264394224 2.4642857142857144 10.341211259365082 2.4642857142857144 L 3.375 2.4642857142857144 Z"
-    }
+    //        Text {
+    //            id: view_Btn
+    //            x: 8
+    //            y: 1
+    //            width: 280
+    //            height: 68
+    //            color: "#ffffff"
+    //            text: qsTr("View data")
+    //            horizontalAlignment: Text.AlignHCenter
+    //            verticalAlignment: Text.AlignVCenter
+    //            font.pointSize: 22
+    //        }
 
-    Rectangle {
-        id: rectangle_65
-        x: 818
-        y: 292
-        width: 189
-        height: 53
-        color: "#6935416c"
-        radius: 8
-
-        Text {
-            id: submit1
-            x: 5
-            y: 5
-            width: 109
-            height: 23
-            color: "#ffffff"
-            text: qsTr("Submit")
-            font.pixelSize: 24
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            anchors.verticalCenterOffset: 0
-            anchors.horizontalCenterOffset: 0
-            font.weight: Font.Light
-            anchors.centerIn: parent
-            font.bold: true
-            font.family: "Josefin Sans"
-        }
-
-        MouseArea {
-            id: submit_ma
-            anchors.fill: parent
-            cursorShape: Qt.WaitCursor
-
-            onClicked: {
-
-            }
-        }
-    }
+    //        MouseArea {
+    //            id: mouseArea17
+    //            anchors.fill: parent
+    //        }
+    //    }
 }

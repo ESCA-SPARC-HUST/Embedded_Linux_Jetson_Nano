@@ -6,38 +6,46 @@ import FileManagerIm 1.0
 
 Rectangle {
     visible: true
-    width: 800
-    height: 600
+    width: 1024
+    height: 500
 
     ListView {
-        id: fileListView
-        anchors.fill: parent
-        model: fileModel
+        id: file_list_view
+        width: 800
+        anchors.centerIn: parent
+        height: 500
+
+        model: ListModel {
+            ListElement { text: "/home" }
+        }
+
+        Component.onCompleted: {
+            // Use a for loop to loop throw fileList
+            console.log(fileModel.fileList.length);
+            for (var i = 0; i < fileModel.fileList.length; ++i) {
+                model.append({text: "" + fileModel.fileList[i].filePath.toString()});
+            }
+        }
+
         delegate: Item {
             width: parent.width
             height: 50
-
             Rectangle {
                 width: parent.width
-                height: 50
-                color: fileModel.isDir ? "lightblue" : "lightgreen"
+                height: parent.height
+                color: "lightblue"
+                border.color: "blue"
 
                 Text {
                     anchors.centerIn: parent
-                    text: fileModel.fileList[2].filePath.toString();
-                    Component.onCompleted: {
-                        console.log("File List:", fileModel)
-                    }
+                    text: model.text
                 }
 
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (fileModel.isDir) {
-                            fileModel.folder = fileModel.filePath
-                        } else {
-                            console.log("Selected file:", fileModel.fileList[2].filePath.toString())
-                        }
+                        console.log("Item clicked:", model.text);
+                        // Add your custom logic here
                     }
                 }
             }
