@@ -5,9 +5,12 @@ import QtQuick.Dialogs 1.0
 import FileManagerIm 1.0
 
 Rectangle {
-    visible: true
+
+    id: root_file_manager
     width: 1024
     height: 500
+    color: "#272D37"
+    property string foldername: fileModel.fileList[0].fileName.toString()
 
     ListView {
         id: file_list_view
@@ -16,14 +19,14 @@ Rectangle {
         height: 500
 
         model: ListModel {
-            ListElement { text: "/home" }
+            ListElement { text: "/data" }
         }
 
         Component.onCompleted: {
             // Use a for loop to loop throw fileList
             console.log(fileModel.fileList.length);
-            for (var i = 0; i < fileModel.fileList.length; ++i) {
-                model.append({text: "" + fileModel.fileList[i].filePath.toString()});
+            for (var i = 2; i < fileModel.fileList.length; ++i) {
+                model.append({text: "" + fileModel.fileList[i].fileName.toString() });
             }
         }
 
@@ -35,6 +38,7 @@ Rectangle {
                 height: parent.height
                 color: "lightblue"
                 border.color: "blue"
+                anchors.margins: 50
 
                 Text {
                     anchors.centerIn: parent
@@ -46,6 +50,7 @@ Rectangle {
                     onClicked: {
                         console.log("Item clicked:", model.text);
                         // Add your custom logic here
+                        fileModel.folder = fileModel.folder + "/" + model.text;
                     }
                 }
             }
@@ -54,7 +59,7 @@ Rectangle {
 
     FileManager {
         id: fileModel
-        folder: "/"
+        folder: "/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/record-module/data"
     }
 
 }

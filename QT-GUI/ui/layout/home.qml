@@ -124,7 +124,7 @@ Rectangle {
             width: 140
             height: 29
             color: "#ffffff"
-            text: qsTr("Process File")
+            text: qsTr("Process Data")
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -394,5 +394,33 @@ Rectangle {
         fillMode: Image.PreserveAspectFit
     }
 
+    Image {
+        id: baseLearningIcon
+        x: 78
+        y: 276
+        width: 132
+        height: 132
+        source: "/ui/assets/baseLearningIcon.png"
+        fillMode: Image.PreserveAspectFit
+    }
 
+    Image {
+        id: lotusIcon
+        x: 317
+        y: 278
+        width: 160
+        height: 140
+        source: "/ui/assets/lotusIcon.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: processDataIcon
+        x: 331
+        y: 53
+        width: 132
+        height: 132
+        source: "/ui/assets/processData.png"
+        fillMode: Image.PreserveAspectFit
+    }
 }
