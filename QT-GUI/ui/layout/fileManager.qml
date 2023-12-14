@@ -2,7 +2,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs 1.0
-// import Qt.labs.qmlmodels
 import Qt.labs.platform 1.0
 import Qt.labs.folderlistmodel 2.6
 
@@ -30,6 +29,7 @@ Rectangle {
             height: 61
             color: "#ffffff"
 
+            // backward feature
             Image {
                 id: image
                 x: 15
@@ -38,8 +38,15 @@ Rectangle {
                 height: 47
                 source: "../assets/icons8-back-50.png"
                 fillMode: Image.PreserveAspectFit
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        folderListModel.folder = folderListModel.parentFolder
+                        text3.text = folderListModel.folder
+                    }
+                }
             }
-
+            // forward feature
             Image {
                 id: image1
                 x: 65
@@ -48,8 +55,17 @@ Rectangle {
                 height: 47
                 source: "../assets/icons8-right-50.png"
                 fillMode: Image.PreserveAspectFit
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        // Use the new method to move forward in the folder hierarchy
+                        folderListModel.popFolderFromStack();
+                        text3.text = folderListModel.folder;
+                    }
+                }
             }
 
+            // choose folder feature
             Rectangle {
                 id: rectangle2
                 x: 129
@@ -99,6 +115,7 @@ Rectangle {
                 }
             }
 
+            // sync feature
             Rectangle {
                 id: rectangle3
                 x: 550
@@ -122,6 +139,7 @@ Rectangle {
 
             }
 
+            // delete feture
             Rectangle {
                 id: rectangle4
                 x: 644
@@ -143,6 +161,7 @@ Rectangle {
                 }
             }
 
+            // import feature
             Rectangle {
                 id: rectangle5
                 x: 764
@@ -164,6 +183,8 @@ Rectangle {
                 }
             }
 
+
+            // share feature
             Rectangle {
                 id: rectangle6
                 x: 875
@@ -187,6 +208,7 @@ Rectangle {
         }
     }
 
+    // header
     Rectangle {
         id: rectangle_76
         x: 349
@@ -232,6 +254,24 @@ Rectangle {
                 id: folderListModel
                 showDirsFirst: true
 //                nameFilters: ["*.mp3", "*.flac"]
+
+                // Add a stack property to store navigation history
+                property var folderStack: []
+
+                onFolderChanged: {
+                    // Push the current folder onto the stack when it changes
+                    folderStack.push(folder)
+                }
+
+                function popFolderFromStack() {
+                    // Pop a folder from the stack
+                    if (folderStack.length > 1) {
+                        folderStack.pop();
+                        folder = folderStack[folderStack.length - 1];
+                    }
+                }
+
+                // end
             }
 
             delegate: Rectangle {
@@ -265,11 +305,5 @@ Rectangle {
                 }
             }
         }
-    }
-    Button {
-        anchors.left: mainRect.right
-        anchors.leftMargin: 5
-        text: "back"
-        onClicked: folderListModel.folder = folderListModel.parentFolder
     }
 }
