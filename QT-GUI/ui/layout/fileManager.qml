@@ -59,15 +59,43 @@ Rectangle {
                 height: 46
                 radius: 10
                 color: "#ffffff"
-                Text {
+                TextField {
                     id: text3
-                    x: 21
-                    y: 11
-                    width: 373
-                    height: 25
-                    text: qsTr("Folder Name")
+                    x: 8
+                    y: 0
+                    width: 386
+                    height: 46
                     font.pixelSize: 22
                     horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                    placeholderText: "Choose folder to open"
+                    maximumLength: 40
+                    background: Rectangle {
+//                        border.color: "yellow"
+                        border.width: 0
+                        color: "transparent"
+//                        color: "orange"
+                    }
+                }
+                FolderDialog {
+                    id: folderDialog
+                    currentFolder: viewer.folder
+                    folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+                    onAccepted: {
+
+                        // handle choose file
+                        text3.text = folderDialog.folder
+                        folderListModel.folder = folderDialog.folder
+                    }
+                    onRejected: {
+                        console.log("Canceled")
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        folderDialog.open();
+                    }
                 }
             }
 
@@ -91,6 +119,7 @@ Rectangle {
                     font.pixelSize: 22
                     horizontalAlignment: Text.AlignLeft
                 }
+
             }
 
             Rectangle {
@@ -205,25 +234,11 @@ Rectangle {
 //                nameFilters: ["*.mp3", "*.flac"]
             }
 
-            // delegate: Button {
-            //     width: parent.width
-            //     height: 50
-            //     text: fileName
-            //     onClicked: {
-            //         if (fileIsDir) {
-            //             folderListModel.folder = fileURL
-            //         }
-            //     }
-            //     background: Rectangle {
-            //         color: fileIsDir ? "orange" : "gray"
-            //         border.color: "black"
-            //     }
-            // }
             delegate: Rectangle {
                 id: rectangle
                 width: parent.width
                 height: 66
-                color: fileIsDir ? "orange" : "#ffffff"
+                color: fileIsDir ? "#e3e3e3" : "#ffffff"
                 border.color: "black"
 
                 Text {
@@ -244,7 +259,7 @@ Rectangle {
                     anchors.rightMargin: 20
                     width: 158
                     height: 22
-                    text: fileSize + " bytes"
+                    text: fileIsDir ? "" : (fileSize + " bytes")
                     font.pixelSize: 20
                     horizontalAlignment: Text.AlignRight
                 }
