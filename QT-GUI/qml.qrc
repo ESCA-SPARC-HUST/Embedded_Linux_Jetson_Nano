@@ -106,6 +106,8 @@
         <file>ui/main.qml</file>
         <file>ui/layout/fileManager.qml</file>
         <file>ui/assets/Untitled.png</file>
+        <file>ui/assets/icons8-back-50.png</file>
+        <file>ui/assets/icons8-right-50.png</file>
         <file>ui/assets/Gravity Forces Blue Icon Game Presentation.png</file>
         <file>ui/assets/fileManagerIcon.png</file>
         <file>ui/assets/systemConfigIcon.png</file>
