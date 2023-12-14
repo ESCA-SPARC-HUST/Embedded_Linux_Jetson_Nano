@@ -917,10 +917,12 @@ qrc_qml.cpp: ../QT-GUI/qml.qrc \
 		../QT-GUI/ui/assets/Gravity\ Forces\ Blue\ Icon\ Game\ Presentation(1).svg \
 		../QT-GUI/ui/assets/robot.png \
 		../QT-GUI/ui/assets/outlineElipse1.png \
+		../QT-GUI/ui/assets/icons8-right-50.png \
 		../QT-GUI/ui/assets/Gravity\ Forces\ Blue\ Icon\ Game\ Presentation(10).svg \
 		../QT-GUI/ui/assets/zoro.png \
 		../QT-GUI/ui/assets/Untitled.png \
 		../QT-GUI/ui/assets/luffy.jpg \
+		../QT-GUI/ui/assets/icons8-back-50.png \
 		../QT-GUI/ui/layout/processData.qml \
 		../QT-GUI/ui/layout/recordingSound.qml \
 		../QT-GUI/ui/layout/home.qml \
