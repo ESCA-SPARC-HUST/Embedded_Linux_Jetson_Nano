@@ -257,34 +257,4 @@ Rectangle {
         text: "back"
         onClicked: folderListModel.folder = folderListModel.parentFolder
     }
-//    ListModel {
-//        id: libraryModel
-//        ListElement {
-//            title: "A Masterpiece"
-//            author: "Gabriel"
-//        }
-//        ListElement {
-//            title: "Brilliance"
-//            author: "Jens"
-//        }
-//        ListElement {
-//            title: "Outstanding"
-//            author: "Frederik"
-//        }
-//    }
-
-//    TableView {
-//        TableViewColumn {
-//            role: "title"
-//            title: "Title"
-//            width: 100
-//        }
-//        TableViewColumn {
-//            role: "author"
-//            title: "Author"
-//            width: 200
-//        }
-//        model: libraryModel
-//    }
-
 }
