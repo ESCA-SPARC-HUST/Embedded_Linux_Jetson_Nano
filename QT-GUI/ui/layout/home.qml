@@ -342,16 +342,85 @@ Rectangle {
                 }
             }
         }
+    }
 
-        Rectangle {
-            id: gravity_Forces_Blue_Icon_Game_Presentation_3_1
-            width: 129
-            height: 122
-            color: "transparent"
-            anchors.verticalCenterOffset: -130
-            anchors.centerIn: parent
-            anchors.horizontalCenterOffset: 383
-            clip: true
-        }
+    Image {
+        id: gravityForcesBlueIconGamePresentation1
+        x: 78
+        y: 53
+        width: 132
+        height: 132
+        source: "/ui/assets/recordIcon"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: fileManagerIcon
+        x: 581
+        y: 53
+        width: 132
+        height: 132
+        source: "/ui/assets/fileManagerIcon.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: systemConfigIcon
+        x: 832
+        y: 276
+        width: 132
+        height: 132
+        source: "/ui/assets/systemConfigIcon.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: systemPerformanceIcon
+        x: 845
+        y: 66
+        width: 106
+        height: 106
+        source: "/ui/assets/systemPerformanceIcon.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: resultsData
+        x: 581
+        y: 276
+        width: 132
+        height: 132
+        source: "/ui/assets/resultsData.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: baseLearningIcon
+        x: 78
+        y: 276
+        width: 132
+        height: 132
+        source: "/ui/assets/baseLearningIcon.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: lotusIcon
+        x: 317
+        y: 278
+        width: 160
+        height: 140
+        source: "/ui/assets/lotusIcon.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: processDataIcon
+        x: 331
+        y: 53
+        width: 132
+        height: 132
+        source: "/ui/assets/processData.png"
+        fillMode: Image.PreserveAspectFit
     }
 }

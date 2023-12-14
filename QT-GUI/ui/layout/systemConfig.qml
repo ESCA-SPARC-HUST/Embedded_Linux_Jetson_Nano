@@ -190,7 +190,7 @@ Rectangle {
         y: 143
         width: 195
         height: 35
-        model: ["Model 1", "Model 2", "Model 3"]
+        model: ["default", "Model 2", "Model 3"]
 
         // Customizing the appearance of items in the ComboBox
         delegate: Item {
@@ -301,7 +301,7 @@ Rectangle {
     }
 
     ComboBox {
-        id: code_dec_combobox
+        id: codec_combobox
         x: 864
         y: 284
         width: 131
@@ -328,7 +328,7 @@ Rectangle {
                 }
             }
         }
-        model: ["Model 1", "Model 2", "Model 3"]
+        model: ["UIntf8", "Model 2", "Model 3"]
 
         onCurrentIndexChanged: {
             var selectedItem = model[currentIndex] // Get the selected item
@@ -365,7 +365,7 @@ Rectangle {
                 }
             }
         }
-        model: ["Model 1", "Model 2", "Model 3"]
+        model: ["8", "16", "32"]
 
         onCurrentIndexChanged: {
             var selectedItem = model[currentIndex] // Get the selected item
@@ -402,7 +402,7 @@ Rectangle {
                 }
             }
         }
-        model: ["Model 1", "Model 2", "Model 3"]
+        model: ["2", "Model 2", "Model 3"]
 
         onCurrentIndexChanged: {
             var selectedItem = model[currentIndex] // Get the selected item
@@ -434,8 +434,8 @@ Rectangle {
         width: 487
         height: 24
         color: "#ffffff"
-        text: qsTr("home/user/doc")
-        font.pixelSize: 22
+        text: "/home/data"
+        font.pixelSize: 18
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.NoWrap
@@ -444,6 +444,7 @@ Rectangle {
         anchors.horizontalCenterOffset: 79
         font.family: "Josefin Sans"
         font.weight: Font.Light
+
 
         onTextChanged: {
             // add handler
@@ -475,17 +476,34 @@ Rectangle {
             font.weight: Font.Normal
         }
 
+
+
         FileDialog {
             id: choose_file_save_record
             title: "Please choose a file"
+
+
+
             onAccepted: {
-                console.log("You choose: " + choose_file_save_record.fileUrl)
+
+                function truncateText(text, maxLength) {
+                    if (text.length > maxLength) {
+                        return text.substring(41, maxLength - 3) + "..."
+                    } else {
+                        return text
+                    }
+                }
+
+                console.log("You choose: " + choose_file_save_record.folder)
+                console.log("You choose: " + truncateText("" + choose_file_save_record.folder, 60))
+
+
                 // handle choose file
-                folder_to_store.text = "" + choose_file_save_record.folder;
+                folder_to_store.text = truncateText("" + choose_file_save_record.folder, 92);
             }
             onRejected: {
                 console.log("Canceled")
-//                Qt.quit()
+                //                Qt.quit()
             }
         }
 

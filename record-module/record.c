@@ -1,11 +1,17 @@
 #include "record.h"
 
-
-int initialize(int sound_stream, int sample_format, int sample_rate, int channels) {
-
+int initialize(char device[], int sound_stream, int sample_format, int sample_rate, int channels) {
     int err;
     // Open the PCM device for recording
     if ((err = snd_pcm_open(&handle, "default", sound_stream, 0)) < 0) {
+        /*
+        parameters: address of the device pointer, Name device, Mode, number of extra configs
+        How to get the name of the device: 
+            Name device would follow the format "plughw:X,Y"
+            Using terminal command: arecord -l 
+                X is the card number, Y is the device number
+        */
+
         printf("Cannot open PCM device: %s\n", snd_strerror(err));
         return EXIT_FAILURE;
     }
@@ -52,22 +58,23 @@ int initialize(int sound_stream, int sample_format, int sample_rate, int channel
 
 
 
-int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording) { 
+int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording, char location[]) { 
     // Implement recording audio until the end time set 
     // Allocate buffer for audio data
     char *buffer = (char *)malloc(frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels);
+    
     if (buffer == NULL) {
         printf("Cannot allocate buffer\n");
         return EXIT_FAILURE;
     }
 
     // Open the output file
-    char *filename = malloc(sizeof(char) * 36);
+    char *filename = malloc(sizeof(char) * 256);
 
     time_t curr;  
     time(&curr);
     struct tm* curr_t = localtime(&curr);
-    sprintf(filename, "/home/gianghandsome/record-module/Embedded_Linux_Jetson_Nano/record-module/data/audio-%d-%d-%d_%02d%02d%02d.wav", curr_t->tm_year + 1900, curr_t->tm_mon + 1, curr_t->tm_mday, curr_t->tm_hour, curr_t->tm_min, curr_t->tm_sec);
+    sprintf(filename, "%s/audio-%d-%d-%d_%02d%02d%02d.wav", location, curr_t->tm_year + 1900, curr_t->tm_mon + 1, curr_t->tm_mday, curr_t->tm_hour, curr_t->tm_min, curr_t->tm_sec);
     FILE *output_file = fopen(filename, "wb");
     if (output_file == NULL) {
         printf("Cannot open output file\n");
@@ -75,12 +82,9 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     }
     free(filename);
 
-    // Get the current time
-    time_t mark = time(NULL);
-    double anchor;
     // Start recording
     printf("Recording started.\n");
-    
+
     // Record audio data 
     int err;
     while (*recording == 1) {
@@ -95,12 +99,12 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     }
     printf("Recording stopped.\nFinish!!");
 
-    fseek(output_file, 0L, SEEK_END); 
+    fseek(output_file, 0L, SEEK_END);         
   
     // calculating the size of the file 
-    long int data_size = ftell(output_file); 
+    unsigned long int data_size = ftell(output_file);
 
-
+    printf("Data size: %ld\n\n", data_size);     
 
     // Write the WAV header to the file
     fseek(output_file, 0L, SEEK_SET);
@@ -109,7 +113,8 @@ int implement (int frame_to_capture, int sample_format, int channels, int sample
     // Clean up
     fclose(output_file);
     free(buffer);
-    printf("Recording finished. Audio saved to recorded.wav\n");
+    printf("Recording finished.\n");
+    *recording = 2; 
     return EXIT_SUCCESS;
 }
 

@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
+import QtQuick.Dialogs 1.0
 
 
 Rectangle {
@@ -47,15 +48,15 @@ Rectangle {
         }
 
         TextInput {
-            id: home_nguyen_lam_nghia
+            id: folder_save_file
             width: 272
             height: 24
             color: "#ffffff"
-            text: qsTr("home/user/doc")
+            text: qsTr("home/data_after_training")
             font.pixelSize: 22
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
+            wrapMode: Text.NoWrap
             font.weight: Font.Light
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -88
@@ -155,9 +156,26 @@ Rectangle {
             color: "#6935416c"
             radius: 8
 
+            FileDialog {
+                id: choose_folder_save_file
+                title: "Please choose a file"
+                onAccepted: {
+                    console.log("You choose: " + choose_file_save_record.fileUrl)
+                    // handle choose file
+                    folder_to_store.text = "" + choose_file_save_record.folder;
+                }
+                onRejected: {
+                    console.log("Canceled")
+                    //                Qt.quit()
+                }
+            }
+
             MouseArea {
                 id: mouseArea1
                 anchors.fill: parent
+                onClicked: {
+                    choose_folder_save_file.open();
+                }
             }
         }
 
