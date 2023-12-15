@@ -5,6 +5,8 @@ import QtQuick.Dialogs 1.0
 import Qt.labs.platform 1.0
 // Import folder list
 import Qt.labs.folderlistmodel 2.6
+// Import for play Audio
+import QtMultimedia 5.15
 
 
 Rectangle {
@@ -114,7 +116,7 @@ Rectangle {
                 }
             }
 
-            // sync feature
+            // play audio feature
             Rectangle {
                 id: rectangle3
                 x: 550
@@ -131,9 +133,19 @@ Rectangle {
                     y: 11
                     width: 49
                     height: 25
-                    text: qsTr("Sync")
+                    text: qsTr("Play")
                     font.pixelSize: 22
                     horizontalAlignment: Text.AlignLeft
+                }
+                // hander play audio feature
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (listView.selectedItemIndex !== -1) {
+                            audioPlayer.source = folderListModel.get(listView.selectedItemIndex,"fileURL")
+                            audioPlayer.play()
+                        }
+                    }
                 }
 
             }
@@ -327,5 +339,10 @@ Rectangle {
                 // --------------------------- END --------------------------------------------
             }
         }
+    }
+
+    MediaPlayer {
+        id: audioPlayer
+        source: ""
     }
 }
