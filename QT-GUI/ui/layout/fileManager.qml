@@ -3,9 +3,9 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs 1.0
 import Qt.labs.platform 1.0
+// Import folder list
 import Qt.labs.folderlistmodel 2.6
 
-//import FileManagerIm 1.0
 
 Rectangle {
     id: frame_1
@@ -13,6 +13,7 @@ Rectangle {
     height: 500
     color: "transparent"
 
+    // tool Bar
     Rectangle {
         id: rectangle_55
         x: 0
@@ -87,10 +88,8 @@ Rectangle {
                     placeholderText: "Choose folder to open"
                     maximumLength: 40
                     background: Rectangle {
-//                        border.color: "yellow"
                         border.width: 0
                         color: "transparent"
-//                        color: "orange"
                     }
                 }
                 FolderDialog {
@@ -237,6 +236,7 @@ Rectangle {
         anchors.horizontalCenter: rectLayout.horizontalCenter
     }
 
+    // ListView Folder and File
     Rectangle {
         id: mainRect
         x: 19
@@ -245,6 +245,12 @@ Rectangle {
         height: 318
         border.color: "black"
         ListView {
+            id: listView
+
+            // Initialization Selected Item For Hightlight
+            property int selectedItemIndex: -1
+
+            // property of list View
             x: 0
             y: 17
             width: parent.width
@@ -253,8 +259,12 @@ Rectangle {
             model: FolderListModel {
                 id: folderListModel
                 showDirsFirst: true
-//                nameFilters: ["*.mp3", "*.flac"]
 
+                // If add filters then remove
+                // nameFilters: ["*.mp3", "*.flac"]
+
+
+                // ------------------ Hander forward feature ------------------
                 // Add a stack property to store navigation history
                 property var folderStack: []
 
@@ -271,14 +281,13 @@ Rectangle {
                     }
                 }
 
-                // end
+                // ------------------------- end ------------------------------
             }
 
             delegate: Rectangle {
                 id: rectangle
                 width: parent.width
                 height: 66
-                color: fileIsDir ? "#e3e3e3" : "#ffffff"
                 border.color: "black"
 
                 Text {
@@ -303,6 +312,19 @@ Rectangle {
                     font.pixelSize: 20
                     horizontalAlignment: Text.AlignRight
                 }
+
+                // --------------------- Hander hightlight clicked item ---------------------
+                // Thêm MouseArea để bắt sự kiện nhấp chuột
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        // Đặt màu nền cho item được chọn
+                        listView.selectedItemIndex = index;
+                    }
+                }
+                // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
+                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#e3e3e3" : "#ffffff")
+                // --------------------------- END --------------------------------------------
             }
         }
     }
