@@ -11,16 +11,16 @@ void FileManipulation::writeFile()
     QFile file(filePath);
     if(file.open(QIODevice::ReadWrite)) {
 
-    qInfo() << "Wrting lines";
-    QTextStream stream(&file);
-    QString line = "Hello Giang";
-    for (int i = 0; i < 10; ++i) {
-        stream << line  << "\n";
-    }
-    file.close();
+        qInfo() << "Wrting lines";
+        QTextStream stream(&file);
+        QString line = "Hello Giang";
+        for (int i = 0; i < 10; ++i) {
+            stream << line  << "\n";
+        }
+        file.close();
     }
     else {
-    qCritical() << file.errorString();
+        qCritical() << file.errorString();
     }
 
 }
@@ -34,9 +34,9 @@ void FileManipulation::readFile()
 
         qInfo() << "Wrting lines";
         QTextStream stream(&file);
-//        while(stream.readLineInto(&file)) {
-//        lines++;
-//        }
+        //        while(stream.readLineInto(&file)) {
+        //        lines++;
+        //        }
         file.close();
     }
     else {

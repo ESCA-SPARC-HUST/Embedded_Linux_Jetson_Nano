@@ -118,5 +118,8 @@
         <file>ui/assets/transferLearningIcon.png</file>
         <file>ui/assets/processData.png</file>
         <file>ui/assets/lotusIcon.png</file>
+        <file>images/image 23.png</file>
+        <file>images/image 25.png</file>
+        <file>ui/assets/defaultLearningImg.png</file>
     </qresource>
 </RCC>

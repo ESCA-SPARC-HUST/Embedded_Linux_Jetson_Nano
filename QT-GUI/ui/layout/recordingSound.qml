@@ -180,6 +180,10 @@ Rectangle {
                     // truc x la thoi gian ( tai thoi diem chay trong for :3)
                     var yValue = audioDataFromCpp[i]
                     //                  var yValue = Math.sin(xValue / 10);
+                    if (yValue >= 95 || yValue <= -95) {
+                        console.log("yValue: " + yValue)
+                    }
+
                     series.append(xValue, yValue)
                 }
                 // Cập nhật giá trị tối đa trên trục X nếu cần
