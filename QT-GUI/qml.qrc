@@ -121,5 +121,7 @@
         <file>images/image 23.png</file>
         <file>images/image 25.png</file>
         <file>ui/assets/defaultLearningImg.png</file>
+        <file>ui/layout/aiProcessMonitor.qml</file>
+        <file>ui/assets/exResourceMonitoring.png</file>
     </qresource>
 </RCC>

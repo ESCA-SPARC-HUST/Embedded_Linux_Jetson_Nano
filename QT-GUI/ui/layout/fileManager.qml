@@ -2,11 +2,12 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs 1.0
-// import Qt.labs.qmlmodels
 import Qt.labs.platform 1.0
+// Import folder list
 import Qt.labs.folderlistmodel 2.6
+// Import for play Audio
+import QtMultimedia 5.15
 
-//import FileManagerIm 1.0
 
 Rectangle {
     id: frame_1
@@ -14,6 +15,7 @@ Rectangle {
     height: 500
     color: "transparent"
 
+    // tool Bar
     Rectangle {
         id: rectangle_55
         x: 0
@@ -30,6 +32,7 @@ Rectangle {
             height: 61
             color: "#ffffff"
 
+            // backward feature
             Image {
                 id: image
                 x: 15
@@ -38,8 +41,15 @@ Rectangle {
                 height: 47
                 source: "../assets/icons8-back-50.png"
                 fillMode: Image.PreserveAspectFit
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        folderListModel.folder = folderListModel.parentFolder
+                        text3.text = folderListModel.folder
+                    }
+                }
             }
-
+            // forward feature
             Image {
                 id: image1
                 x: 65
@@ -48,8 +58,17 @@ Rectangle {
                 height: 47
                 source: "../assets/icons8-right-50.png"
                 fillMode: Image.PreserveAspectFit
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        // Use the new method to move forward in the folder hierarchy
+                        folderListModel.popFolderFromStack();
+                        text3.text = folderListModel.folder;
+                    }
+                }
             }
 
+            // choose folder feature
             Rectangle {
                 id: rectangle2
                 x: 129
@@ -71,10 +90,8 @@ Rectangle {
                     placeholderText: "Choose folder to open"
                     maximumLength: 40
                     background: Rectangle {
-//                        border.color: "yellow"
                         border.width: 0
                         color: "transparent"
-//                        color: "orange"
                     }
                 }
                 FolderDialog {
@@ -99,6 +116,7 @@ Rectangle {
                 }
             }
 
+            // play audio feature
             Rectangle {
                 id: rectangle3
                 x: 550
@@ -115,13 +133,24 @@ Rectangle {
                     y: 11
                     width: 49
                     height: 25
-                    text: qsTr("Sync")
+                    text: qsTr("Play")
                     font.pixelSize: 22
                     horizontalAlignment: Text.AlignLeft
+                }
+                // hander play audio feature
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (listView.selectedItemIndex !== -1) {
+                            audioPlayer.source = folderListModel.get(listView.selectedItemIndex,"fileURL")
+                            audioPlayer.play()
+                        }
+                    }
                 }
 
             }
 
+            // delete feture
             Rectangle {
                 id: rectangle4
                 x: 644
@@ -143,6 +172,7 @@ Rectangle {
                 }
             }
 
+            // import feature
             Rectangle {
                 id: rectangle5
                 x: 764
@@ -164,6 +194,8 @@ Rectangle {
                 }
             }
 
+
+            // share feature
             Rectangle {
                 id: rectangle6
                 x: 875
@@ -187,6 +219,7 @@ Rectangle {
         }
     }
 
+    // header
     Rectangle {
         id: rectangle_76
         x: 349
@@ -215,6 +248,7 @@ Rectangle {
         anchors.horizontalCenter: rectLayout.horizontalCenter
     }
 
+    // ListView Folder and File
     Rectangle {
         id: mainRect
         x: 19
@@ -223,6 +257,12 @@ Rectangle {
         height: 318
         border.color: "black"
         ListView {
+            id: listView
+
+            // Initialization Selected Item For Hightlight
+            property int selectedItemIndex: -1
+
+            // property of list View
             x: 0
             y: 17
             width: parent.width
@@ -231,14 +271,35 @@ Rectangle {
             model: FolderListModel {
                 id: folderListModel
                 showDirsFirst: true
-//                nameFilters: ["*.mp3", "*.flac"]
+
+                // If add filters then remove
+                // nameFilters: ["*.mp3", "*.flac"]
+
+
+                // ------------------ Hander forward feature ------------------
+                // Add a stack property to store navigation history
+                property var folderStack: []
+
+                onFolderChanged: {
+                    // Push the current folder onto the stack when it changes
+                    folderStack.push(folder)
+                }
+
+                function popFolderFromStack() {
+                    // Pop a folder from the stack
+                    if (folderStack.length > 1) {
+                        folderStack.pop();
+                        folder = folderStack[folderStack.length - 1];
+                    }
+                }
+
+                // ------------------------- end ------------------------------
             }
 
             delegate: Rectangle {
                 id: rectangle
                 width: parent.width
                 height: 66
-                color: fileIsDir ? "#e3e3e3" : "#ffffff"
                 border.color: "black"
 
                 Text {
@@ -263,13 +324,25 @@ Rectangle {
                     font.pixelSize: 20
                     horizontalAlignment: Text.AlignRight
                 }
+
+                // --------------------- Hander hightlight clicked item ---------------------
+                // Thêm MouseArea để bắt sự kiện nhấp chuột
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        // Đặt màu nền cho item được chọn
+                        listView.selectedItemIndex = index;
+                    }
+                }
+                // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
+                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#e3e3e3" : "#ffffff")
+                // --------------------------- END --------------------------------------------
             }
         }
     }
-    Button {
-        anchors.left: mainRect.right
-        anchors.leftMargin: 5
-        text: "back"
-        onClicked: folderListModel.folder = folderListModel.parentFolder
+
+    MediaPlayer {
+        id: audioPlayer
+        source: ""
     }
 }

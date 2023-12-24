@@ -6,56 +6,82 @@ Rectangle {
     width: parent
     height: parent
     color: "#272d37"
-    // CpuFrame {
-    //     anchors.centerIn: parent
-    //     width: 250
-    //     height: 250
-    //     anchors.verticalCenterOffset: -117
-    //     anchors.horizontalCenterOffset: 0
-    // }
 
-    // RamFrame {
-    //     anchors.centerIn: parent
-    //     width: 250
-    //     height: 250
-    //     anchors.verticalCenterOffset: 88
-    //     anchors.horizontalCenterOffset: 308
-    // }
+    // header
+    Rectangle {
+        id: rectangle
+        x: 117
+        y: 8
+        width: 352
+        height: 52
+        color: "#69000822"
+        radius: 8
 
-    // GpuFrame {
-    //     anchors.centerIn: parent
-    //     width: 250
-    //     height: 250
-    //     anchors.verticalCenterOffset: 88
-    //     anchors.horizontalCenterOffset: -308
-    // }
-    // DiskUsageFrame {
-    //     anchors.centerIn: parent
-    //     width: 176
-    //     height: 40
-    //     anchors.verticalCenterOffset: -126
-    //     anchors.horizontalCenterOffset: -311
-    // }
+        Text {
+            id: text1
+            color: "#ffffff"
+            text: qsTr("Real-time monitor")
+            anchors.fill: parent
+            font.pixelSize: 33
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+    }
+
+    Rectangle {
+        id: rectangle1
+        x: 565
+        y: 7
+        width: 352
+        height: 52
+        color: "#394251"
+        radius: 8
+        Text {
+            id: text2
+            color: "#ffffff"
+            text: qsTr("AI-process monitor")
+            anchors.fill: parent
+            font.pixelSize: 33
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                loader.source = "aiProcessMonitor.qml"
+            }
+        }
+    }
+    Rectangle {
+        id: rectangle2
+        x: 50
+        y: 65
+        width: 927
+        height: 2
+        color: "#ffffff"
+    }
+    // End header
+
     CpuFrame{
-        x: 395
-        y: 28
+        x: 387
+        y: 125
         width: 250
         height: 250
     }
 
     RamFrame{
-        y: 220
+        y: 187
         width: 250
         height: 250
         anchors.right: parent.right
-        anchors.rightMargin: 67
+        anchors.rightMargin: 47
     }
     GpuFrame{
-        y: 220
+        y: 187
         width: 250
         height: 250
         anchors.left: parent.left
-        anchors.leftMargin: 48
+        anchors.leftMargin: 50
     }
 
 
@@ -63,14 +89,14 @@ Rectangle {
 
     Text {
         id: diskUsage
-        x: 50
-        y: 70
-        width: 176
+        x: 64
+        y: 80
+        width: 272
         height: 40
         color: "#ffffff"
         text: BackendObject.diskText
         font.pixelSize: 20
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.Wrap
         font.family: "Roboto"
@@ -79,14 +105,14 @@ Rectangle {
 
     Text {
         id: internetStatus
-        x: 50
-        y: 120
-        width: 272
+        x: 64
+        y: 126
+        width: 260
         height: 40
         color: "#ffffff"
-        text: "Internet status: Connected"
+        text: "Monitor: ASUS VA27EHF"
         font.pixelSize: 20
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.Wrap
         font.family: "Roboto"
@@ -94,14 +120,14 @@ Rectangle {
     }
     Text {
         id: runnningTime
-        x: 700
-        y: 70
-        width: 240
+        x: 679
+        y: 80
+        width: 260
         height: 40
         color: "#ffffff"
-        text: "Running time: 0 hours"
+        text: "Microphone: AT2020"
         font.pixelSize: 20
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.Wrap
         font.family: "Roboto"
@@ -110,14 +136,14 @@ Rectangle {
 
     Text {
         id: connectionPort
-        x: 700
+        x: 679
         y: 120
-        width: 240
+        width: 260
         height: 40
         color: "#ffffff"
-        text: "Connection port: COM3"
+        text: "Speaker: MEGUO 2023"
         font.pixelSize: 20
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.Wrap
         font.family: "Roboto"
