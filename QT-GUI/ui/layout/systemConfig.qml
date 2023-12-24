@@ -4,6 +4,8 @@ import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
 
 
+
+
 Rectangle {
     id: frame_22
     width: 1024
@@ -11,18 +13,9 @@ Rectangle {
     color: "#262e4b"
 
     Image {
-        id: rectangle_60
+        id: rectangle_59
         x: 20
-        y: 270
-        source: "/ui/assets/rec.png"
-    }
-
-    Image {
-        id: rectangle_58
-        x: 20
-        y: 120
-        width: 989
-        height: 80
+        y: 207
         source: "/ui/assets/rec.png"
     }
 
@@ -34,11 +27,112 @@ Rectangle {
     }
 
     Image {
-        id: rectangle_59
+        id: rectangle_60
         x: 20
-        y: 207
+        y: 273
+        source: "/ui/assets/rec.png"
+
+        TextEdit {
+            id: textEdit
+            x: 344
+            y: 16
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: qsTr("__________")
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            selectByMouse: true
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+        }
+
+        TextEdit {
+            id: textEdit1
+            x: 344
+            y: 77
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: "8"
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+
+        TextEdit {
+            id: textEdit2
+            x: 840
+            y: 75
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: qsTr("__________")
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+
+        TextEdit {
+            id: textEdit3
+            x: 840
+            y: 16
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: qsTr("__________")
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+
+        TextEdit {
+            id: textEdit4
+            x: 840
+            y: -49
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: qsTr("__________")
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+    }
+
+    Image {
+        id: rectangle_58
+        x: 20
+        y: 120
+        width: 989
+        height: 80
         source: "/ui/assets/rec.png"
     }
+
+
 
     Text {
         id: sample_rate
@@ -59,7 +153,7 @@ Rectangle {
     Text {
         id: choose_device_text
         x: 49
-        y: 150
+        y: 225
         width: 188
         height: 21
         color: "#ffffff"
@@ -111,7 +205,7 @@ Rectangle {
         width: 160
         height: 24
         color: "#ffffff"
-        text: qsTr("Code dec")
+        text: qsTr("Codec")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -147,7 +241,7 @@ Rectangle {
     SvgPathItem {
         id: line_19_Stroke_
         x: 491
-        y: 296
+        y: 297
         width: 45
         height: 5
         strokeColor: "transparent"
@@ -176,20 +270,20 @@ Rectangle {
         joinStyle: 0
     }
 
-    Item {
-        id: group_62
-        x: 389
-        y: 279
-        width: 109
-        height: 35
-    }
-
     ComboBox {
         id: choose_device_combobox
-        x: 302
-        y: 143
+        x: 301
+        y: 217
         width: 195
         height: 35
+        font.weight: Font.Normal
+        font.family: "Courier"
+        font.pointSize: 13
+        background: Rectangle {
+            color: "#f8c3dab8"
+            border.color: "#435493"
+        }
+
         model: ["default", "Model 2", "Model 3"]
 
         // Customizing the appearance of items in the ComboBox
@@ -200,13 +294,13 @@ Rectangle {
             Rectangle {
                 width: parent.width
                 height: parent.height
-                color: "lightblue" // Background color
-                border.color: "#e0a3339a"
+                color: "#dcb3c9a9"
+                border.color: "#262e4b"
 
                 Text {
                     anchors.centerIn: parent
                     text: modelData
-                    color: "white" // Set the text color
+                    font.family: "Courier"
                 }
 
                 MouseArea {
@@ -228,8 +322,8 @@ Rectangle {
 
     SvgPathItem {
         id: line_22_Stroke_
-        x: 493
-        y: 150
+        x: 492
+        y: 234
         width: 43
         height: 5
         strokeColor: "transparent"
@@ -262,159 +356,10 @@ Rectangle {
         }
     }
 
-    ComboBox {
-        id: sample_rate_combobox
-        x: 303
-        y: 284
-        width: 195
-        height: 35
-        delegate: Item {
-            width: sample_rate_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        sample_rate_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["Model 1", "Model 2", "Model 3"]
-
-        //            Signal handler for item selection change
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected sample_rate Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
-    ComboBox {
-        id: codec_combobox
-        x: 864
-        y: 284
-        width: 131
-        height: 35
-        delegate: Item {
-            width: code_dec_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        code_dec_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["UIntf8", "Model 2", "Model 3"]
-
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected code_dec_combobox Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
-    ComboBox {
-        id: bits_per_sample_combobox
-        x: 302
-        y: 346
-        width: 195
-        height: 35
-        delegate: Item {
-            width: bits_per_sample_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        bits_per_sample_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["8", "16", "32"]
-
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected bits_per_sample_combobox Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
-    ComboBox {
-        id: channels_combobox
-        x: 864
-        y: 347
-        width: 131
-        height: 35
-        delegate: Item {
-            width: channels_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        channels_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["2", "Model 2", "Model 3"]
-
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected channels_combobox Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
     Text {
         id: choose_folder_text
-        x: 49
-        y: 223
+        x: 44
+        y: 150
         width: 266
         height: 21
         color: "#ffffff"
@@ -431,7 +376,7 @@ Rectangle {
         id: folder_to_store
         x: -3
         y: -3
-        width: 487
+        width: 501
         height: 24
         color: "#ffffff"
         text: "/home/data"
@@ -439,23 +384,22 @@ Rectangle {
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.NoWrap
-        anchors.verticalCenterOffset: -15
+        anchors.verticalCenterOffset: -91
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: 79
+        anchors.horizontalCenterOffset: 77
         font.family: "Josefin Sans"
         font.weight: Font.Light
-
 
         onTextChanged: {
             // add handler
         }
-
     }
+
 
     Rectangle {
         id: open_file_rec
-        x: 845
-        y: 216
+        x: 850
+        y: 141
         width: 150
         height: 36
         color: "#6935416c"
@@ -476,13 +420,9 @@ Rectangle {
             font.weight: Font.Normal
         }
 
-
-
         FileDialog {
             id: choose_file_save_record
             title: "Please choose a file"
-
-
 
             onAccepted: {
 
@@ -496,7 +436,6 @@ Rectangle {
 
                 console.log("You choose: " + choose_file_save_record.folder)
                 console.log("You choose: " + truncateText("" + choose_file_save_record.folder, 60))
-
 
                 // handle choose file
                 folder_to_store.text = truncateText("" + choose_file_save_record.folder, 92);
@@ -528,6 +467,21 @@ Rectangle {
             strokeColor: "#00000000"
         }
     }
+
+    Text {
+        id: code_dec1
+        x: 541
+        y: 225
+        width: 160
+        height: 24
+        color: "#ffffff"
+        text: qsTr("Duration")
+        font.pixelSize: 24
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.Wrap
+        font.weight: Font.Normal
+        font.family: "Itim"
+    }
+
 }
-
-
