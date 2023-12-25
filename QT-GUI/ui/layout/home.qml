@@ -338,7 +338,7 @@ Rectangle {
                 anchors.fill: parent
                 anchors.leftMargin: 0
                 onClicked: {
-                    loader.source = "/ui/layout/systemPerformance.qml"
+                    loader.source = "/ui/layout/realTimeMonitor.qml"
                 }
             }
         }

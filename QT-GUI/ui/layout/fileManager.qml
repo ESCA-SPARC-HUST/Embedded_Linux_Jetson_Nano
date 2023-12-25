@@ -30,7 +30,7 @@ Rectangle {
             y: 67
             width: 983
             height: 61
-            color: "#ffffff"
+            color: "#394251"
 
             // backward feature
             Image {
@@ -252,10 +252,11 @@ Rectangle {
     Rectangle {
         id: mainRect
         x: 19
-        y: 135
+        y: 128
         width: 986
         height: 318
-        border.color: "black"
+        // border.color: "black"
+        color: "#272d37"
         ListView {
             id: listView
 
@@ -310,6 +311,7 @@ Rectangle {
                     width: 158
                     height: 22
                     text: fileName
+                    color: "#ffffff"
                     font.pixelSize: 20
                 }
 
@@ -321,6 +323,7 @@ Rectangle {
                     width: 158
                     height: 22
                     text: fileIsDir ? "" : (fileSize + " bytes")
+                    color: "#ffffff"
                     font.pixelSize: 20
                     horizontalAlignment: Text.AlignRight
                 }
@@ -335,7 +338,7 @@ Rectangle {
                     }
                 }
                 // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
-                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#e3e3e3" : "#ffffff")
+                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#e3e3e3" : "#272d37")
                 // --------------------------- END --------------------------------------------
             }
         }
