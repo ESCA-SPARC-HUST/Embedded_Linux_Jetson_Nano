@@ -7,61 +7,7 @@ Rectangle {
     height: parent
     color: "#272d37"
 
-    // header
-    Rectangle {
-        id: rectangle
-        x: 117
-        y: 8
-        width: 352
-        height: 52
-        color: "#69000822"
-        radius: 8
-
-        Text {
-            id: text1
-            color: "#ffffff"
-            text: qsTr("Real-time monitor")
-            anchors.fill: parent
-            font.pixelSize: 33
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
-    }
-
-    Rectangle {
-        id: rectangle1
-        x: 565
-        y: 7
-        width: 352
-        height: 52
-        color: "#394251"
-        radius: 8
-        Text {
-            id: text2
-            color: "#ffffff"
-            text: qsTr("AI-process monitor")
-            anchors.fill: parent
-            font.pixelSize: 33
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                loader.source = "aiProcessMonitor.qml"
-            }
-        }
-    }
-    Rectangle {
-        id: rectangle2
-        x: 50
-        y: 65
-        width: 927
-        height: 2
-        color: "#ffffff"
-    }
-    // End header
-
+    // graph
     CpuFrame{
         x: 387
         y: 125
@@ -83,6 +29,86 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: 50
     }
+
+    // HEADER
+    Rectangle {
+        id: rectangle3
+        x: 50
+        y: 8
+        width: 305
+        height: 52
+        color: "#394251"
+        radius: 8
+        Text {
+            id: text3
+            color: "#ffffff"
+            text: qsTr("System Infomation")
+            anchors.fill: parent
+            font.pixelSize: 33
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                    loader.source = "aiProcessMonitor.qml"
+                }
+        }
+    }
+    Rectangle {
+        id: rectangle
+        x: 366
+        y: 8
+        width: 293
+        height: 52
+        color: "#69000822"
+        radius: 8
+
+        Text {
+            id: text1
+            color: "#ffffff"
+            text: qsTr("Real-time monitor")
+            anchors.fill: parent
+            font.pixelSize: 33
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+    }
+
+    Rectangle {
+        id: rectangle1
+        x: 672
+        y: 8
+        width: 305
+        height: 52
+        color: "#394251"
+        radius: 8
+        Text {
+            id: text2
+            color: "#ffffff"
+            text: qsTr("AI job monitor")
+            anchors.fill: parent
+            font.pixelSize: 33
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                loader.source = "aiProcessMonitor.qml"
+            }
+        }
+    }
+    Rectangle {
+        id: rectangle2
+        x: 50
+        y: 65
+        width: 927
+        height: 2
+        color: "#ffffff"
+    }
+    // End header
 
 
     // TEMP COMPONENT
