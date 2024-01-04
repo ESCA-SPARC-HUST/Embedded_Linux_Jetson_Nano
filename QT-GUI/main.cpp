@@ -14,7 +14,6 @@
 #include "core/audio/audioengine.h"
 
 
-
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -66,7 +65,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("AudioObject", audioController);
 
     //----------------------------
-    //  Connect to audio file list
+    //  Connect to audio file listnewBuffer
     //----------------------------
     QObject::connect(audioController->m_audio, &AudioEngine::inputDeviceSig, [&](const QVector<QString>& newBuffer) {
         // Dữ liệu trong buffer đã được cập nhật
@@ -74,7 +73,9 @@ int main(int argc, char *argv[])
 
     });
 
-//    imageWatcher.setWatchedFolder("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
+//    ----------------------------
+//     Config for Audio
+//    ----------------------------
 
     return app.exec();
 }

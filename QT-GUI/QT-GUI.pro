@@ -14,6 +14,7 @@ SOURCES += \
         component/file/filemanipulation.cpp \
         component/socket/socket.cpp \
         controller/audiocontroller.cpp \
+        controller/configaudio.cpp \
         controller/monitorbackend.cpp \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     config/socketconfig.h \
     config/fileconfig.h \
     controller/audiocontroller.h \
+    controller/configaudio.h \
     controller/monitorbackend.h \
     core/audio/audiofile.h \
     core/audiochart.h \

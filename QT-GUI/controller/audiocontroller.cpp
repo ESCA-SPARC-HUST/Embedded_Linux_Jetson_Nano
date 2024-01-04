@@ -27,8 +27,8 @@ AudioController::AudioController(QObject *parent) : QObject{parent}
         m_audiochart->open(QIODevice::WriteOnly);
         m_audio->startAudioInput(m_audiochart);
         m_audio_file = new AudioFile();
-        m_audio_file->setFilePath();
-        m_audio_file->writeFile();
+//        m_audio_file->setFilePath();
+        m_audio_file->writeFile("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/shared-file/recording.txt", "minh");
     }
 
 }

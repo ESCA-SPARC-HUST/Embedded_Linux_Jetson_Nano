@@ -87,42 +87,14 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        id: rectangle_64
-        x: 290
-        y: 226
-        width: 130
-        height: 53
-        color: "#6935416c"
-        radius: 8
-
-        Text {
-            id: time_to_start_record
-            anchors.centerIn: parent
-            width: 140
-            height: 40
-            color: "#ffffff"
-            text: "10 s"
-            horizontalAlignment: Text.AlignHCenter
-            anchors.verticalCenterOffset: 2
-            anchors.horizontalCenterOffset: -1
-            font.pointSize: 20
-
-            onTextChanged: {
-
-                // Add handle
-            }
-        }
-    }
-
     Text {
         id: set_time_to_start_record
         x: 24
         y: 241
-        width: 254
+        width: 212
         height: 24
         color: "#ffffff"
-        text: qsTr("Time to start record")
+        text: qsTr("Timer setting list")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -200,8 +172,8 @@ Rectangle {
         Text {
             id: start_stop_text
             anchors.centerIn: parent
-            width: parent
-            height: parent
+            width: parent.width
+            height: parent.height
             color: "#ffffff"
             text: flag ? "Stop" : "Start"
             horizontalAlignment: Text.AlignHCenter
@@ -210,7 +182,7 @@ Rectangle {
         }
 
         MouseArea {
-            id: mouseArea_ma
+            id: mouseArea
             anchors.fill: parent
             onClicked: {
                 flag = !flag;
@@ -221,7 +193,7 @@ Rectangle {
     Text {
         id: device_label
         x: 23
-        y: 306
+        y: 365
         width: 174
         height: 24
         color: "#ffffff"
@@ -236,8 +208,8 @@ Rectangle {
 
     Text {
         id: device_name_text
-        width: 545
-        height: 70
+        width: 225
+        height: 26
         color: "#ffffff"
         text: "default"
         font.pixelSize: 23
@@ -246,9 +218,9 @@ Rectangle {
         wrapMode: Text.NoWrap
         anchors.centerIn: parent
         font.family: "Josefin Sans"
-        anchors.horizontalCenterOffset: -214
+        anchors.horizontalCenterOffset: -191
         font.weight: Font.Light
-        anchors.verticalCenterOffset: 111
+        anchors.verticalCenterOffset: 128
     }
 
     Rectangle {
@@ -263,8 +235,8 @@ Rectangle {
         Text {
             id: file_manager_text
             anchors.centerIn: parent
-            width: parent
-            height: parent
+            width: parent.width
+            height: parent.height
             color: "#ffffff"
             text: "File Manager"
             horizontalAlignment: Text.AlignHCenter
@@ -276,11 +248,65 @@ Rectangle {
             id: file_manager_ma
             anchors.fill: parent
             onClicked: {
-                loader.source = "/ui/layout/fileManager.qml"
+                flag = !flag;
             }
         }
     }
 
+    Text {
+        id: device_name_text1
+        x: 4
+        y: 4
+        width: 189
+        height: 26
+        color: "#ffffff"
+        text: "date&time_start"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        anchors.verticalCenterOffset: 43
+        anchors.centerIn: parent
+        font.weight: Font.Light
+        anchors.horizontalCenterOffset: -398
+        font.family: "Josefin Sans"
+    }
+
+    Text {
+        id: device_name_text2
+        x: 4
+        y: 4
+        width: 19
+        height: 26
+        color: "#ffffff"
+        text: "--"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        anchors.verticalCenterOffset: 43
+        anchors.centerIn: parent
+        font.weight: Font.Light
+        anchors.horizontalCenterOffset: -288
+        font.family: "Josefin Sans"
+    }
+
+    Text {
+        id: device_name_text3
+        x: 7
+        y: 7
+        width: 189
+        height: 26
+        color: "#ffffff"
+        text: "date&time_end"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        anchors.verticalCenterOffset: 43
+        anchors.centerIn: parent
+        font.weight: Font.Light
+        anchors.horizontalCenterOffset: -179
+        font.family: "Josefin Sans"
+    }
 }
-
-

@@ -10,6 +10,17 @@ Rectangle {
     height: 500
     color: "#262e4b"
 
+    property string device_name: 'default'      // signal slot gui property nay ve cpp
+    property string sample_rate: ''
+    property string bits_per_sample: ''
+    property string channels: ''
+    property string codec: ''
+    property string duration: ''
+    property string start_time: ''
+    property string end_time: ''
+    property string folder_to_store: ''
+    property string file_to_store: ''
+
     Image {
         id: rectangle_59
         x: 20
@@ -120,41 +131,8 @@ Rectangle {
             selectByMouse: true
         }
 
-        TextEdit {
-            id: start_time_text
-            x: 262
-            y: -185
-            width: 130
-            height: 27
-            color: "#ffffff"
-            text: qsTr("__________")
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            selectionColor: "#2e52a3"
-            overwriteMode: true
-            mouseSelectionMode: TextInput.SelectWords
-            selectByMouse: true
-        }
 
-        TextEdit {
-            id: end_time_text
-            x: 629
-            y: -185
-            width: 130
-            height: 27
-            color: "#ffffff"
-            text: qsTr("__________")
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            selectionColor: "#2e52a3"
-            overwriteMode: true
-            mouseSelectionMode: TextInput.SelectWords
-            selectByMouse: true
-        }
+
     }
 
     Image {
@@ -247,7 +225,7 @@ Rectangle {
     }
 
     Image {
-        id: rectangle_68
+        id: save_btn
         x: 679
         y: 429
         width: 224
@@ -267,6 +245,53 @@ Rectangle {
             wrapMode: Text.Wrap
             font.family: "Itim"
             font.weight: Font.Normal
+        }
+
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+            anchors.fill: parent
+
+            onClicked: {
+                console.log("Save clicked")
+
+            }
+        }
+    }
+
+    Image {
+        id: timer_btn
+        x: 139
+        y: 429
+        width: 224
+        height: 58
+        source: "/ui/assets/btn.png"
+
+        Text {
+            x: 30
+            y: 7
+            width: 170
+            height: 42
+            color: "#ffffff"
+            text: qsTr("Set timer")
+            font.pixelSize: 24
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            font.family: "Itim"
+            font.weight: Font.Normal
+        }
+
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+            anchors.fill: parent
+
+            onClicked: {
+                loader.source = "/ui/layout/setTimer.qml";
+            }
         }
     }
 
@@ -337,19 +362,18 @@ Rectangle {
 
                 MouseArea {
                     anchors.fill: parent
-                                        onClicked: {
-                                            choose_device_combobox.currentIndex = index
-                                        }
+                    onClicked: {
+                        choose_device_combobox.currentIndex = index
+                    }
                 }
             }
         }
-
         //            Signal handler for item selection change
-                onCurrentIndexChanged: {
-                    var selectedItem = model[currentIndex] // Get the selected item
-                    console.log("Selected choose_device Item:", selectedItem)
-                    // Add logic here
-                }
+        onCurrentIndexChanged: {
+            var selectedItem = model[currentIndex] // Get the selected item
+            console.log("Selected choose_device Item:", selectedItem)
+            // Add logic here
+        }
     }
 
     SvgPathItem {
@@ -422,10 +446,10 @@ Rectangle {
         font.family: "Josefin Sans"
         font.weight: Font.Light
 
-                onTextChanged: {
+        onTextChanged: {
 
-                    // add handler
-                }
+            // add handler
+        }
     }
 
     Rectangle {
@@ -456,35 +480,35 @@ Rectangle {
             id: choose_file_save_record
             title: "Please choose a file"
 
-                        onAccepted: {
+            onAccepted: {
 
-                            function truncateText(text, maxLength) {
-                                if (text.length > maxLength) {
-                                    return text.substring(41, maxLength - 3) + "..."
-                                } else {
-                                    return text
-                                }
-                            }
+                function truncateText(text, maxLength) {
+                    if (text.length > maxLength) {
+                        return text.substring(41, maxLength - 3) + "..."
+                    } else {
+                        return text
+                    }
+                }
 
-                            console.log("You choose: " + choose_file_save_record.folder)
-                            console.log("You choose: " + truncateText(
-                                            "" + choose_file_save_record.folder, 60))
+                console.log("You choose: " + choose_file_save_record.folder)
+                console.log("You choose: " + truncateText(
+                                "" + choose_file_save_record.folder, 60))
 
-                            // handle choose file
-                            folder_to_store.text = truncateText(
-                                        "" + choose_file_save_record.folder, 92)
-                        }
-                        onRejected: {
-                            console.log("Canceled")
-                            //                Qt.quit()
-                        }
+                // handle choose file
+                folder_to_store.text = truncateText(
+                            "" + choose_file_save_record.folder, 92)
+            }
+            onRejected: {
+                console.log("Canceled")
+                //                Qt.quit()
+            }
         }
 
         MouseArea {
             anchors.fill: parent
-                        onClicked: {
-                            choose_file_save_record.open()
-                        }
+            onClicked: {
+                choose_file_save_record.open()
+            }
         }
 
         SvgPathItem {
@@ -518,53 +542,5 @@ Rectangle {
         font.family: "Itim"
     }
 
-    GroupItem {}
 
-    Text {
-        id: choose_device_text1
-        x: 42
-        y: 90
-        width: 75
-        height: 21
-        color: "#ffffff"
-        text: qsTr("Timer")
-        font.pixelSize: 26
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.weight: Font.Normal
-        font.family: "Itim"
-    }
-
-    Text {
-        id: start_time_label
-        x: 162
-        y: 92
-        width: 153
-        height: 21
-        color: "#ffffff"
-        text: qsTr("Start time")
-        font.pixelSize: 26
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.weight: Font.Normal
-        font.family: "Itim"
-    }
-
-    Text {
-        id: end_time_label
-        x: 541
-        y: 92
-        width: 208
-        height: 21
-        color: "#ffffff"
-        text: qsTr("End time")
-        font.pixelSize: 26
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.weight: Font.Normal
-        font.family: "Itim"
-    }
 }
