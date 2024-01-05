@@ -145,7 +145,12 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Save")
             font.pixelSize: 32
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
 
+            }
         }
     }
 

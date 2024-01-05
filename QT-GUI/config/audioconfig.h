@@ -2,7 +2,7 @@
 #define AUDIOCONFIG_H
 
 
-#define RECORDING_FILE_PATH "/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/recording.txt"
+#define RECORDING_FILE_PATH "/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/shared-file/recording.txt"
 
 #define START_RECORDING "start"
 #define END_RECORDING "end"

@@ -2,6 +2,7 @@ import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
+import ConfigAudio 1.0
 
 
 Rectangle {
@@ -10,16 +11,35 @@ Rectangle {
     height: 500
     color: "#262e4b"
 
-    property string device_name: 'default'      // signal slot gui property nay ve cpp
-    property string sample_rate: ''
-    property string bits_per_sample: ''
-    property string channels: ''
-    property string codec: ''
-    property string duration: ''
-    property string start_time: ''
-    property string end_time: ''
-    property string folder_to_store: ''
-    property string file_to_store: ''
+//    Component.completed: {
+//        let test = [];
+//        test = configAudio.loadConfig();
+//        console.log(test);
+//    }
+
+
+    property int device_name: 0
+    property string bits_per_sample: 'bits_per_sample'
+    property string channels: 'channels'
+    property string codec: 'codec'
+    property string duration: 'duration'
+    property string number_of_channels: 'number_of_channels'
+    property string file_to_store: 'file_to_store'
+    property string sample_rate_ne: 'sample_rate'
+
+    Component.onCompleted: {
+        let test = [];
+        test = configAudio.loadConfig();
+        console.log(test);
+        device_name = test[0];
+        sample_rate_ne = test[1];
+        bits_per_sample = test[2];
+        channels = test[3];
+        codec = test[4];
+        duration = test[5];
+        file_to_store = test[6];
+        number_of_channels = test[7];
+    }
 
     Image {
         id: rectangle_59
@@ -41,14 +61,16 @@ Rectangle {
         y: 273
         source: "/ui/assets/rec.png"
 
+
+
         TextEdit {
-            id: textEdit
+            id: sample_rate_textedit
             x: 344
             y: 16
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: sample_rate_ne
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -60,13 +82,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit1
+            id: bits_per_sample_textedit
             x: 344
             y: 77
             width: 130
             height: 27
             color: "#ffffff"
-            text: "8"
+            text: bits_per_sample
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -78,13 +100,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit2
+            id: numberofchannel_textedit
             x: 840
             y: 75
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: number_of_channels
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -96,13 +118,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit3
+            id: codec_textedit
             x: 840
             y: 16
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: codec
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -114,13 +136,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit4
+            id: duration_textedit
             x: 840
             y: -49
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: duration
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -130,8 +152,6 @@ Rectangle {
             selectionColor: "#2e52a3"
             selectByMouse: true
         }
-
-
 
     }
 
@@ -224,6 +244,29 @@ Rectangle {
         font.weight: Font.Normal
     }
 
+    Dialog {
+            id: notificationDialog
+            width: 300
+            height: 150
+            anchors.centerIn: parent
+            title: "Notification"
+
+            contentItem: Text {
+                text: "Save completed!"
+                anchors.centerIn: parent
+            }
+
+            standardButtons: Dialog.Ok
+
+            onAccepted: {
+                console.log("Save completed!");
+            }
+
+            onRejected: {
+                console.log("Rejected");
+            }
+        }
+
     Image {
         id: save_btn
         x: 679
@@ -231,6 +274,7 @@ Rectangle {
         width: 224
         height: 58
         source: "/ui/assets/btn.png"
+
 
         Text {
             x: 30
@@ -247,6 +291,10 @@ Rectangle {
             font.weight: Font.Normal
         }
 
+        ConfigAudio {
+            id: configAudio
+        }
+
 
         MouseArea {
             width: parent.width
@@ -254,7 +302,28 @@ Rectangle {
             anchors.fill: parent
 
             onClicked: {
-                console.log("Save clicked")
+                let stringList = [];
+
+                sample_rate_ne = sample_rate_textedit.text;
+                bits_per_sample = bits_per_sample_textedit.text;
+                number_of_channels = numberofchannel_textedit.text;
+                codec = codec_textedit.text;
+                duration = duration_textedit.text;
+                file_to_store = folder_to_store.text;
+                device_name = choose_device_combobox.currentIndex;
+
+                stringList.push(device_name);
+                stringList.push(sample_rate_ne);
+                stringList.push(bits_per_sample);
+                stringList.push(channels);
+                stringList.push(codec);
+                stringList.push(duration);
+                stringList.push(file_to_store);
+                stringList.push(number_of_channels);
+
+                console.log(stringList);
+                configAudio.saveConfig(stringList);
+                notificationDialog.visible = true;
 
             }
         }
@@ -288,7 +357,6 @@ Rectangle {
             width: parent.width
             height: parent.height
             anchors.fill: parent
-
             onClicked: {
                 loader.source = "/ui/layout/setTimer.qml";
             }
@@ -336,6 +404,7 @@ Rectangle {
         font.weight: Font.Normal
         font.family: "Courier"
         font.pointSize: 13
+        currentIndex: device_name
         background: Rectangle {
             color: "#f8c3dab8"
             border.color: "#435493"
@@ -435,7 +504,7 @@ Rectangle {
         width: 501
         height: 24
         color: "#ffffff"
-        text: "/home/data"
+        text: file_to_store
         font.pixelSize: 18
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
@@ -447,7 +516,6 @@ Rectangle {
         font.weight: Font.Light
 
         onTextChanged: {
-
             // add handler
         }
     }

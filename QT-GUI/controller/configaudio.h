@@ -6,23 +6,21 @@
 class ConfigAudio : public FileManipulation
 {
     Q_OBJECT
-    Q_PROPERTY(QVector<QString> configvalue READ configvalue WRITE setconfigvalue NOTIFY configvalueChanged FINAL)
 
 public:
-    explicit ConfigAudio();
-    void writeFile(const QString filePath, const QString &data) override;
-    void readFile(const QString &filePath) override;
+    ConfigAudio(QObject *parent = nullptr);
+    void writeFile(const QString filePath, const QVector<QString> &data) override;
+    QVector<QString> readFile(const QString &filePath) override;
 
-    QVector<QString> configvalue() const;
-    void setconfigvalue(const QVector<QString> &newConfigvalue);
+    void setFilePath() override;
 
 public slots:
-    void saveConfig(const QString &configValue);
-//    void loadConfig();
+    Q_INVOKABLE void saveConfig(const QVector<QString> &configValue);
+    Q_INVOKABLE QVector<QString> loadConfig();
 
 
 signals:
-    void configvalueChanged();
+    void saveConfigSignal(const QString &configValue);
 
 private:
     QVector<QString> m_configvalue;

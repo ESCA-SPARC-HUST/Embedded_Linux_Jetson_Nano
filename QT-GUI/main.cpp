@@ -12,7 +12,7 @@
 #include "component/chart/audiochart.h"
 #include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
-
+#include "controller/configaudio.h"
 
 int main(int argc, char *argv[])
 {
@@ -41,7 +41,12 @@ int main(int argc, char *argv[])
     FileWatcher fileWatcher("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
     fileWatcher.setDirectory("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
 
-//    QObject::connect(imageWatcher.fileWatcher, &QFileSystemWatcher::fileChanged, imageWatcher.fileWatcher, &ImageWatcher::handleFileChanged);
+    ConfigAudio configAudio = new ConfigAudio;
+    engine.rootContext()->setContextProperty("ConfigAudio", &configAudio);
+    qmlRegisterType<ConfigAudio>("ConfigAudio", 1, 0, "ConfigAudio");
+
+
+    //    QObject::connect(imageWatcher.fileWatcher, &QFileSystemWatcher::fileChanged, imageWatcher.fileWatcher, &ImageWatcher::handleFileChanged);
     engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
 
 
@@ -73,9 +78,9 @@ int main(int argc, char *argv[])
 
     });
 
-//    ----------------------------
-//     Config for Audio
-//    ----------------------------
+    //    ----------------------------
+    //     Config for Audio
+    //    ----------------------------
 
     return app.exec();
 }

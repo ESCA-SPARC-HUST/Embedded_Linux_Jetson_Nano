@@ -1,66 +1,64 @@
 #include "configaudio.h"
 
-ConfigAudio::ConfigAudio() : FileManipulation()
+ConfigAudio::ConfigAudio(QObject *parent) : FileManipulation(parent)
 {
-    filePath = "/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/recording.txt";
+    filePath = "/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/shared-file/recording.txt";
+//    connect(this, &ConfigAudio::saveConfigSignal, this, &ConfigAudio::saveConfig);
+    qDebug () << "ConfigAudio constructor done!";
 }
 
-
-void ConfigAudio::writeFile(const QString filePath, const QString &data)
+void ConfigAudio::writeFile(const QString filePath, const QVector<QString> &data)
 {
     QFile file(filePath);
     if (file.open(QIODevice::WriteOnly))
-    {
+    {       
         QTextStream out(&file);
-        out << data << "/n";
-        qInfo() << "Writing lines";
+        for(int i = 0; i < data.size(); i++) {
+            out << data[i] << "\n";
+            qInfo() << "Writing lines" << i << data[i];
+        }
         file.close();
     }
 }
 
-void ConfigAudio::readFile(const QString &filePath)
+QVector<QString> ConfigAudio::readFile(const QString &filePath)
 {
-    qInfo() << "Reading lines";
     QFile file(filePath);
+    QVector<QString> data;
 
     if (file.open(QIODevice::ReadOnly))
     {
         QTextStream in(&file);
         in.seek(0);
         QString line;
-        QString content;
         int lines = 0;
-
         while (in.readLineInto(&line))
         {
-            // Do something with line
-            content += line;
+            qInfo() << "line read: " << line;
+            data += line;
             lines++;
         }
-
         qInfo() << "line read: " << line;
-
-//        QString content = in.readAll();
-        // sửa ko readAll nữa
+        //        QString content = in.readAll();
+        return data;
         file.close();
     }
 }
 
-void ConfigAudio::saveConfig(const QString &configValue)
+void ConfigAudio::setFilePath() {
+    filePath = "/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/recording.txt";
+}
+
+void ConfigAudio::saveConfig(const QVector<QString> &configValue)
 {
-    qInfo() << "Saving config";
-    qInfo() << configValue;
+    qInfo() << "Saving config from C++:" << configValue;
     writeFile(filePath, configValue);
 }
 
-QVector<QString> ConfigAudio::configvalue() const
+QVector<QString> ConfigAudio::loadConfig()
 {
-    return m_configvalue;
+    qInfo() << "Load config";
+    QVector<QString> result = readFile(filePath);
+    return result;
 }
 
-void ConfigAudio::setconfigvalue(const QVector<QString> &newConfigvalue)
-{
-    if (m_configvalue == newConfigvalue)
-        return;
-    m_configvalue = newConfigvalue;
-}
