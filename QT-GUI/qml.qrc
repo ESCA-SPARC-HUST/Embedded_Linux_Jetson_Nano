@@ -123,5 +123,6 @@
         <file>ui/assets/defaultLearningImg.png</file>
         <file>ui/layout/aiProcessMonitor.qml</file>
         <file>ui/assets/exResourceMonitoring.png</file>
+        <file>ui/layout/setTimer.qml</file>
     </qresource>
 </RCC>
