@@ -8,44 +8,12 @@ Rectangle {
     color: "#272d37"
 
     // graph
-    CpuFrame{
-        x: 387
-        y: 125
-        width: 250
-        height: 250
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                    loader.source = "cpuMonitor.qml"
-                }
-        }
-    }
-
     RamFrame{
         y: 187
         width: 250
         height: 250
         anchors.right: parent.right
         anchors.rightMargin: 47
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                    loader.source = "ramMonitor.qml"
-                }
-        }
-    }
-    GpuFrame{
-        y: 187
-        width: 250
-        height: 250
-        anchors.left: parent.left
-        anchors.leftMargin: 50
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                    loader.source = "gpuMonitor.qml"
-                }
-        }
     }
 
     // HEADER

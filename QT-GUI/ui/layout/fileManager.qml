@@ -74,7 +74,7 @@ Rectangle {
                 x: 129
                 y: 7
                 border.color: "black"
-                width: 402
+                width: 326
                 height: 46
                 radius: 10
                 color: "#ffffff"
@@ -114,40 +114,6 @@ Rectangle {
                         folderDialog.open();
                     }
                 }
-            }
-
-            // play audio feature
-            Rectangle {
-                id: rectangle3
-                x: 550
-                y: 7
-                width: 83
-                height: 46
-                color: "#ffffff"
-                radius: 10
-                border.color: "black"
-
-                Text {
-                    id: text4
-                    x: 21
-                    y: 11
-                    width: 49
-                    height: 25
-                    text: qsTr("Play")
-                    font.pixelSize: 22
-                    horizontalAlignment: Text.AlignLeft
-                }
-                // hander play audio feature
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (listView.selectedItemIndex !== -1) {
-                            audioPlayer.source = folderListModel.get(listView.selectedItemIndex,"fileURL")
-                            audioPlayer.play()
-                        }
-                    }
-                }
-
             }
 
             // delete feture
@@ -215,6 +181,69 @@ Rectangle {
                     font.pixelSize: 22
                     horizontalAlignment: Text.AlignLeft
                 }
+            }
+
+            // play audio feature
+            Rectangle {
+                id: rectangle7
+                x: 461
+                y: 7
+                width: 83
+                height: 46
+                color: "#ffffff"
+                radius: 10
+                border.color: "#000000"
+                Text {
+                    id: text8
+                    x: 21
+                    y: 11
+                    width: 49
+                    height: 25
+                    text: qsTr("Play")
+                    font.pixelSize: 22
+                    horizontalAlignment: Text.AlignLeft
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                                    if (listView.selectedItemIndex !== -1) {
+                                        audioPlayer.source = folderListModel.get(listView.selectedItemIndex,"fileURL")
+                                        audioPlayer.play()
+                                    }
+                                }
+                }
+            }
+
+            // stop audio feature
+            Rectangle {
+                id: rectangle3
+                x: 550
+                y: 7
+                width: 83
+                height: 46
+                color: "#ffffff"
+                radius: 10
+                border.color: "black"
+
+                Text {
+                    id: text4
+                    x: 21
+                    y: 11
+                    width: 49
+                    height: 25
+                    text: qsTr("Stop")
+                    font.pixelSize: 22
+                    horizontalAlignment: Text.AlignLeft
+                }
+                // hander stop audio feature
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        audioPlayer.stop()
+                    }
+                }
+
             }
         }
     }

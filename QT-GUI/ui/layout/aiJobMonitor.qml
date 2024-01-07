@@ -200,20 +200,62 @@ Rectangle {
     }
     Rectangle {
         id: rectangle4
-        x: 70
+        x: 37
         y: 81
-        width: 358
+        width: 211
         height: 43
         color: "#69000822"
         radius: 8
+        border.color: "#ffffff"
+        border.width: 2
         Text {
             id: text4
             color: "#ffffff"
-            text: qsTr("Choose folder to open")
+            text: qsTr("AI Job Monitor")
             anchors.fill: parent
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                rectangle5.border.color = "#000000"
+                rectangle5.border.width = 1
+                rectangle4.border.width = 2
+                rectangle4.border.color = "#ffffff"
+                folderListModel.folder = "/ui/layout/"
+            }
+        }
+    }
+    Rectangle {
+        id: rectangle5
+        x: 254
+        y: 81
+        width: 211
+        height: 43
+        color: "#69000822"
+        radius: 8
+        border.color: "#000000"
+        border.width: 1
+        Text {
+            id: text5
+            color: "#ffffff"
+            text: qsTr("AI Job Monitor")
+            anchors.fill: parent
+            font.pixelSize: 25
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                rectangle4.border.color = "#000000"
+                rectangle4.border.width = 1
+                rectangle5.border.width = 2
+                rectangle5.border.color = "#ffffff"
+                folderListModel.folder = "/ui/component/"
+            }
         }
     }
 }

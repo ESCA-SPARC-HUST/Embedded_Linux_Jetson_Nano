@@ -93,29 +93,6 @@ Rectangle {
     }
     // End header
 
-    Rectangle{
-        x: 387
-        y: 125
-        width: 250
-        height: 250
-    }
-
-    Rectangle{
-        y: 187
-        width: 250
-        height: 250
-        anchors.right: parent.right
-        anchors.rightMargin: 47
-    }
-    Rectangle{
-        y: 187
-        width: 250
-        height: 250
-        anchors.left: parent.left
-        anchors.leftMargin: 50
-    }
-
-
     // TEMP COMPONENT
 
     Text {

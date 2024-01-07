@@ -121,5 +121,8 @@
         <file>ui/layout/aiJobMonitor.qml</file>
         <file>ui/assets/exResourceMonitoring.png</file>
         <file>ui/layout/systemInformation.qml</file>
+        <file>ui/layout/cpuMonitor.qml</file>
+        <file>ui/layout/gpuMonitor.qml</file>
+        <file>ui/layout/ramMonitor.qml</file>
     </qresource>
 </RCC>
