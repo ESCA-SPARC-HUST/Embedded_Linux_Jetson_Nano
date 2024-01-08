@@ -1,10 +1,8 @@
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
+1
+minhrate
+bits_per_sample
+channels
+codec
+mkibuyfgc
+file:///home/nguyen-hai-minh/Pictures
+number_of_channels

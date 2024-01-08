@@ -3,14 +3,16 @@
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QtWidgets/QApplication>
+#include <QFileSystemWatcher>
+#include <QWidget>
+#include <QDebug>
 
 #include "controller/audiocontroller.h"
 #include "controller/monitorbackend.h"
 #include "component/chart/audiochart.h"
-#include "core/filemanager.h"
+#include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
-
-
+#include "controller/configaudio.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,13 +38,16 @@ int main(int argc, char *argv[])
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
     AudioEngine* audioEngine;
-    FileManager fileManager;
+    FileWatcher fileWatcher("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
+    fileWatcher.setDirectory("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
 
-    //----------------------------
-    //  To Qml FileManager
-    //----------------------------
-    //    engine.rootContext()->setContextProperty("fileManager", &fileManager);
-    qmlRegisterType<FileManager>("FileManagerIm", 1, 0, "FileManager");
+    ConfigAudio configAudio = new ConfigAudio;
+    engine.rootContext()->setContextProperty("ConfigAudio", &configAudio);
+    qmlRegisterType<ConfigAudio>("ConfigAudio", 1, 0, "ConfigAudio");
+
+
+    //    QObject::connect(imageWatcher.fileWatcher, &QFileSystemWatcher::fileChanged, imageWatcher.fileWatcher, &ImageWatcher::handleFileChanged);
+    engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
 
 
     //---------------------------
@@ -65,13 +70,17 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("AudioObject", audioController);
 
     //----------------------------
-    //  Connect to audio file list
+    //  Connect to audio file listnewBuffer
     //----------------------------
     QObject::connect(audioController->m_audio, &AudioEngine::inputDeviceSig, [&](const QVector<QString>& newBuffer) {
         // Dữ liệu trong buffer đã được cập nhật
         engine.rootContext()->setContextProperty("audioDeviceList", QVariant::fromValue(newBuffer));
 
     });
+
+    //    ----------------------------
+    //     Config for Audio
+    //    ----------------------------
 
     return app.exec();
 }
