@@ -101,7 +101,7 @@
         <file>ui/layout/recordingSound.qml</file>
         <file>ui/layout/screen2.qml</file>
         <file>ui/layout/systemConfig.qml</file>
-        <file>ui/layout/systemPerformance.qml</file>
+        <file>ui/layout/realTimeMonitor.qml</file>
         <file>ui/layout/transferLearning.qml</file>
         <file>ui/main.qml</file>
         <file>ui/layout/fileManager.qml</file>
@@ -118,6 +118,11 @@
         <file>ui/assets/transferLearningIcon.png</file>
         <file>ui/assets/processData.png</file>
         <file>ui/assets/lotusIcon.png</file>
+        <file>ui/layout/aiJobMonitor.qml</file>
+        <file>ui/layout/systemInformation.qml</file>
+        <file>ui/layout/cpuMonitor.qml</file>
+        <file>ui/layout/gpuMonitor.qml</file>
+        <file>ui/layout/ramMonitor.qml</file>
         <file>images/image 23.png</file>
         <file>images/image 25.png</file>
         <file>ui/assets/defaultLearningImg.png</file>
