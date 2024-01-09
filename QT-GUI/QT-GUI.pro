@@ -12,11 +12,14 @@ QT += network
 SOURCES += \
         component/chart/audiochart.cpp \
         component/file/filemanipulation.cpp \
+        component/process/process.cpp \
         component/socket/socket.cpp \
         controller/audiocontroller.cpp \
+        controller/audiofeaturecontroller.cpp \
         controller/monitorbackend.cpp \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
+        core/audio/featureaudioextractor.cpp \
         core/filewatcher.cpp \
         main.cpp
 
@@ -37,13 +40,17 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     component/chart/audiochart.h \
     component/file/filemanipulation.h \
+    component/process/process.h \
     component/socket/socket.h \
     config/audioconfig.h \
+    config/featureaudioextractor.h \
     config/socketconfig.h \
     config/fileconfig.h \
     controller/audiocontroller.h \
+    controller/audiofeaturecontroller.h \
     controller/monitorbackend.h \
     core/audio/audiofile.h \
+    core/audio/featureaudioextractor.h \
     core/audiochart.h \
     core/audio/audioengine.h \
     core/filewatcher.h

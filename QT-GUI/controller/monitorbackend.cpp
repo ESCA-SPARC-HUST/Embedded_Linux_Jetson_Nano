@@ -73,7 +73,7 @@ double MonitorBackend::getCpu()
 }
 // end
 
-MonitorBackend::MonitorBackend(QObject *parent) : QObject(parent) {
+MonitorBackend::MonitorBackend(QObject *parent) : QObject{parent} {
     m_timer.setInterval(3);
     m_timer.setSingleShot(false);
     m_timer.start(1000);

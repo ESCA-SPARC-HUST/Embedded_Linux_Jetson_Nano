@@ -170,6 +170,7 @@ Rectangle {
             cursorShape: Qt.WaitCursor
             onClicked: {
                 console.log("minhgay is here");
+                FeatureAudioExtractor.extractMFCC("Hanoi")
             }
         }
     }
