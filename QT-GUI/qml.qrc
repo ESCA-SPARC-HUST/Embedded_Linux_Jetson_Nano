@@ -124,5 +124,9 @@
         <file>ui/layout/cpuMonitor.qml</file>
         <file>ui/layout/gpuMonitor.qml</file>
         <file>ui/layout/ramMonitor.qml</file>
+        <file>ui/layout/about.qml</file>
+        <file>ui/assets/hust-logo.jpg</file>
+        <file>ui/assets/si-synergy-logo.png</file>
+        <file>ui/assets/sparc-lab-logo.png</file>
     </qresource>
 </RCC>

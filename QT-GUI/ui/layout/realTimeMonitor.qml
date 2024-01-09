@@ -50,10 +50,36 @@ Rectangle {
 
     // HEADER
     Rectangle {
-        id: rectangle3
+        id: about
         x: 50
         y: 8
-        width: 305
+        width: 113
+        height: 52
+        color: "#394251"
+        radius: 8
+
+        Text {
+            id: text_about
+            color: "#ffffff"
+            text: qsTr("About")
+            anchors.fill: parent
+            font.pixelSize: 33
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                    loader.source = "about.qml"
+                }
+        }
+    }
+
+    Rectangle {
+        id: rectangle3
+        x: 169
+        y: 8
+        width: 291
         height: 52
         color: "#394251"
         radius: 8
@@ -76,9 +102,9 @@ Rectangle {
     }
     Rectangle {
         id: rectangle
-        x: 366
+        x: 466
         y: 8
-        width: 293
+        width: 285
         height: 52
         color: "#69000822"
         radius: 8
@@ -102,9 +128,9 @@ Rectangle {
 
     Rectangle {
         id: rectangle1
-        x: 672
+        x: 757
         y: 8
-        width: 305
+        width: 227
         height: 52
         color: "#394251"
         radius: 8
@@ -128,7 +154,7 @@ Rectangle {
         id: rectangle2
         x: 50
         y: 65
-        width: 927
+        width: 934
         height: 2
         color: "#ffffff"
     }
