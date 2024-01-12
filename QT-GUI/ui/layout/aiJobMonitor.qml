@@ -193,7 +193,7 @@ Rectangle {
                     width: 158
                     height: 22
                     color: "#ffffff"
-                    text: fileIsDir ? "" : (fileSize + " bytes")
+                    text: fileIsDir ? "" : ((fileSize / 1024).toFixed(2) + " KB")
                     font.pixelSize: 20
                     horizontalAlignment: Text.AlignRight
                 }
