@@ -14,10 +14,11 @@ SOURCES += \
         component/file/filemanipulation.cpp \
         component/socket/socket.cpp \
         controller/audiocontroller.cpp \
+        controller/configaudio.cpp \
         controller/monitorbackend.cpp \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
-        core/filemanager.cpp \
+        core/filewatcher.cpp \
         main.cpp
 
 RESOURCES += qml.qrc \
@@ -42,11 +43,12 @@ HEADERS += \
     config/socketconfig.h \
     config/fileconfig.h \
     controller/audiocontroller.h \
+    controller/configaudio.h \
     controller/monitorbackend.h \
     core/audio/audiofile.h \
     core/audiochart.h \
     core/audio/audioengine.h \
-    core/filemanager.h
+    core/filewatcher.h
 
 DISTFILES += \
     ../../../tessnewDESC/UI-D-ESCA-3/UI/cppImports/QtQuick/Studio/Components/ArcArrow.qml \

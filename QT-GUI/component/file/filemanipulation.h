@@ -7,19 +7,20 @@
 #include <QDebug>
 
 
-class FileManipulation
+class FileManipulation : public QObject
 {
+    Q_OBJECT
+
 public:
-    //    explicit FileManipulation(QObject* parent = 0);
-    //    virtual ~FileManipulation();
+    explicit FileManipulation(QObject *parent = nullptr);
+    //        virtual ~FileManipulation();
     virtual void setFilePath() = 0;
     QString getFilePath();
-    void writeFile();
-    void readFile();
+
+    virtual void writeFile(const QString filePath, const QVector<QString> &configValue)=0;
+    virtual QVector<QString> readFile(const QString &filePath)=0;
 
     QString filePath;
-
-
 
     //private:
     //    QString filePath;

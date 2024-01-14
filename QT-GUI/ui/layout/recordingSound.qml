@@ -9,27 +9,18 @@ Rectangle {
     id: frame_1
     width: 1024
     height: 500
-    color: "transparent"
+    color: "#262e4b"
 
     property bool flag: false
-
-    Rectangle {
-        id: rectangle_55
-        x: 0
-        y: 0
-        width: 1024
-        height: 500
-        color: "#262e4b"
-    }
 
     Text {
         id: select_folder_to_store
         x: 23
         y: 120
-        width: 312
+        width: 290
         height: 24
         color: "#ffffff"
-        text: qsTr("Select folder to store")
+        text: qsTr("Folder stored audio file")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -40,8 +31,8 @@ Rectangle {
 
     Text {
         id: choose_file_text
-        width: 552
-        height: 133
+        width: 545
+        height: 70
         color: "#ffffff"
         text: "home/nguyen-hai-minh/wavFile"
         font.pixelSize: 23
@@ -50,15 +41,15 @@ Rectangle {
         wrapMode: Text.NoWrap
         font.weight: Font.Light
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: -213
-        anchors.verticalCenterOffset: -30
+        anchors.horizontalCenterOffset: -214
+        anchors.verticalCenterOffset: -65
         font.family: "Josefin Sans"
     }
 
     SvgPathItem {
         id: line_21_Stroke_
-        x: 23
-        y: 96
+        x: 25
+        y: 91
         width: 975
         height: 1
         strokeColor: "transparent"
@@ -73,8 +64,8 @@ Rectangle {
     Rectangle {
         id: rectangle_74
         x: 423
-        y: 20
-        width: 179
+        y: 11
+        width: 249
         height: 67
         color: "#69000822"
         radius: 8
@@ -83,7 +74,7 @@ Rectangle {
             id: text1
             x: 14
             y: 17
-            width: 151
+            width: 222
             height: 29
             color: "#ffffff"
             text: qsTr("Recording Sound")
@@ -96,42 +87,14 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        id: rectangle_64
-        x: 285
-        y: 292
-        width: 130
-        height: 53
-        color: "#6935416c"
-        radius: 8
-
-        Text {
-            id: textEdit
-            anchors.centerIn: parent
-            width: 140
-            height: 40
-            color: "#ffffff"
-            text: "10 s"
-            horizontalAlignment: Text.AlignHCenter
-            anchors.verticalCenterOffset: 1
-            anchors.horizontalCenterOffset: -1
-            font.pointSize: 24
-
-            onTextChanged: {
-
-                // Add handle
-            }
-        }
-    }
-
     Text {
         id: set_time_to_start_record
-        x: 25
-        y: 306
-        width: 254
+        x: 24
+        y: 241
+        width: 212
         height: 24
         color: "#ffffff"
-        text: qsTr("Time to start record")
+        text: qsTr("Timer setting list")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -180,6 +143,10 @@ Rectangle {
                     // truc x la thoi gian ( tai thoi diem chay trong for :3)
                     var yValue = audioDataFromCpp[i]
                     //                  var yValue = Math.sin(xValue / 10);
+                    if (yValue >= 95 || yValue <= -95) {
+                        console.log("yValue: " + yValue)
+                    }
+
                     series.append(xValue, yValue)
                 }
                 // Cập nhật giá trị tối đa trên trục X nếu cần
@@ -194,20 +161,19 @@ Rectangle {
     }
 
     Rectangle {
-        id: rectangle
-        x: 73
-        y: 384
-        width: 288
-        height: 77
+        id: start_stop_rec
+        x: 251
+        y: 412
+        width: 176
+        height: 58
         color: "#f30b0836"
         radius: 22
 
         Text {
-            id: start_stop_Btn
-            x: 8
-            y: 1
-            width: 280
-            height: 68
+            id: start_stop_text
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
             color: "#ffffff"
             text: flag ? "Stop" : "Start"
             horizontalAlignment: Text.AlignHCenter
@@ -224,31 +190,123 @@ Rectangle {
         }
     }
 
-    //    Rectangle {
-    //        id: rectangle17
-    //        x: 703
-    //        y: 292
-    //        width: 288
-    //        height: 77
-    //        color: "#f30b0836"
-    //        radius: 22
+    Text {
+        id: device_label
+        x: 23
+        y: 365
+        width: 174
+        height: 24
+        color: "#ffffff"
+        text: qsTr("Device name")
+        font.pixelSize: 24
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.Wrap
+        font.family: "Itim"
+        font.weight: Font.Normal
+    }
 
-    //        Text {
-    //            id: view_Btn
-    //            x: 8
-    //            y: 1
-    //            width: 280
-    //            height: 68
-    //            color: "#ffffff"
-    //            text: qsTr("View data")
-    //            horizontalAlignment: Text.AlignHCenter
-    //            verticalAlignment: Text.AlignVCenter
-    //            font.pointSize: 22
-    //        }
+    Text {
+        id: device_name_text
+        width: 225
+        height: 26
+        color: "#ffffff"
+        text: "default"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        anchors.centerIn: parent
+        font.family: "Josefin Sans"
+        anchors.horizontalCenterOffset: -191
+        font.weight: Font.Light
+        anchors.verticalCenterOffset: 128
+    }
 
-    //        MouseArea {
-    //            id: mouseArea17
-    //            anchors.fill: parent
-    //        }
-    //    }
+    Rectangle {
+        id: file_manager_rec
+        x: 16
+        y: 412
+        width: 212
+        height: 58
+        color: "#f30b0836"
+        radius: 22
+
+        Text {
+            id: file_manager_text
+            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
+            color: "#ffffff"
+            text: "File Manager"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.pointSize: 22
+        }
+
+        MouseArea {
+            id: file_manager_ma
+            anchors.fill: parent
+            onClicked: {
+                flag = !flag;
+            }
+        }
+    }
+
+    Text {
+        id: device_name_text1
+        x: 4
+        y: 4
+        width: 189
+        height: 26
+        color: "#ffffff"
+        text: "date&time_start"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        anchors.verticalCenterOffset: 43
+        anchors.centerIn: parent
+        font.weight: Font.Light
+        anchors.horizontalCenterOffset: -398
+        font.family: "Josefin Sans"
+    }
+
+    Text {
+        id: device_name_text2
+        x: 4
+        y: 4
+        width: 19
+        height: 26
+        color: "#ffffff"
+        text: "--"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        anchors.verticalCenterOffset: 43
+        anchors.centerIn: parent
+        font.weight: Font.Light
+        anchors.horizontalCenterOffset: -288
+        font.family: "Josefin Sans"
+    }
+
+    Text {
+        id: device_name_text3
+        x: 7
+        y: 7
+        width: 189
+        height: 26
+        color: "#ffffff"
+        text: "date&time_end"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.NoWrap
+        anchors.verticalCenterOffset: 43
+        anchors.centerIn: parent
+        font.weight: Font.Light
+        anchors.horizontalCenterOffset: -179
+        font.family: "Josefin Sans"
+    }
 }

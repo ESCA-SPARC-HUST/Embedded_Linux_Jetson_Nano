@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.0
 
 
 Rectangle {
+            property bool connected: false
     Rectangle {
         id: frame_27
         width: 1024
@@ -13,6 +14,7 @@ Rectangle {
         property alias model_name_to_outputText: model_name_to_output.text
         property alias select_folder_to_storedText: select_folder_to_stored.text
         property alias executionText: execution.text
+
 
         Rectangle {
             id: rectangle
@@ -25,10 +27,62 @@ Rectangle {
         }
 
         Image {
-            id: denoiseSpeechUsingDeepLearningNetworksExample_02_1
+            id: image_render
             x: 451
             y: 97
-            source: "/ui/assets/Untitled.png"
+            fillMode: Image.PreserveAspectCrop
+            source: "/ui/assets/defaultLearningImg.png"    // default img
+
+            Connections {
+                target: fileWatcher
+
+                function onSetImage(imageName) {
+                    console.log("file:///home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images/" + imageName);
+                    image_render.source = "file:///home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images/" + imageName;
+                }
+            }
+        }
+
+        Rectangle {
+            id: rectangle_73
+            x: 75
+            y: 407
+            width: 211
+            height: 54
+            color: "#6935416c"
+            radius: 8
+
+            Text {
+                id: execution
+                width: 154
+                height: 35
+                color: "#ffffff"
+                text: connected ? qsTr("Stop") : qsTr("Execution")
+                font.pixelSize: 26
+                horizontalAlignment: Text.AlignRight
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.Wrap
+                font.weight: Font.Bold
+                anchors.centerIn: parent
+                font.family: "Josefin Sans"
+            }
+
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent
+
+                onClicked: {
+                    connected = !connected;
+
+//                    if (connected) {
+//                        fileWatcher.connect(onSetImage);
+//                        console.log("Connection established");
+//                    } else {
+//                        fileWatcher.disconnect(onSetImage);
+//                        console.log("Connection closed");
+//                    }
+                }
+            }
         }
 
         Text {
@@ -64,35 +118,7 @@ Rectangle {
             font.family: "Josefin Sans"
         }
 
-        Rectangle {
-            id: rectangle_73
-            x: 75
-            y: 407
-            width: 211
-            height: 54
-            color: "#6935416c"
-            radius: 8
 
-            Text {
-                id: execution
-                width: 154
-                height: 35
-                color: "#ffffff"
-                text: qsTr("Execution")
-                font.pixelSize: 26
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.Wrap
-                font.weight: Font.Bold
-                anchors.centerIn: parent
-                font.family: "Josefin Sans"
-            }
-
-            MouseArea {
-                id: mouseArea
-                anchors.fill: parent
-            }
-        }
 
         SvgPathItem {
             id: line_21_Stroke_
