@@ -37,8 +37,8 @@ Rectangle {
                 target: fileWatcher
 
                 function onSetImage(imageName) {
-                    console.log("file:///home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images/" + imageName);
-                    image_render.source = "file:///home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images/" + imageName;
+                    console.log("file:///home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image/" + imageName);
+                    image_render.source = "file:///home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image/" + imageName;
                 }
             }
         }
@@ -73,6 +73,7 @@ Rectangle {
 
                 onClicked: {
                     connected = !connected;
+                    BaseTraining.execution('Hanoi');
 
 //                    if (connected) {
 //                        fileWatcher.connect(onSetImage);
@@ -149,7 +150,7 @@ Rectangle {
                 x: 21
                 y: 8
                 color: "#ffffff"
-                text: qsTr("Base Learning")
+                text: qsTr("Base Training")
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 font.bold: false

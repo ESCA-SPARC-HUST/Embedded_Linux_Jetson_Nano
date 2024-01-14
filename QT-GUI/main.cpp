@@ -9,10 +9,20 @@
 
 #include "controller/audiocontroller.h"
 #include "controller/monitorbackend.h"
+#include "controller/audiofeaturecontroller.h"
+#include "controller/basetraining.h"
+
+
+
 #include "component/chart/audiochart.h"
+
+
 #include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
 #include "controller/configaudio.h"
+
+
+
 
 int main(int argc, char *argv[])
 {
@@ -37,9 +47,13 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
+    AudioFeatureController* audioExtractor = new AudioFeatureController();
+    BaseTraining* baseTrainingController = new BaseTraining();
+
+
     AudioEngine* audioEngine;
-    FileWatcher fileWatcher("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
-    fileWatcher.setDirectory("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
+    FileWatcher fileWatcher("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
+    fileWatcher.setDirectory("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
 
     ConfigAudio configAudio = new ConfigAudio;
     engine.rootContext()->setContextProperty("ConfigAudio", &configAudio);
@@ -69,6 +83,14 @@ int main(int argc, char *argv[])
     // control audiocontroller
     engine.rootContext()->setContextProperty("AudioObject", audioController);
 
+
+    engine.rootContext()->setContextProperty("FeatureAudioExtractor", audioExtractor);
+
+    engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
+
+
+
+
     //----------------------------
     //  Connect to audio file listnewBuffer
     //----------------------------
@@ -78,9 +100,8 @@ int main(int argc, char *argv[])
 
     });
 
-    //    ----------------------------
-    //     Config for Audio
-    //    ----------------------------
+//    imageWatcher.setWatchedFolder("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
+
 
     return app.exec();
 }

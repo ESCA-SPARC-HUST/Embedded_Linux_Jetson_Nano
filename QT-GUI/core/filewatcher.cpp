@@ -23,6 +23,7 @@ void FileWatcher::directoryChanged(const QString &path)
 {
     Q_UNUSED(path);
 
+
     // Check for new files
     updateFileList();
 
@@ -41,11 +42,13 @@ void FileWatcher::updateFileList()
 
     for (const QString &newFile : newFiles) {
         qDebug() << "New file added:" << newFile;
+        setImage(newFile);
 //        emit newFileAdded(newFile);
     }
 
-    qDebug() << "New image set:" << currentFiles.last();
-    emit setImage(currentFiles[currentFiles.length()-1]);
+    // qDebug() << "New image set:" << currentFiles.last();
+    // emit setImage(currentFiles[currentFiles.length()-1]);
+
 
     // Update the previous files
     m_previousFiles = currentFiles.toSet();

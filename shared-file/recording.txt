@@ -6,3 +6,4 @@ codec
 mkibuyfgc
 file:///home/nguyen-hai-minh/Pictures
 number_of_channels
+

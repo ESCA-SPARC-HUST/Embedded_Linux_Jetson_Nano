@@ -540,6 +540,15 @@ Rectangle {
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.topMargin: 0
+            anchors.leftMargin: 0
+            cursorShape: Qt.WaitCursor
+            onClicked: {
+                console.log("minhgay is here");
+                FeatureAudioExtractor.extractMFCC("Hanoi")
+            }
         }
     }
 
