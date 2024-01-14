@@ -7,12 +7,78 @@ Rectangle {
     height: parent
     color: "#272d37"
 
-    // header
+    // graph
+    CpuFrame{
+        x: 387
+        y: 125
+        width: 250
+        height: 250
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                    loader.source = "cpuMonitor.qml"
+                }
+        }
+    }
+
+    RamFrame{
+        y: 187
+        width: 250
+        height: 250
+        anchors.right: parent.right
+        anchors.rightMargin: 47
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                    loader.source = "ramMonitor.qml"
+                }
+        }
+    }
+    GpuFrame{
+        y: 187
+        width: 250
+        height: 250
+        anchors.left: parent.left
+        anchors.leftMargin: 50
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                    loader.source = "gpuMonitor.qml"
+                }
+        }
+    }
+
+    // HEADER
+    Rectangle {
+        id: rectangle3
+        x: 50
+        y: 8
+        width: 305
+        height: 52
+        color: "#394251"
+        radius: 8
+        Text {
+            id: text3
+            color: "#ffffff"
+            text: qsTr("System Infomation")
+            anchors.fill: parent
+            font.pixelSize: 33
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                    loader.source = "systemInformation.qml"
+                }
+        }
+    }
     Rectangle {
         id: rectangle
-        x: 117
+        x: 366
         y: 8
-        width: 352
+        width: 293
         height: 52
         color: "#69000822"
         radius: 8
@@ -26,20 +92,26 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                    loader.source = "realTimeMonitor.qml"
+                }
+        }
     }
 
     Rectangle {
         id: rectangle1
-        x: 565
-        y: 7
-        width: 352
+        x: 672
+        y: 8
+        width: 305
         height: 52
         color: "#394251"
         radius: 8
         Text {
             id: text2
             color: "#ffffff"
-            text: qsTr("AI-process monitor")
+            text: qsTr("AI job monitor")
             anchors.fill: parent
             font.pixelSize: 33
             horizontalAlignment: Text.AlignHCenter
@@ -48,7 +120,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                loader.source = "aiProcessMonitor.qml"
+                loader.source = "aiJobMonitor.qml"
             }
         }
     }
@@ -61,28 +133,6 @@ Rectangle {
         color: "#ffffff"
     }
     // End header
-
-    CpuFrame{
-        x: 387
-        y: 125
-        width: 250
-        height: 250
-    }
-
-    RamFrame{
-        y: 187
-        width: 250
-        height: 250
-        anchors.right: parent.right
-        anchors.rightMargin: 47
-    }
-    GpuFrame{
-        y: 187
-        width: 250
-        height: 250
-        anchors.left: parent.left
-        anchors.leftMargin: 50
-    }
 
 
     // TEMP COMPONENT

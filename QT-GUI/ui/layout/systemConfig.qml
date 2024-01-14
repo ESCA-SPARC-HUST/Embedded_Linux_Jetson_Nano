@@ -2,6 +2,7 @@ import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
+import ConfigAudio 1.0
 
 
 Rectangle {
@@ -9,6 +10,36 @@ Rectangle {
     width: 1024
     height: 500
     color: "#262e4b"
+
+//    Component.completed: {
+//        let test = [];
+//        test = configAudio.loadConfig();
+//        console.log(test);
+//    }
+
+
+    property int device_name: 0
+    property string bits_per_sample: 'bits_per_sample'
+    property string channels: 'channels'
+    property string codec: 'codec'
+    property string duration: 'duration'
+    property string number_of_channels: 'number_of_channels'
+    property string file_to_store: 'file_to_store'
+    property string sample_rate_ne: 'sample_rate'
+
+    Component.onCompleted: {
+        let test = [];
+        test = configAudio.loadConfig();
+        console.log(test);
+        device_name = test[0];
+        sample_rate_ne = test[1];
+        bits_per_sample = test[2];
+        channels = test[3];
+        codec = test[4];
+        duration = test[5];
+        file_to_store = test[6];
+        number_of_channels = test[7];
+    }
 
     Image {
         id: rectangle_59
@@ -30,14 +61,16 @@ Rectangle {
         y: 273
         source: "/ui/assets/rec.png"
 
+
+
         TextEdit {
-            id: textEdit
+            id: sample_rate_textedit
             x: 344
             y: 16
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: sample_rate_ne
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -49,13 +82,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit1
+            id: bits_per_sample_textedit
             x: 344
             y: 77
             width: 130
             height: 27
             color: "#ffffff"
-            text: "8"
+            text: bits_per_sample
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -67,13 +100,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit2
+            id: numberofchannel_textedit
             x: 840
             y: 75
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: number_of_channels
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -85,13 +118,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit3
+            id: codec_textedit
             x: 840
             y: 16
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: codec
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -103,13 +136,13 @@ Rectangle {
         }
 
         TextEdit {
-            id: textEdit4
+            id: duration_textedit
             x: 840
             y: -49
             width: 130
             height: 27
             color: "#ffffff"
-            text: qsTr("__________")
+            text: duration
             font.pixelSize: 18
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -120,41 +153,6 @@ Rectangle {
             selectByMouse: true
         }
 
-        TextEdit {
-            id: start_time_text
-            x: 262
-            y: -185
-            width: 130
-            height: 27
-            color: "#ffffff"
-            text: qsTr("__________")
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            selectionColor: "#2e52a3"
-            overwriteMode: true
-            mouseSelectionMode: TextInput.SelectWords
-            selectByMouse: true
-        }
-
-        TextEdit {
-            id: end_time_text
-            x: 629
-            y: -185
-            width: 130
-            height: 27
-            color: "#ffffff"
-            text: qsTr("__________")
-            font.pixelSize: 18
-            horizontalAlignment: Text.AlignRight
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            selectionColor: "#2e52a3"
-            overwriteMode: true
-            mouseSelectionMode: TextInput.SelectWords
-            selectByMouse: true
-        }
     }
 
     Image {
@@ -246,13 +244,37 @@ Rectangle {
         font.weight: Font.Normal
     }
 
+    Dialog {
+            id: notificationDialog
+            width: 300
+            height: 150
+            anchors.centerIn: parent
+            title: "Notification"
+
+            contentItem: Text {
+                text: "Save completed!"
+                anchors.centerIn: parent
+            }
+
+            standardButtons: Dialog.Ok
+
+            onAccepted: {
+                console.log("Save completed!");
+            }
+
+            onRejected: {
+                console.log("Rejected");
+            }
+        }
+
     Image {
-        id: rectangle_68
+        id: save_btn
         x: 679
         y: 429
         width: 224
         height: 58
         source: "/ui/assets/btn.png"
+
 
         Text {
             x: 30
@@ -267,6 +289,77 @@ Rectangle {
             wrapMode: Text.Wrap
             font.family: "Itim"
             font.weight: Font.Normal
+        }
+
+        ConfigAudio {
+            id: configAudio
+        }
+
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+            anchors.fill: parent
+
+            onClicked: {
+                let stringList = [];
+
+                sample_rate_ne = sample_rate_textedit.text;
+                bits_per_sample = bits_per_sample_textedit.text;
+                number_of_channels = numberofchannel_textedit.text;
+                codec = codec_textedit.text;
+                duration = duration_textedit.text;
+                file_to_store = folder_to_store.text;
+                device_name = choose_device_combobox.currentIndex;
+
+                stringList.push(device_name);
+                stringList.push(sample_rate_ne);
+                stringList.push(bits_per_sample);
+                stringList.push(channels);
+                stringList.push(codec);
+                stringList.push(duration);
+                stringList.push(file_to_store);
+                stringList.push(number_of_channels);
+
+                console.log(stringList);
+                configAudio.saveConfig(stringList);
+                notificationDialog.visible = true;
+
+            }
+        }
+    }
+
+    Image {
+        id: timer_btn
+        x: 139
+        y: 429
+        width: 224
+        height: 58
+        source: "/ui/assets/btn.png"
+
+        Text {
+            x: 30
+            y: 7
+            width: 170
+            height: 42
+            color: "#ffffff"
+            text: qsTr("Set timer")
+            font.pixelSize: 24
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            font.family: "Itim"
+            font.weight: Font.Normal
+        }
+
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+            anchors.fill: parent
+            onClicked: {
+                loader.source = "/ui/layout/setTimer.qml";
+            }
         }
     }
 
@@ -311,6 +404,7 @@ Rectangle {
         font.weight: Font.Normal
         font.family: "Courier"
         font.pointSize: 13
+        currentIndex: device_name
         background: Rectangle {
             color: "#f8c3dab8"
             border.color: "#435493"
@@ -337,19 +431,18 @@ Rectangle {
 
                 MouseArea {
                     anchors.fill: parent
-                                        onClicked: {
-                                            choose_device_combobox.currentIndex = index
-                                        }
+                    onClicked: {
+                        choose_device_combobox.currentIndex = index
+                    }
                 }
             }
         }
-
         //            Signal handler for item selection change
-                onCurrentIndexChanged: {
-                    var selectedItem = model[currentIndex] // Get the selected item
-                    console.log("Selected choose_device Item:", selectedItem)
-                    // Add logic here
-                }
+        onCurrentIndexChanged: {
+            var selectedItem = model[currentIndex] // Get the selected item
+            console.log("Selected choose_device Item:", selectedItem)
+            // Add logic here
+        }
     }
 
     SvgPathItem {
@@ -411,7 +504,7 @@ Rectangle {
         width: 501
         height: 24
         color: "#ffffff"
-        text: "/home/data"
+        text: file_to_store
         font.pixelSize: 18
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
@@ -422,10 +515,9 @@ Rectangle {
         font.family: "Josefin Sans"
         font.weight: Font.Light
 
-                onTextChanged: {
-
-                    // add handler
-                }
+        onTextChanged: {
+            // add handler
+        }
     }
 
     Rectangle {
@@ -456,35 +548,35 @@ Rectangle {
             id: choose_file_save_record
             title: "Please choose a file"
 
-                        onAccepted: {
+            onAccepted: {
 
-                            function truncateText(text, maxLength) {
-                                if (text.length > maxLength) {
-                                    return text.substring(41, maxLength - 3) + "..."
-                                } else {
-                                    return text
-                                }
-                            }
+                function truncateText(text, maxLength) {
+                    if (text.length > maxLength) {
+                        return text.substring(41, maxLength - 3) + "..."
+                    } else {
+                        return text
+                    }
+                }
 
-                            console.log("You choose: " + choose_file_save_record.folder)
-                            console.log("You choose: " + truncateText(
-                                            "" + choose_file_save_record.folder, 60))
+                console.log("You choose: " + choose_file_save_record.folder)
+                console.log("You choose: " + truncateText(
+                                "" + choose_file_save_record.folder, 60))
 
-                            // handle choose file
-                            folder_to_store.text = truncateText(
-                                        "" + choose_file_save_record.folder, 92)
-                        }
-                        onRejected: {
-                            console.log("Canceled")
-                            //                Qt.quit()
-                        }
+                // handle choose file
+                folder_to_store.text = truncateText(
+                            "" + choose_file_save_record.folder, 92)
+            }
+            onRejected: {
+                console.log("Canceled")
+                //                Qt.quit()
+            }
         }
 
         MouseArea {
             anchors.fill: parent
-                        onClicked: {
-                            choose_file_save_record.open()
-                        }
+            onClicked: {
+                choose_file_save_record.open()
+            }
         }
 
         SvgPathItem {
@@ -518,53 +610,5 @@ Rectangle {
         font.family: "Itim"
     }
 
-    GroupItem {}
 
-    Text {
-        id: choose_device_text1
-        x: 42
-        y: 90
-        width: 75
-        height: 21
-        color: "#ffffff"
-        text: qsTr("Timer")
-        font.pixelSize: 26
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.weight: Font.Normal
-        font.family: "Itim"
-    }
-
-    Text {
-        id: start_time_label
-        x: 162
-        y: 92
-        width: 153
-        height: 21
-        color: "#ffffff"
-        text: qsTr("Start time")
-        font.pixelSize: 26
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.weight: Font.Normal
-        font.family: "Itim"
-    }
-
-    Text {
-        id: end_time_label
-        x: 541
-        y: 92
-        width: 208
-        height: 21
-        color: "#ffffff"
-        text: qsTr("End time")
-        font.pixelSize: 26
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.weight: Font.Normal
-        font.family: "Itim"
-    }
 }
