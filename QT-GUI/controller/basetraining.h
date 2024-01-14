@@ -1,5 +1,5 @@
-#ifndef AUDIOFEATURECONTROLLER_H
-#define AUDIOFEATURECONTROLLER_H
+#ifndef BASETRAINING_H
+#define BASETRAINING_H
 
 #include <QObject>
 #include <QFileSystemWatcher>
@@ -9,23 +9,19 @@
 #include <QDir>
 #include <QSet>
 
-#include "config/featureaudioextractor.h"
+#include "config/basetraining.h"
+
 #include "component/process/process.h"
 
-
-class Process;
-
-
-class AudioFeatureController : public QObject
+class BaseTraining : public QObject
 {
     Q_OBJECT
 public:
-    explicit AudioFeatureController(QObject *parent = 0);
-    // ~AudioFeatureController();
+    explicit BaseTraining(QObject *parent = 0);
 
     void setDirectory(QString directoryPath);
 
-    Q_INVOKABLE void extractMFCC(QString audioPath);
+    Q_INVOKABLE void execution(QString audioPath);
 
 public slots:
     void directoryChanged(const QString &path);
@@ -36,7 +32,7 @@ signals:
 
 private:
     // FeatureAudioExtractor* m_audio_extractor = nullptr;
-    Process* m_audio_extractor = nullptr;
+    Process* m_base_training = nullptr;
     QFileSystemWatcher m_watcher;
     QString m_directory_result;
     QSet<QString> m_previousFiles;
@@ -44,4 +40,5 @@ private:
     void updateFileList();
 };
 
-#endif // AUDIOFEATURECONTROLLER_H
+
+#endif // BASETRAINING_H

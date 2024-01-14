@@ -10,10 +10,13 @@
 #include "controller/audiocontroller.h"
 #include "controller/monitorbackend.h"
 #include "controller/audiofeaturecontroller.h"
+#include "controller/basetraining.h"
 
 
 
 #include "component/chart/audiochart.h"
+
+
 #include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
 
@@ -46,6 +49,7 @@ int main(int argc, char *argv[])
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
     AudioFeatureController* audioExtractor = new AudioFeatureController();
+    BaseTraining* baseTrainingController = new BaseTraining();
 
 
     AudioEngine* audioEngine;
@@ -77,6 +81,8 @@ int main(int argc, char *argv[])
 
 
     engine.rootContext()->setContextProperty("FeatureAudioExtractor", audioExtractor);
+
+    engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
 
 
 

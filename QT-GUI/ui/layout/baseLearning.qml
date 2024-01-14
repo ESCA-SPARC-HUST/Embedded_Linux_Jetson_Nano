@@ -73,6 +73,7 @@ Rectangle {
 
                 onClicked: {
                     connected = !connected;
+                    BaseTraining.execution('Hanoi');
 
 //                    if (connected) {
 //                        fileWatcher.connect(onSetImage);
