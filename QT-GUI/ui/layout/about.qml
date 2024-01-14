@@ -1,52 +1,13 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import "qrc:/ui/component"
+import "qrc:/ui/component/QtQuick/Studio/Components"
+// Import folder list
+import Qt.labs.folderlistmodel 2.6
 
 Rectangle {
-    width: parent
-    height: parent
+    width: 1024
+    height: 500
     color: "#272d37"
-
-    // graph
-    CpuFrame{
-        x: 387
-        y: 125
-        width: 250
-        height: 250
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                    loader.source = "cpuMonitor.qml"
-                }
-        }
-    }
-
-    RamFrame{
-        y: 187
-        width: 250
-        height: 250
-        anchors.right: parent.right
-        anchors.rightMargin: 47
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                    loader.source = "ramMonitor.qml"
-                }
-        }
-    }
-    GpuFrame{
-        y: 187
-        width: 250
-        height: 250
-        anchors.left: parent.left
-        anchors.leftMargin: 50
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                    loader.source = "gpuMonitor.qml"
-                }
-        }
-    }
 
     // HEADER
     Rectangle {
@@ -55,7 +16,7 @@ Rectangle {
         y: 8
         width: 113
         height: 52
-        color: "#394251"
+        color: "#69000822"
         radius: 8
 
         Text {
@@ -106,7 +67,7 @@ Rectangle {
         y: 8
         width: 285
         height: 52
-        color: "#69000822"
+        color: "#394251"
         radius: 8
 
         Text {
@@ -158,71 +119,64 @@ Rectangle {
         height: 2
         color: "#ffffff"
     }
+
+    Image {
+        id: image1
+        x: 677
+        y: 119
+        width: 248
+        height: 103
+        source: "../assets/si-synergy-logo.png"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: image2
+        x: 211
+        y: 112
+        width: 110
+        height: 116
+        source: "../assets/hust-logo.jpg"
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: image3
+        x: 161
+        y: 42
+        width: 712
+        height: 257
+        source: "../assets/sparc-lab-logo.png"
+        fillMode: Image.PreserveAspectFit
+
+        Text {
+            id: text4
+            x: 77
+            y: 243
+            color: "#ffffff"
+            text: qsTr("Environmental Sound Collection and Analysis embedded applications")
+            font.pixelSize: 18
+        }
+    }
+
+    Text {
+        id: text5
+        x: 270
+        y: 328
+        color: "#ffffff"
+        text: qsTr("HUST Industry-Academia Collaboration Project")
+        font.pixelSize: 23
+    }
+
+    Text {
+        id: text6
+        x: 834
+        y: 401
+        color: "#ffffff"
+        text: qsTr("© Copyright by ESCA3 2023")
+        font.pixelSize: 12
+    }
     // End header
 
 
-    // TEMP COMPONENT
-
-    Text {
-        id: diskUsage
-        x: 64
-        y: 80
-        width: 272
-        height: 40
-        color: "#ffffff"
-        text: BackendObject.diskText
-        font.pixelSize: 20
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.family: "Roboto"
-        font.weight: Font.Normal
-    }
-
-    Text {
-        id: internetStatus
-        x: 64
-        y: 126
-        width: 260
-        height: 40
-        color: "#ffffff"
-        text: "Monitor: ASUS VA27EHF"
-        font.pixelSize: 20
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.family: "Roboto"
-        font.weight: Font.Normal
-    }
-    Text {
-        id: runnningTime
-        x: 679
-        y: 80
-        width: 260
-        height: 40
-        color: "#ffffff"
-        text: "Microphone: AT2020"
-        font.pixelSize: 20
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.family: "Roboto"
-        font.weight: Font.Normal
-    }
-
-    Text {
-        id: connectionPort
-        x: 679
-        y: 120
-        width: 260
-        height: 40
-        color: "#ffffff"
-        text: "Speaker: MEGUO 2023"
-        font.pixelSize: 20
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-        wrapMode: Text.Wrap
-        font.family: "Roboto"
-        font.weight: Font.Normal
-    }
 }
