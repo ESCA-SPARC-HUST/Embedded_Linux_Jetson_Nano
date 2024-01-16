@@ -2,6 +2,7 @@ import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
+import ConfigAudio 1.0
 
 
 Rectangle {
@@ -10,19 +11,33 @@ Rectangle {
     height: 500
     color: "#262e4b"
 
-    Image {
-        id: rectangle_60
-        x: 20
-        y: 270
-        source: "/ui/assets/rec.png"
+    property int device_name: 0
+    property string bits_per_sample: 'bits_per_sample'
+    property string channels: 'channels'
+    property string codec: 'codec'
+    property string duration: 'duration'
+    property string number_of_channels: 'number_of_channels'
+    property string file_to_store: 'file_to_store'
+    property string sample_rate_ne: 'sample_rate'
+
+    Component.onCompleted: {
+        let test = [];
+        test = AudioObject.loadParametersConfigure();
+        console.log(test);
+        device_name = test[0];
+        sample_rate_ne = test[1];
+        bits_per_sample = test[2];
+        channels = test[3];
+        codec = test[4];
+        duration = test[5];
+        file_to_store = test[6];
+        number_of_channels = test[7];
     }
 
     Image {
-        id: rectangle_58
+        id: rectangle_59
         x: 20
-        y: 120
-        width: 989
-        height: 80
+        y: 207
         source: "/ui/assets/rec.png"
     }
 
@@ -34,9 +49,111 @@ Rectangle {
     }
 
     Image {
-        id: rectangle_59
+        id: rectangle_60
         x: 20
-        y: 207
+        y: 273
+        source: "/ui/assets/rec.png"
+
+
+
+        TextEdit {
+            id: sample_rate_textedit
+            x: 344
+            y: 16
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: sample_rate_ne
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            selectByMouse: true
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+        }
+
+        TextEdit {
+            id: bits_per_sample_textedit
+            x: 344
+            y: 77
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: bits_per_sample
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+
+        TextEdit {
+            id: numberofchannel_textedit
+            x: 840
+            y: 75
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: number_of_channels
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+
+        TextEdit {
+            id: codec_textedit
+            x: 840
+            y: 16
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: codec
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+
+        TextEdit {
+            id: duration_textedit
+            x: 840
+            y: -49
+            width: 130
+            height: 27
+            color: "#ffffff"
+            text: duration
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            mouseSelectionMode: TextInput.SelectWords
+            overwriteMode: true
+            selectionColor: "#2e52a3"
+            selectByMouse: true
+        }
+
+    }
+
+    Image {
+        id: rectangle_58
+        x: 20
+        y: 120
+        width: 989
+        height: 80
         source: "/ui/assets/rec.png"
     }
 
@@ -59,7 +176,7 @@ Rectangle {
     Text {
         id: choose_device_text
         x: 49
-        y: 150
+        y: 225
         width: 188
         height: 21
         color: "#ffffff"
@@ -75,7 +192,7 @@ Rectangle {
     Text {
         id: bits_per_sample_text
         x: 49
-        y: 355
+        y: 356
         width: 203
         height: 23
         color: "#ffffff"
@@ -111,7 +228,7 @@ Rectangle {
         width: 160
         height: 24
         color: "#ffffff"
-        text: qsTr("Code dec")
+        text: qsTr("Codec")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -120,13 +237,37 @@ Rectangle {
         font.weight: Font.Normal
     }
 
+    Dialog {
+            id: notificationDialog
+            width: 300
+            height: 150
+            anchors.centerIn: parent
+            title: "Notification"
+
+            contentItem: Text {
+                text: "Save completed!"
+                anchors.centerIn: parent
+            }
+
+            standardButtons: Dialog.Ok
+
+            onAccepted: {
+                console.log("Save completed!");
+            }
+
+            onRejected: {
+                console.log("Rejected");
+            }
+        }
+
     Image {
-        id: rectangle_68
-        x: 677
-        y: 419
+        id: save_btn
+        x: 679
+        y: 429
         width: 224
         height: 58
         source: "/ui/assets/btn.png"
+
 
         Text {
             x: 30
@@ -142,12 +283,83 @@ Rectangle {
             font.family: "Itim"
             font.weight: Font.Normal
         }
+
+        ConfigAudio {
+            id: configAudio
+        }
+
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+            anchors.fill: parent
+
+            onClicked: {
+                let stringList = [];
+
+                sample_rate_ne = sample_rate_textedit.text;
+                bits_per_sample = bits_per_sample_textedit.text;
+                number_of_channels = numberofchannel_textedit.text;
+                codec = codec_textedit.text;
+                duration = duration_textedit.text;
+                file_to_store = folder_to_store.text;
+                device_name = choose_device_combobox.currentIndex;
+
+                stringList.push(device_name);
+                stringList.push(sample_rate_ne);
+                stringList.push(bits_per_sample);
+                stringList.push(channels);
+                stringList.push(codec);
+                stringList.push(duration);
+                stringList.push(file_to_store);
+                stringList.push(number_of_channels);
+
+                console.log(stringList);
+                AudioObject.saveParametersConfigure(stringList);
+                notificationDialog.visible = true;
+
+            }
+        }
+    }
+
+    Image {
+        id: timer_btn
+        x: 139
+        y: 429
+        width: 224
+        height: 58
+        source: "/ui/assets/btn.png"
+
+        Text {
+            x: 30
+            y: 7
+            width: 170
+            height: 42
+            color: "#ffffff"
+            text: qsTr("Set timer")
+            font.pixelSize: 24
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            font.family: "Itim"
+            font.weight: Font.Normal
+        }
+
+
+        MouseArea {
+            width: parent.width
+            height: parent.height
+            anchors.fill: parent
+            onClicked: {
+                loader.source = "/ui/layout/setTimer.qml";
+            }
+        }
     }
 
     SvgPathItem {
         id: line_19_Stroke_
         x: 491
-        y: 296
+        y: 297
         width: 45
         height: 5
         strokeColor: "transparent"
@@ -176,20 +388,21 @@ Rectangle {
         joinStyle: 0
     }
 
-    Item {
-        id: group_62
-        x: 389
-        y: 279
-        width: 109
-        height: 35
-    }
-
     ComboBox {
         id: choose_device_combobox
-        x: 302
-        y: 143
+        x: 301
+        y: 217
         width: 195
         height: 35
+        font.weight: Font.Normal
+        font.family: "Courier"
+        font.pointSize: 13
+        currentIndex: device_name
+        background: Rectangle {
+            color: "#f8c3dab8"
+            border.color: "#435493"
+        }
+
         model: ["default", "Model 2", "Model 3"]
 
         // Customizing the appearance of items in the ComboBox
@@ -200,13 +413,13 @@ Rectangle {
             Rectangle {
                 width: parent.width
                 height: parent.height
-                color: "lightblue" // Background color
-                border.color: "#e0a3339a"
+                color: "#dcb3c9a9"
+                border.color: "#262e4b"
 
                 Text {
                     anchors.centerIn: parent
                     text: modelData
-                    color: "white" // Set the text color
+                    font.family: "Courier"
                 }
 
                 MouseArea {
@@ -217,7 +430,6 @@ Rectangle {
                 }
             }
         }
-
         //            Signal handler for item selection change
         onCurrentIndexChanged: {
             var selectedItem = model[currentIndex] // Get the selected item
@@ -228,8 +440,8 @@ Rectangle {
 
     SvgPathItem {
         id: line_22_Stroke_
-        x: 493
-        y: 150
+        x: 492
+        y: 234
         width: 43
         height: 5
         strokeColor: "transparent"
@@ -245,7 +457,7 @@ Rectangle {
     Rectangle {
         id: rectangle_76
         x: 389
-        y: 29
+        y: 7
         width: 246
         height: 52
         color: "#69000822"
@@ -262,159 +474,10 @@ Rectangle {
         }
     }
 
-    ComboBox {
-        id: sample_rate_combobox
-        x: 303
-        y: 284
-        width: 195
-        height: 35
-        delegate: Item {
-            width: sample_rate_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        sample_rate_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["Model 1", "Model 2", "Model 3"]
-
-        //            Signal handler for item selection change
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected sample_rate Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
-    ComboBox {
-        id: codec_combobox
-        x: 864
-        y: 284
-        width: 131
-        height: 35
-        delegate: Item {
-            width: code_dec_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        code_dec_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["UIntf8", "Model 2", "Model 3"]
-
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected code_dec_combobox Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
-    ComboBox {
-        id: bits_per_sample_combobox
-        x: 302
-        y: 346
-        width: 195
-        height: 35
-        delegate: Item {
-            width: bits_per_sample_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        bits_per_sample_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["8", "16", "32"]
-
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected bits_per_sample_combobox Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
-    ComboBox {
-        id: channels_combobox
-        x: 864
-        y: 347
-        width: 131
-        height: 35
-        delegate: Item {
-            width: channels_combobox.width
-            height: 30
-            Rectangle {
-                width: parent.width
-                height: parent.height
-                color: "#add8e6"
-                border.color: "#e0a3339a"
-                Text {
-                    color: "#ffffff"
-                    text: modelData
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        channels_combobox.currentIndex = index
-                    }
-                }
-            }
-        }
-        model: ["2", "Model 2", "Model 3"]
-
-        onCurrentIndexChanged: {
-            var selectedItem = model[currentIndex] // Get the selected item
-            console.log("Selected channels_combobox Item:", selectedItem)
-            // Add logic here
-        }
-    }
-
     Text {
         id: choose_folder_text
-        x: 49
-        y: 223
+        x: 44
+        y: 150
         width: 266
         height: 21
         color: "#ffffff"
@@ -431,31 +494,29 @@ Rectangle {
         id: folder_to_store
         x: -3
         y: -3
-        width: 487
+        width: 501
         height: 24
         color: "#ffffff"
-        text: "/home/data"
+        text: file_to_store
         font.pixelSize: 18
         horizontalAlignment: Text.AlignRight
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.NoWrap
-        anchors.verticalCenterOffset: -15
+        anchors.verticalCenterOffset: -91
         anchors.centerIn: parent
-        anchors.horizontalCenterOffset: 79
+        anchors.horizontalCenterOffset: 77
         font.family: "Josefin Sans"
         font.weight: Font.Light
-
 
         onTextChanged: {
             // add handler
         }
-
     }
 
     Rectangle {
         id: open_file_rec
-        x: 845
-        y: 216
+        x: 850
+        y: 141
         width: 150
         height: 36
         color: "#6935416c"
@@ -476,13 +537,9 @@ Rectangle {
             font.weight: Font.Normal
         }
 
-
-
         FileDialog {
             id: choose_file_save_record
             title: "Please choose a file"
-
-
 
             onAccepted: {
 
@@ -495,11 +552,12 @@ Rectangle {
                 }
 
                 console.log("You choose: " + choose_file_save_record.folder)
-                console.log("You choose: " + truncateText("" + choose_file_save_record.folder, 60))
-
+                console.log("You choose: " + truncateText(
+                                "" + choose_file_save_record.folder, 60))
 
                 // handle choose file
-                folder_to_store.text = truncateText("" + choose_file_save_record.folder, 92);
+                folder_to_store.text = truncateText(
+                            "" + choose_file_save_record.folder, 92)
             }
             onRejected: {
                 console.log("Canceled")
@@ -510,7 +568,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                choose_file_save_record.open();
+                choose_file_save_record.open()
             }
         }
 
@@ -528,6 +586,22 @@ Rectangle {
             strokeColor: "#00000000"
         }
     }
+
+    Text {
+        id: code_dec1
+        x: 541
+        y: 225
+        width: 160
+        height: 24
+        color: "#ffffff"
+        text: qsTr("Duration")
+        font.pixelSize: 24
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.Wrap
+        font.weight: Font.Normal
+        font.family: "Itim"
+    }
+
+
 }
-
-

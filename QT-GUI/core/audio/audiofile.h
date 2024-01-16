@@ -10,6 +10,9 @@ class AudioFile : public FileManipulation
 public:
 //    AudioFile();
     void setFilePath();
+
+    void writeFile(const QString filePath, const QVector<QString> &configValue) override;
+    QVector<QString> readFile(const QString &filePath) override;
 };
 
 #endif // AUDIOFILE_H

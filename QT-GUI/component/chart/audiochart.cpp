@@ -30,8 +30,6 @@ qint64 AudioChart::writeData(const char *data, qint64 maxSize)
         m_buffer[start] = value;
         start++;
     }
-
-//    qDebug() << "buffer: " << m_buffer;
     emit bufferUpdated(m_buffer);
 
     return maxSize;

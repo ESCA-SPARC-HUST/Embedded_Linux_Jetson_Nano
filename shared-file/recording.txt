@@ -1,10 +1,8 @@
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
-Hello Giang
+1
+44100 kHz
+16
+channels
+codec
+60 seconds
+/home/gianghandsome/esca-main/data
+1

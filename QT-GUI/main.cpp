@@ -3,12 +3,24 @@
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QtWidgets/QApplication>
+#include <QFileSystemWatcher>
+#include <QWidget>
+#include <QDebug>
 
 #include "controller/audiocontroller.h"
 #include "controller/monitorbackend.h"
+#include "controller/audiofeaturecontroller.h"
+#include "controller/basetraining.h"
+
+
+
 #include "component/chart/audiochart.h"
-#include "core/filemanager.h"
+
+
+#include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
+#include "controller/configaudio.h"
+
 
 
 
@@ -35,14 +47,21 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
-    AudioEngine* audioEngine;
-    FileManager fileManager;
+    AudioFeatureController* audioExtractor = new AudioFeatureController();
+    BaseTraining* baseTrainingController = new BaseTraining();
 
-    //----------------------------
-    //  To Qml FileManager
-    //----------------------------
-    //    engine.rootContext()->setContextProperty("fileManager", &fileManager);
-    qmlRegisterType<FileManager>("FileManagerIm", 1, 0, "FileManager");
+
+    AudioEngine* audioEngine;
+    FileWatcher fileWatcher("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
+    fileWatcher.setDirectory("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
+
+    ConfigAudio *configAudio = new ConfigAudio();
+    engine.rootContext()->setContextProperty("ConfigAudio", configAudio);
+    qmlRegisterType<ConfigAudio>("ConfigAudio", 1, 0, "ConfigAudio");
+
+
+    //    QObject::connect(imageWatcher.fileWatcher, &QFileSystemWatcher::fileChanged, imageWatcher.fileWatcher, &ImageWatcher::handleFileChanged);
+    engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
 
 
     //---------------------------
@@ -64,14 +83,25 @@ int main(int argc, char *argv[])
     // control audiocontroller
     engine.rootContext()->setContextProperty("AudioObject", audioController);
 
+
+    engine.rootContext()->setContextProperty("FeatureAudioExtractor", audioExtractor);
+
+    engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
+
+
+
+
     //----------------------------
-    //  Connect to audio file list
+    //  Connect to audio file listnewBuffer
     //----------------------------
     QObject::connect(audioController->m_audio, &AudioEngine::inputDeviceSig, [&](const QVector<QString>& newBuffer) {
         // Dữ liệu trong buffer đã được cập nhật
         engine.rootContext()->setContextProperty("audioDeviceList", QVariant::fromValue(newBuffer));
 
     });
+
+//    imageWatcher.setWatchedFolder("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
+
 
     return app.exec();
 }

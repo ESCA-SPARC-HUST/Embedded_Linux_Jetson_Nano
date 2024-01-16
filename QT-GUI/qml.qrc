@@ -118,7 +118,6 @@
         <file>ui/assets/processData.png</file>
         <file>ui/assets/lotusIcon.png</file>
         <file>ui/layout/aiJobMonitor.qml</file>
-        <file>ui/assets/exResourceMonitoring.png</file>
         <file>ui/layout/systemInformation.qml</file>
         <file>ui/layout/cpuMonitor.qml</file>
         <file>ui/layout/gpuMonitor.qml</file>
@@ -131,5 +130,10 @@
         <file>ui/layout/baseLearning_parameterConfigure.qml</file>
         <file>ui/layout/baseLearning_result.qml</file>
         <file>ui/layout/baseLearning_traning.qml</file>
+        <file>images/image 23.png</file>
+        <file>images/image 25.png</file>
+        <file>ui/assets/defaultLearningImg.png</file>
+        <file>ui/assets/exResourceMonitoring.png</file>
+        <file>ui/layout/setTimer.qml</file>
     </qresource>
 </RCC>
