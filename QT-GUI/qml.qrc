@@ -122,5 +122,15 @@
         <file>ui/assets/gear-solid.svg</file>
         <file>ui/assets/Gravity Forces Blue Icon Game Presentation(10).svg</file>
         <file>ui/assets/Gravity Forces Blue Icon Game Presentation(2).png</file>
+        <file>../../../baseQtCopy/Embedded_Linux_Jetson_Nano/QT-GUI/ui/assets/rocCurve.png</file>
+        <file>../../../baseQtCopy/Embedded_Linux_Jetson_Nano/QT-GUI/ui/assets/prCurve.png</file>
+        <file>../../../baseQtCopy/Embedded_Linux_Jetson_Nano/QT-GUI/ui/assets/valLoss.png</file>
+        <file>../../../baseQtCopy/Embedded_Linux_Jetson_Nano/QT-GUI/ui/assets/testLoss.png</file>
+        <file>../../../baseQtCopy/Embedded_Linux_Jetson_Nano/QT-GUI/ui/assets/trainLoss.png</file>
+        <file>ui/assets/rocCurve.png</file>
+        <file>ui/assets/prCurve.png</file>
+        <file>ui/assets/valLoss.png</file>
+        <file>ui/assets/testLoss.png</file>
+        <file>ui/assets/trainLoss.png</file>
     </qresource>
 </RCC>
