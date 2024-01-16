@@ -1,4 +1,5 @@
 #include "audiocontroller.h"
+
 #include <QtMultimedia/QAudioDeviceInfo>
 #include <QtMultimedia/QAudioInput>
 #include <QDebug>
@@ -27,6 +28,7 @@ AudioController::AudioController(QObject *parent) : QObject{parent}
         m_audiochart->open(QIODevice::WriteOnly);
         m_audio->startAudioInput(m_audiochart);
         m_audio_file = new AudioFile();
+        m_audio_config = new AudioConfigFile();
 //        m_audio_file->setFilePath();
 //        m_audio_file->writeFile("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/shared-file/recording.txt");
     }
@@ -52,6 +54,17 @@ void AudioController::editRecordParameters(QString device, QString path, int sam
 {
     qInfo() << "Hello Giang";
 
+}
+
+QVector<QString> AudioController::loadParametersConfigure()
+{
+    QVector<QString> result = m_audio_config->loadConfig();
+    return result;
+}
+
+void AudioController::saveParametersConfigure(const QVector<QString> &configValue)
+{
+    m_audio_config->saveConfig(configValue);
 }
 
 

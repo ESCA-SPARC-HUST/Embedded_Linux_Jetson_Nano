@@ -19,6 +19,7 @@ SOURCES += \
         controller/basetraining.cpp \
         controller/configaudio.cpp \
         controller/monitorbackend.cpp \
+        core/audio/audioconfigfile.cpp \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
         core/filewatcher.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     controller/basetraining.h \
     controller/configaudio.h \
     controller/monitorbackend.h \
+    core/audio/audioconfigfile.h \
     core/audio/audiofile.h \
     core/audiochart.h \
     core/audio/audioengine.h \
