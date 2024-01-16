@@ -16,6 +16,7 @@ SOURCES += \
         controller/audiocontroller.cpp \
         controller/configaudio.cpp \
         controller/monitorbackend.cpp \
+        controller/settimer.cpp \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
         core/filewatcher.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     controller/audiocontroller.h \
     controller/configaudio.h \
     controller/monitorbackend.h \
+    controller/settimer.h \
     core/audio/audiofile.h \
     core/audiochart.h \
     core/audio/audioengine.h \

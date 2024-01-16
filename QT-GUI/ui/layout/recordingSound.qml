@@ -9,7 +9,7 @@ Rectangle {
     id: frame_1
     width: 1024
     height: 500
-    color: "#262e4b"
+    color: "#272D37"
 
     property bool flag: false
 
@@ -248,7 +248,7 @@ Rectangle {
             id: file_manager_ma
             anchors.fill: parent
             onClicked: {
-                flag = !flag;
+                loader.source = "fileManager.qml"
             }
         }
     }

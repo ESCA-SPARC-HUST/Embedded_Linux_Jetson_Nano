@@ -13,6 +13,7 @@
 #include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
 #include "controller/configaudio.h"
+#include "controller/settimer.h"
 
 int main(int argc, char *argv[])
 {
@@ -38,21 +39,31 @@ int main(int argc, char *argv[])
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
     AudioEngine* audioEngine;
-    FileWatcher fileWatcher("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
-    fileWatcher.setDirectory("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
 
+
+    //------------------------------------------------------------------------------------------------------
+    //                                             Set Timer
+    SetTimer setTimer = new SetTimer;
+    engine.rootContext()->setContextProperty("SetTimer", &setTimer);
+    qmlRegisterType<SetTimer>("SetTimer", 1, 0, "SetTimer");
+    //------------------------------------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------------------------------------
+    //                                             Config Audio
     ConfigAudio configAudio = new ConfigAudio;
     engine.rootContext()->setContextProperty("ConfigAudio", &configAudio);
     qmlRegisterType<ConfigAudio>("ConfigAudio", 1, 0, "ConfigAudio");
+    //------------------------------------------------------------------------------------------------------
 
-
-    //    QObject::connect(imageWatcher.fileWatcher, &QFileSystemWatcher::fileChanged, imageWatcher.fileWatcher, &ImageWatcher::handleFileChanged);
+    //----------------------------------------------------------------------------------------------------------
+    //                                             Set Image
+    FileWatcher fileWatcher("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
+    fileWatcher.setDirectory("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
     engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
+    //----------------------------------------------------------------------------------------------------------
 
-
-    //---------------------------
-    //  Connect to Audio
-    //---------------------------
+    //----------------------------------------------------------------------------------------------------------------
+    //                                                Connect to Audio
     QObject::connect(audioController->m_audiochart, &AudioChart::bufferUpdated, [&](const QVector<float>& newBuffer) {
         // Dữ liệu trong buffer đã được cập nhật
         //bufferData = newBuffer;
@@ -60,11 +71,12 @@ int main(int argc, char *argv[])
         QQmlEngine::setObjectOwnership(audioController, QQmlEngine::CppOwnership);
         engine.rootContext()->setContextProperty("audioDataFromCpp", QVariant::fromValue(newBuffer));
     });
+    //----------------------------------------------------------------------------------------------------------------
 
-    //----------------------------
+    //----------------------------------------------------------------------------------------------------------------
     //  Connect to Cpu file
-    //----------------------------
     engine.rootContext()->setContextProperty("BackendObject", minitorBackend);
+    //----------------------------------------------------------------------------------------------------------------
 
     // control audiocontroller
     engine.rootContext()->setContextProperty("AudioObject", audioController);
@@ -77,10 +89,6 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty("audioDeviceList", QVariant::fromValue(newBuffer));
 
     });
-
-    //    ----------------------------
-    //     Config for Audio
-    //    ----------------------------
 
     return app.exec();
 }

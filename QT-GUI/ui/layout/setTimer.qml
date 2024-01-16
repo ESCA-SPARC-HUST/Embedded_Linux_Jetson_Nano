@@ -2,12 +2,26 @@ import QtQuick 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
+import SetTimer 1.0
 
 Rectangle {
     id: frame_27
     width: 1024
     height: 500
     color: "#262e4b"
+
+    property string start_time: ''
+    property string end_time: ''
+    property string timer_list_text: ''
+
+    Component.onCompleted: {
+        let result = [];
+        result = setTimer.loadTimer();
+        console.log(result);
+        for (let i = 0; i < result.length; i++) {
+            timer_list_text += result[i] + '\n';
+        }
+    }
 
     SvgPathItem {
         id: line_21_Stroke_
@@ -46,6 +60,29 @@ Rectangle {
         }
     }
 
+    Dialog {
+            id: notificationDialog
+            width: 300
+            height: 150
+            anchors.centerIn: parent
+            title: "Notification"
+
+            contentItem: Text {
+                text: "Save completed!"
+                anchors.centerIn: parent
+            }
+
+            standardButtons: Dialog.Ok
+
+            onAccepted: {
+                console.log("Save completed!");
+            }
+
+            onRejected: {
+                console.log("Rejected");
+            }
+        }
+
     Text {
         id: start_time_text
         x: 56
@@ -77,13 +114,13 @@ Rectangle {
         color: "#3b000643"
         radius: 12
         TextEdit {
-            id: textEdit
+            id: start_time_textedit
             x: 32
             y: 8
             width: 146
             height: 48
             color: "#ffffff"
-            text: qsTr("Text Edit")
+            text: start_time
             font.pixelSize: 32
         }
     }
@@ -97,12 +134,13 @@ Rectangle {
         color: "#3b000643"
         radius: 12
         TextEdit {
+            id: end_time_textedit
             x: 32
             y: 8
             width: 146
             height: 48
             color: "#ffffff"
-            text: qsTr("Text Edit")
+            text: end_time
             font.pixelSize: 32
         }
     }
@@ -122,8 +160,18 @@ Rectangle {
             width: 148
             height: 40
             color: "#ffffff"
-            text: qsTr("Timer list")
+            text: "Timer Lít"
             font.pixelSize: 32
+        }
+        Text {
+            id: timer_list_text_id
+            x: 262
+            y: 50
+            width: 148
+            height: 40
+            color: "#ffffff"
+            text: timer_list_text
+            font.pixelSize: 20
         }
     }
 
@@ -146,10 +194,25 @@ Rectangle {
             text: qsTr("Save")
             font.pixelSize: 32
         }
+
+        SetTimer {
+            id: setTimer
+        }
+
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                let result = [];
+                start_time = start_time_textedit.text;
+                end_time = end_time_textedit.text;
+                result.push('From: ' +start_time);
+                result.push('--to--' +end_time);
 
+                setTimer.saveTimer(result);
+                notificationDialog.open();
+                timer_list_text += 'From: ' + start_time + ' --to-- ' + end_time + '\n';
+                start_time_textedit.text = '';
+                end_time_textedit.text = '';
             }
         }
     }
@@ -178,7 +241,6 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 loader.source = "/ui/layout/systemConfig.qml"
-
             }
         }
     }

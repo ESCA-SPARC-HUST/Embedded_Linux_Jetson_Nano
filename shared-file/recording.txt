@@ -4,5 +4,5 @@ bits_per_sample
 channels
 codec
 mkibuyfgc
-file:///home/nguyen-hai-minh/Pictures
+/Embedded_Linux_Jetson_Nano/build-QT-GUI-Desktop...
 number_of_channels

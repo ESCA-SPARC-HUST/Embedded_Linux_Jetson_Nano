@@ -20,10 +20,10 @@ public slots:
 
 
 signals:
-    void saveConfigSignal(const QString &configValue);
+//    void saveConfigSignal(const QString &configValue);
 
 private:
-    QVector<QString> m_configvalue;
+//    QVector<QString> m_configvalue;
 };
 
 #endif // CONFIGAUDIO_H

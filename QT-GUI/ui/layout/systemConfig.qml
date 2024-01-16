@@ -9,7 +9,7 @@ Rectangle {
     id: frame_22
     width: 1024
     height: 500
-    color: "#262e4b"
+    color: "#272D37"
 
 //    Component.completed: {
 //        let test = [];

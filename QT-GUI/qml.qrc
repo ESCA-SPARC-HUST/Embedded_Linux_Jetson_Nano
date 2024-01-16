@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>ui/assets/backgroundElipse1.png</file>
         <file>ui/assets/btn.png</file>
-        <file>ui/assets/Gravity Forces Blue Icon Game Presentation(10).svg</file>
         <file>ui/assets/outlineElipse1.png</file>
         <file>ui/assets/rec.png</file>
         <file>ui/assets/robot.png</file>
@@ -108,21 +107,20 @@
         <file>ui/assets/Untitled.png</file>
         <file>ui/assets/icons8-back-50.png</file>
         <file>ui/assets/icons8-right-50.png</file>
-        <file>ui/assets/Gravity Forces Blue Icon Game Presentation.png</file>
-        <file>ui/assets/fileManagerIcon.png</file>
-        <file>ui/assets/systemConfigIcon.png</file>
-        <file>ui/assets/recordIcon.png</file>
-        <file>ui/assets/systemPerformanceIcon.png</file>
-        <file>ui/assets/resultsData.png</file>
-        <file>ui/assets/baseLearningIcon.png</file>
-        <file>ui/assets/transferLearningIcon.png</file>
-        <file>ui/assets/processData.png</file>
-        <file>ui/assets/lotusIcon.png</file>
         <file>images/image 23.png</file>
         <file>images/image 25.png</file>
-        <file>ui/assets/defaultLearningImg.png</file>
         <file>ui/layout/aiProcessMonitor.qml</file>
         <file>ui/assets/exResourceMonitoring.png</file>
         <file>ui/layout/setTimer.qml</file>
+        <file>ui/assets/chart-line-solid.svg</file>
+        <file>ui/assets/laptop-file-solid.svg</file>
+        <file>ui/assets/shuffle-solid.svg</file>
+        <file>ui/assets/microphone-solid.svg</file>
+        <file>ui/assets/lightbulb-regular.svg</file>
+        <file>ui/assets/microchip-solid.svg</file>
+        <file>ui/assets/folder-open-regular.svg</file>
+        <file>ui/assets/gear-solid.svg</file>
+        <file>ui/assets/Gravity Forces Blue Icon Game Presentation(10).svg</file>
+        <file>ui/assets/Gravity Forces Blue Icon Game Presentation(2).png</file>
     </qresource>
 </RCC>
