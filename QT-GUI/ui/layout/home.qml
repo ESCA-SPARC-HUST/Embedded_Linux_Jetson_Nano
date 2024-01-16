@@ -212,7 +212,7 @@ Rectangle {
                 anchors.fill: parent
                 anchors.leftMargin: 0
                 onClicked: {
-                    loader.source = "/ui/layout/transferLearning.qml"
+                    loader.source = "/ui/layout/transferLearning_data.qml"
                 }
             }
         }

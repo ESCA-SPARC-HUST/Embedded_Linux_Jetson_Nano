@@ -101,7 +101,6 @@
         <file>ui/layout/screen2.qml</file>
         <file>ui/layout/systemConfig.qml</file>
         <file>ui/layout/realTimeMonitor.qml</file>
-        <file>ui/layout/transferLearning.qml</file>
         <file>ui/main.qml</file>
         <file>ui/layout/fileManager.qml</file>
         <file>ui/assets/Untitled.png</file>
@@ -131,5 +130,9 @@
         <file>ui/layout/baseLearning_parameterConfigure.qml</file>
         <file>ui/layout/baseLearning_result.qml</file>
         <file>ui/layout/baseLearning_traning.qml</file>
+        <file>ui/layout/transferLearning_data.qml</file>
+        <file>ui/layout/transferLearning_parameterConfigure.qml</file>
+        <file>ui/layout/transferLearning_result.qml</file>
+        <file>ui/layout/transferLearning_traning.qml</file>
     </qresource>
 </RCC>
