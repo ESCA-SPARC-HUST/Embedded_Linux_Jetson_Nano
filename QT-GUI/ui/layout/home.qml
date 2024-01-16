@@ -191,7 +191,7 @@ Rectangle {
                 anchors.fill: parent
                 anchors.leftMargin: 0
                 onClicked: {
-                    loader.source = "/ui/layout/baseLearning.qml"
+                    loader.source = "/ui/layout/baseLearning_data.qml"
                 }
             }
         }
