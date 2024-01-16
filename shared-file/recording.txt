@@ -1,9 +1,8 @@
 1
-minhrate
-bits_per_sample
+44100 kHz
+16
 channels
 codec
-mkibuyfgc
-file:///home/nguyen-hai-minh/Pictures
-number_of_channels
-
+60 seconds
+/home/gianghandsome/esca-main/data
+1

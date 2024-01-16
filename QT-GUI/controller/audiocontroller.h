@@ -3,6 +3,7 @@
 
 #include "core/audio/audioengine.h"
 #include "core/audio/audiofile.h"
+#include "core/audio/audioconfigfile.h"
 
 
 #include "component/chart/audiochart.h"
@@ -10,6 +11,7 @@
 
 class AudioEngine;
 class AudioFile;
+class AudioConfigFile;
 
 class AudioChart;
 
@@ -30,7 +32,8 @@ public:
     //    Q_INVOKABLE void startRecord();
     //    Q_INVOKABLE void endRecord();
     Q_INVOKABLE void editRecordParameters(QString device, QString path, int sampleRate, int bitsPerSample, int duration);
-
+    Q_INVOKABLE QVector<QString> loadParametersConfigure();
+    Q_INVOKABLE void saveParametersConfigure(const QVector<QString> &configValue);
 
 public slots:
     void sendDataToQml(const QString &data) {
@@ -44,6 +47,7 @@ signals:
 private:
 
     AudioFile *m_audio_file = nullptr;
+    AudioConfigFile* m_audio_config = nullptr;
     QVector<float> m_bufferData;
 };
 

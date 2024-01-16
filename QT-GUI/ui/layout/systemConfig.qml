@@ -11,13 +11,6 @@ Rectangle {
     height: 500
     color: "#262e4b"
 
-//    Component.completed: {
-//        let test = [];
-//        test = configAudio.loadConfig();
-//        console.log(test);
-//    }
-
-
     property int device_name: 0
     property string bits_per_sample: 'bits_per_sample'
     property string channels: 'channels'
@@ -29,7 +22,7 @@ Rectangle {
 
     Component.onCompleted: {
         let test = [];
-        test = configAudio.loadConfig();
+        test = AudioObject.loadParametersConfigure();
         console.log(test);
         device_name = test[0];
         sample_rate_ne = test[1];
@@ -322,7 +315,7 @@ Rectangle {
                 stringList.push(number_of_channels);
 
                 console.log(stringList);
-                configAudio.saveConfig(stringList);
+                AudioObject.saveParametersConfigure(stringList);
                 notificationDialog.visible = true;
 
             }

@@ -34,7 +34,7 @@ Rectangle {
         width: 545
         height: 70
         color: "#ffffff"
-        text: "home/nguyen-hai-minh/wavFile"
+        text: "/home/gianghandsome/esca-main/data"
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -94,7 +94,7 @@ Rectangle {
         width: 212
         height: 24
         color: "#ffffff"
-        text: qsTr("Timer setting list")
+        text: qsTr("Duration    ")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -144,7 +144,7 @@ Rectangle {
                     var yValue = audioDataFromCpp[i]
                     //                  var yValue = Math.sin(xValue / 10);
                     if (yValue >= 95 || yValue <= -95) {
-                        console.log("yValue: " + yValue)
+                        // console.log("yValue: " + yValue)
                     }
 
                     series.append(xValue, yValue)
@@ -260,7 +260,7 @@ Rectangle {
         width: 189
         height: 26
         color: "#ffffff"
-        text: "date&time_start"
+        text: "60"
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -279,7 +279,7 @@ Rectangle {
         width: 19
         height: 26
         color: "#ffffff"
-        text: "--"
+        text: "seconds"
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -298,7 +298,7 @@ Rectangle {
         width: 189
         height: 26
         color: "#ffffff"
-        text: "date&time_end"
+        text: ""
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter

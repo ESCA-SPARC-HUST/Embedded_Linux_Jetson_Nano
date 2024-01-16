@@ -55,8 +55,8 @@ int main(int argc, char *argv[])
     FileWatcher fileWatcher("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
     fileWatcher.setDirectory("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
 
-    ConfigAudio configAudio = new ConfigAudio;
-    engine.rootContext()->setContextProperty("ConfigAudio", &configAudio);
+    ConfigAudio *configAudio = new ConfigAudio();
+    engine.rootContext()->setContextProperty("ConfigAudio", configAudio);
     qmlRegisterType<ConfigAudio>("ConfigAudio", 1, 0, "ConfigAudio");
 
 
