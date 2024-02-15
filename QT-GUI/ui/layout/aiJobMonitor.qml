@@ -98,7 +98,7 @@ Rectangle {
         Text {
             id: text2
             color: "#ffffff"
-            text: qsTr("AI job monitor")
+            text: qsTr("AI Task Monitor")
             anchors.fill: parent
             font.pixelSize: 33
             horizontalAlignment: Text.AlignHCenter
@@ -208,7 +208,7 @@ Rectangle {
                     }
                 }
                 // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
-                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#e3e3e3" : "#394251")
+                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#394251" : "#394251")
                 // --------------------------- END --------------------------------------------
             }
         }
@@ -237,7 +237,7 @@ Rectangle {
         Text {
             id: text4
             color: "#ffffff"
-            text: qsTr("AI Job Monitor")
+            text: qsTr("Base Traning")
             anchors.fill: parent
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter
@@ -250,7 +250,7 @@ Rectangle {
                 rectangle5.border.width = 1
                 rectangle4.border.width = 2
                 rectangle4.border.color = "#ffffff"
-                folderListModel.folder = "/ui/layout/"
+                folderListModel.folder = "/ui/temp/"
             }
         }
     }
@@ -267,7 +267,7 @@ Rectangle {
         Text {
             id: text5
             color: "#ffffff"
-            text: qsTr("AI Job Monitor")
+            text: qsTr("Transfer Learning")
             anchors.fill: parent
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter
@@ -280,7 +280,7 @@ Rectangle {
                 rectangle4.border.width = 1
                 rectangle5.border.width = 2
                 rectangle5.border.color = "#ffffff"
-                folderListModel.folder = "/ui/component/"
+                folderListModel.folder = "/ui/temp/"
             }
         }
     }

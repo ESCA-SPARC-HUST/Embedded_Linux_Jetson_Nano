@@ -134,5 +134,13 @@
         <file>ui/layout/transferLearning_parameterConfigure.qml</file>
         <file>ui/layout/transferLearning_result.qml</file>
         <file>ui/layout/transferLearning_traning.qml</file>
+        <file>ui/assets/si-synergy-logo-no-bg.png</file>
+        <file>ui/component/BackendObject.qml</file>
+        <file>ui/temp/backgroundElipse1.png</file>
+        <file>ui/temp/20241501-175936/backgroundElipse1.png</file>
+        <file>ui/temp/20241601-135901/backgroundElipse1.png</file>
+        <file>ui/temp/20241701-135901/backgroundElipse1.png</file>
+        <file>ui/temp/20241801-115901/backgroundElipse1.png</file>
+        <file>ui/temp/20241501-201436/backgroundElipse1.png</file>
     </qresource>
 </RCC>
