@@ -160,12 +160,12 @@ Rectangle {
             width: 148
             height: 40
             color: "#ffffff"
-            text: "Timer Lít"
+            text: "Timer List"
             font.pixelSize: 32
         }
         Text {
             id: timer_list_text_id
-            x: 262
+            x: 20
             y: 50
             width: 148
             height: 40
@@ -205,12 +205,12 @@ Rectangle {
                 let result = [];
                 start_time = start_time_textedit.text;
                 end_time = end_time_textedit.text;
-                result.push('From: ' +start_time);
-                result.push('--to--' +end_time);
+                result.push(start_time);
+                result.push('--->' +end_time);
 
                 setTimer.saveTimer(result);
                 notificationDialog.open();
-                timer_list_text += 'From: ' + start_time + ' --to-- ' + end_time + '\n';
+                timer_list_text += start_time +" ---> "+ end_time + '\n';
                 start_time_textedit.text = '';
                 end_time_textedit.text = '';
             }

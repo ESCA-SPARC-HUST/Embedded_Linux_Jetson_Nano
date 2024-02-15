@@ -132,5 +132,6 @@
         <file>ui/assets/valLoss.png</file>
         <file>ui/assets/testLoss.png</file>
         <file>ui/assets/trainLoss.png</file>
+        <file>ui/assets/infer.png</file>
     </qresource>
 </RCC>
