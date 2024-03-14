@@ -102,7 +102,8 @@ void *recording_handler (void* data) {
     printf("\nRecording running...\n\n");
     pthread_mutex_lock(&lock);
     initialize(device, SND_PCM_STREAM_CAPTURE, SAMPLE_FORMAT, SAMPLE_RATE, CHANNELS);
-    implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
+    // implement (FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION);
+    implement_timer(FRAME_TO_CAPTURE, SAMPLE_FORMAT, CHANNELS, SAMPLE_RATE, BITS_PER_SAMPLE, recording, RECORD_LOCATION, TIME_RECORD);
     snd_pcm_close(handle);
     pthread_mutex_unlock(&lock);
     pthread_exit(NULL); 

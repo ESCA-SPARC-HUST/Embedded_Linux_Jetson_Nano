@@ -5,6 +5,8 @@
 #include <alsa/asoundlib.h>
 #include <unistd.h>
 
+#define RC_EPSILON 0.05
+
 // #define RECORD_DURATION 't' // command syntax:   -RCD value
 // #define START_TIME 's'// command syntax:   -ST hh:mm:ss
 // #define END_TIME 'e'// command syntax:   -ET hh:mm:ss
@@ -39,3 +41,5 @@ int initialize(char device[], int sound_stream, int sample_format, int sample_ra
 int implement (int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording, char location[]);
 
 void writeWAVHeader(FILE *file, unsigned int sampleRate, unsigned short num_CHANNELS, unsigned short bits_per_sample, unsigned int data_size);
+
+int implement_timer(int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording, char location[], float rcduration);

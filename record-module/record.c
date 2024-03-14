@@ -1,4 +1,5 @@
 #include "record.h"
+#include <time.h>
 
 int initialize(char device[], int sound_stream, int sample_format, int sample_rate, int channels) {
     int err;
@@ -148,4 +149,78 @@ void writeWAVHeader(FILE *file, unsigned int sampleRate, unsigned short num_CHAN
 
     // Write the WAV header to the file
     fwrite(&header, sizeof(WAVHeader), 1, file);
+}
+
+int implement_timer(int frame_to_capture, int sample_format, int channels, int sample_rate, int bits_per_sample, int *recording, char location[], float rcduration) {
+    // Implement recording audio until the end time set 
+    // Allocate buffer for audio data
+    char *buffer = (char *)malloc(frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels);
+    
+    if (buffer == NULL) {
+        printf("Cannot allocate buffer\n");
+        return EXIT_FAILURE;
+    }
+
+    rcduration += RC_EPSILON; 
+
+    while (*recording == 1) {
+        // Open the output file
+        char *filename = malloc(sizeof(char) * 256);
+
+        time_t curr;  
+        time(&curr);
+        struct tm* curr_t = localtime(&curr);
+        sprintf(filename, "%s/audio-%d-%d-%d_%02d%02d%02d.wav", location, curr_t->tm_year + 1900, curr_t->tm_mon + 1, curr_t->tm_mday, curr_t->tm_hour, curr_t->tm_min, curr_t->tm_sec);
+        FILE *output_file = fopen(filename, "wb");
+        if (output_file == NULL) {
+            printf("Cannot open output file\n");
+            return EXIT_FAILURE;
+        }
+        free(filename);
+
+        // Start recording
+        printf("Recording started.\n");
+
+        // Record audio data 
+        int err;
+
+        // Declare timers 
+        struct timespec start, current; 
+        clock_gettime(1, &start); // Fisrt parameter is set as 1 that means CLOCK_MONOTONIC
+        
+        do {
+            if (err = snd_pcm_readi(handle, buffer, frame_to_capture) != frame_to_capture) {
+                printf("Error reading from PCM device: %s\n", snd_strerror(err));
+                break;
+            }
+            printf("recording\n");
+            // Write the recorded audio data to the output file
+            fwrite(buffer, sizeof(char) , frame_to_capture * snd_pcm_format_width(sample_format) / 8 * channels, output_file);
+            // printf("Recording! %d\n", n);
+            clock_gettime(1, &current); // Fisrt parameter is set as
+            printf("%f\n", ((current.tv_sec - start.tv_sec) + (current.tv_nsec - start.tv_nsec) / 1e9));
+        } while (((current.tv_sec - start.tv_sec) + (current.tv_nsec - start.tv_nsec) / 1e9) <= rcduration);
+
+        printf("Recording stopped.\nFinish!!");
+
+        fseek(output_file, 0L, SEEK_END);         
+    
+        // calculating the size of the file 
+        unsigned long int data_size = ftell(output_file);
+
+        printf("Data size: %ld\n\n", data_size);     
+
+        // Write the WAV header to the file
+        fseek(output_file, 0L, SEEK_SET);
+        writeWAVHeader(output_file, sample_rate, channels, bits_per_sample, data_size);
+        
+        // Clean up
+        fclose(output_file);
+        printf("Recording finished.\n");
+    }
+
+    free(buffer);
+    *recording = 2; 
+
+    return EXIT_SUCCESS;
 }
