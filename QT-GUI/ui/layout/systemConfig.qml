@@ -403,7 +403,7 @@ Rectangle {
             border.color: "#435493"
         }
 
-        model: ["default", "Model 2", "Model 3"]
+        model: ["default", "External microphone"]
 
         // Customizing the appearance of items in the ComboBox
         delegate: Item {

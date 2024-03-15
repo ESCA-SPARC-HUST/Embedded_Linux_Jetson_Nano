@@ -748,7 +748,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                     Text {
                         id: text9
-                        text: qsTr("Sync")
+                        text: qsTr("Export")
                         anchors.verticalCenter: parent.verticalCenter
                         font.pixelSize: 18
                         horizontalAlignment: Text.AlignLeft

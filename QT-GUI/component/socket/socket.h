@@ -17,8 +17,8 @@ public:
 
 
 
-    //    void startAduioRecording();
-    //    void endAudioRecording();
+       void startAduioRecording();
+       void endAudioRecording();
     //    void editAudioParameters();
     //    void setaudioParameters();
 

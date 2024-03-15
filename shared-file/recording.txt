@@ -1,8 +1,8 @@
 1
-44100 kHz
-16
-channels
+44100
+8
+1
 codec
 60 seconds
-/home/gianghandsome/esca-main/data
+file:///home/gianghandsome/esca-main/data
 1

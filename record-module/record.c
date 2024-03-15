@@ -3,7 +3,7 @@
 int initialize(char device[], int sound_stream, int sample_format, int sample_rate, int channels) {
     int err;
     // Open the PCM device for recording
-    if ((err = snd_pcm_open(&handle, "default", sound_stream, 0)) < 0) {
+    if ((err = snd_pcm_open(&handle, "plughw:1,0", sound_stream, 0)) < 0) {
         /*
         parameters: address of the device pointer, Name device, Mode, number of extra configs
         How to get the name of the device: 

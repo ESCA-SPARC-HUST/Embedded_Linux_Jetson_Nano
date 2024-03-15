@@ -47,13 +47,13 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
-    AudioFeatureController* audioExtractor = new AudioFeatureController();
-    BaseTraining* baseTrainingController = new BaseTraining();
+    // AudioFeatureController* audioExtractor = new AudioFeatureController();
+    // BaseTraining* baseTrainingController = new BaseTraining();
 
 
     AudioEngine* audioEngine;
-    FileWatcher fileWatcher("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
-    fileWatcher.setDirectory("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
+    // FileWatcher fileWatcher("/opt/QT-GUI/bin");
+    // fileWatcher.setDirectory("/opt/QT-GUI/bin");
 
     ConfigAudio *configAudio = new ConfigAudio();
     engine.rootContext()->setContextProperty("ConfigAudio", configAudio);
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 
 
     //    QObject::connect(imageWatcher.fileWatcher, &QFileSystemWatcher::fileChanged, imageWatcher.fileWatcher, &ImageWatcher::handleFileChanged);
-    engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
+    // engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
 
 
     //---------------------------
@@ -84,9 +84,9 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("AudioObject", audioController);
 
 
-    engine.rootContext()->setContextProperty("FeatureAudioExtractor", audioExtractor);
+    // engine.rootContext()->setContextProperty("FeatureAudioExtractor", audioExtractor);
 
-    engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
+    // engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
 
 
 

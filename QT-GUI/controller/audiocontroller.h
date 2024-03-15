@@ -7,12 +7,13 @@
 
 
 #include "component/chart/audiochart.h"
+#include "component/socket/socket.h"
 
 
 class AudioEngine;
 class AudioFile;
 class AudioConfigFile;
-
+class Socket;
 class AudioChart;
 
 class AudioController :  public QObject
@@ -29,8 +30,8 @@ public:
 
 
 
-    //    Q_INVOKABLE void startRecord();
-    //    Q_INVOKABLE void endRecord();
+    Q_INVOKABLE void startRecord();
+    Q_INVOKABLE void stopRecord();
     Q_INVOKABLE void editRecordParameters(QString device, QString path, int sampleRate, int bitsPerSample, int duration);
     Q_INVOKABLE QVector<QString> loadParametersConfigure();
     Q_INVOKABLE void saveParametersConfigure(const QVector<QString> &configValue);
@@ -47,6 +48,7 @@ signals:
 private:
 
     AudioFile *m_audio_file = nullptr;
+    Socket *m_audio_socket = nullptr;
     AudioConfigFile* m_audio_config = nullptr;
     QVector<float> m_bufferData;
 };

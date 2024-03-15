@@ -21,35 +21,35 @@ void Socket::sendData(QString str)
     }
 }
 
-//void Socket::startAduioRecording()
-//{
-//    connection = new QTcpSocket(this);
-//    connection->connectToHost(SOCKET_SERVER, PORT);
+void Socket::startAduioRecording()
+{
+   connection = new QTcpSocket(this);
+   connection->connectToHost(SOCKET_SERVER, PORT);
 
-//    if(connection->waitForConnected(TIMEOUT)) {
-//        connection->write(START_RECORDING);
-//        qDebug() << "start recording";
-//        connection->close();
-//    }
-//    else {
-//        qDebug() << "Not Connected";
-//    }
-//}
+   if(connection->waitForConnected(TIMEOUT)) {
+       connection->write(START_RECORDING);
+       qDebug() << "start recording";
+       connection->close();
+   }
+   else {
+       qDebug() << "Not Connected";
+   }
+}
 
-//void Socket::endAudioRecording()
-//{
-//    connection = new QTcpSocket(this);
-//    connection->connectToHost(SOCKET_SERVER, PORT);
+void Socket::endAudioRecording()
+{
+   connection = new QTcpSocket(this);
+   connection->connectToHost(SOCKET_SERVER, PORT);
 
-//    if(connection->waitForConnected(TIMEOUT)) {
-//        connection->write(END_RECORDING);
-//        qDebug() << "end recording";
-//        connection->close();
-//    }
-//    else {
-//        qDebug() << "Not Connected";
-//    }
-//}
+   if(connection->waitForConnected(TIMEOUT)) {
+       connection->write(END_RECORDING);
+       qDebug() << "end recording";
+       connection->close();
+   }
+   else {
+       qDebug() << "Not Connected";
+   }
+}
 
 //void Socket::editAudioParameters()
 //{
