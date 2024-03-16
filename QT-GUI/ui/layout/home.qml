@@ -234,7 +234,7 @@ Rectangle {
                 anchors.rightMargin: 0
                 onClicked: {
                     console.log("minh dai ca")
-                    loader.source = "/ui/layout/screen2.qml"
+                    loader.source = "/ui/layout/realTimeInference_data.qml"
                 }
             }
         }

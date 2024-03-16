@@ -142,5 +142,7 @@
         <file>ui/temp/20241701-135901/backgroundElipse1.png</file>
         <file>ui/temp/20241801-115901/backgroundElipse1.png</file>
         <file>ui/temp/20241501-201436/backgroundElipse1.png</file>
+        <file>ui/layout/realTimeInference_data.qml</file>
+        <file>ui/layout/realTimeInference_result.qml</file>
     </qresource>
 </RCC>
