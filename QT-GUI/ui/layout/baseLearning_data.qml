@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Dialogs 1.0
+import Qt.labs.platform 1.0
 
 Rectangle {
     id: frame_1
@@ -254,6 +255,26 @@ Rectangle {
             font.weight: Font.Light
             font.family: "Josefin Sans"
         }
+        FolderDialog {
+            id: folderDialog3
+            currentFolder: viewer.folder
+            folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            onAccepted: {
+
+                // handle choose file
+                textInput1.text = folderDialog3.folder
+                folderListModel.folder = folderDialog3.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+            }
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog3.open();
+            }
+        }
     }
 
 
@@ -300,6 +321,26 @@ Rectangle {
             font.weight: Font.Light
             font.family: "Josefin Sans"
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+        FolderDialog {
+            id: folderDialog2
+            currentFolder: viewer.folder
+            folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            onAccepted: {
+
+                // handle choose file
+                textInput2.text = folderDialog2.folder
+                folderListModel.folder = folderDialog2.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+            }
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog2.open();
+            }
         }
     }
 }
