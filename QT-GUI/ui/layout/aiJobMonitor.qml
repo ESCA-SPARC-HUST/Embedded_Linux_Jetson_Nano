@@ -98,7 +98,7 @@ Rectangle {
         Text {
             id: text2
             color: "#ffffff"
-            text: qsTr("AI job monitor")
+            text: qsTr("AI tasks monitor")
             anchors.fill: parent
             font.pixelSize: 33
             horizontalAlignment: Text.AlignHCenter
@@ -237,7 +237,7 @@ Rectangle {
         Text {
             id: text4
             color: "#ffffff"
-            text: qsTr("AI Job Monitor")
+            text: qsTr("Base Training")
             anchors.fill: parent
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter
@@ -267,7 +267,7 @@ Rectangle {
         Text {
             id: text5
             color: "#ffffff"
-            text: qsTr("AI Job Monitor")
+            text: qsTr("Transfer Learning")
             anchors.fill: parent
             font.pixelSize: 25
             horizontalAlignment: Text.AlignHCenter

@@ -15,6 +15,7 @@
 
 
 #include "component/chart/audiochart.h"
+#include "component/chart/losschart.h"
 
 
 #include "core/filewatcher.h"
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     app.setOrganizationName("D-ESCA3");
-    app.setOrganizationDomain("sparc.com");
+    app.setOrganizationDomain("sparc.hust.edu.com");
     app.setApplicationName("D-ESCA3");
 
     QQmlApplicationEngine engine;
@@ -47,8 +48,8 @@ int main(int argc, char *argv[])
 
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
-    // AudioFeatureController* audioExtractor = new AudioFeatureController();
-    // BaseTraining* baseTrainingController = new BaseTraining();
+    AudioFeatureController* audioExtractor = new AudioFeatureController();
+    BaseTraining* baseTrainingController = new BaseTraining();
 
 
     AudioEngine* audioEngine;
@@ -84,9 +85,18 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("AudioObject", audioController);
 
 
-    // engine.rootContext()->setContextProperty("FeatureAudioExtractor", audioExtractor);
+    engine.rootContext()->setContextProperty("FeatureAudioExtractor", audioExtractor);
 
-    // engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
+    engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
+
+    // LossCharts* losschart = new LossCharts();
+    // QObject::connect(losschart, &LossCharts::totalLossChanged, [&](const QVector<float>& newBuffer) {
+    //     // Dữ liệu trong buffer đã được cập nhật
+    //     //bufferData = newBuffer;
+    //     // audioController->setbufferData(newBuffer);
+    //     QQmlEngine::setObjectOwnership(losschart, QQmlEngine::CppOwnership);
+    //     engine.rootContext()->setContextProperty("LossFromCpp", QVariant::fromValue(newBuffer));
+    // });
 
 
 

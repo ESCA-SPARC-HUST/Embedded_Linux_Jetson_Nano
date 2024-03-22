@@ -191,7 +191,7 @@ Rectangle {
         width: 663
         height: 40
         color: "#ffffff"
-        text: "CPU: NVIDIA Maxwell architecture with 128 NVIDIA CUDA® cores\t"
+        text: "CPU: Quad-core ARM Cortex-A57 MPCore processor"
         font.pixelSize: 20
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -207,7 +207,7 @@ Rectangle {
         width: 663
         height: 40
         color: "#ffffff"
-        text: "GPU: Quad-core ARM Cortex-A57 MPCore processor"
+        text: "GPU: NVIDIA Maxwell architecture with 128 NVIDIA CUDA® cores\t"
         font.pixelSize: 20
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter

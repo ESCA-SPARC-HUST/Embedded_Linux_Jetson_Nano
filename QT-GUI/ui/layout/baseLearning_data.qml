@@ -2,12 +2,17 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Dialogs 1.0
+import Qt.labs.platform 1.0
 
 Rectangle {
     id: frame_1
     width: 1024
     height: 500
     color: "transparent"
+
+    property string source: ''
+    property string destination: ''
+    property  string duration: ''
 
     Rectangle {
         id: rectangle_55
@@ -136,7 +141,7 @@ Rectangle {
         width: 312
         height: 24
         color: "#ffffff"
-        text: qsTr("Select folder to store")
+        text: qsTr("Data source")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -175,7 +180,7 @@ Rectangle {
             color: "#ffffff"
             width: 99
             height: 30
-            text: qsTr("10 minutes")
+            text: qsTr("10 seconds")
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 20
             anchors.horizontalCenter: parent.horizontalCenter
@@ -199,7 +204,7 @@ Rectangle {
             width: 168
             height: 68
             color: "#ffffff"
-            text: qsTr("Excution")
+            text: qsTr("Execution")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.pointSize: 22
@@ -214,7 +219,13 @@ Rectangle {
             anchors.leftMargin: 0
             cursorShape: Qt.WaitCursor
             onClicked: {
-                console.log("minhgay is here");
+                duration = textInput.text
+                source = textInput1.text
+                destination = textInput2.text
+                let temp = duration.split(' ')
+                console.log(temp)
+                duration = temp[0]
+                FeatureAudioExtractor.splitAudio(source.substring(7), destination.substring(7), duration);
             }
         }
     }
@@ -226,7 +237,7 @@ Rectangle {
         width: 422
         height: 24
         color: "#ffffff"
-        text: qsTr("Select folder to store file after split")
+        text: qsTr("Folder to store file after split")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -254,6 +265,26 @@ Rectangle {
             font.weight: Font.Light
             font.family: "Josefin Sans"
         }
+        FolderDialog {
+            id: folderDialog3
+            currentFolder: viewer.folder
+            folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            onAccepted: {
+
+                // handle choose file
+                textInput1.text = folderDialog3.folder
+                folderListModel.folder = folderDialog3.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+            }
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog3.open();
+            }
+        }
     }
 
 
@@ -265,7 +296,7 @@ Rectangle {
         width: 565
         height: 30
         color: "#ffffff"
-        text: qsTr("home/nguyen-lam-nghia")
+        text: qsTr("")
         font.pixelSize: 20
         font.italic: true
     }
@@ -277,7 +308,7 @@ Rectangle {
         width: 565
         height: 30
         color: "#ffffff"
-        text: qsTr("home/nguyen-lam-nghia")
+        text: qsTr("")
         font.pixelSize: 20
         font.italic: true
     }
@@ -300,6 +331,26 @@ Rectangle {
             font.weight: Font.Light
             font.family: "Josefin Sans"
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+        FolderDialog {
+            id: folderDialog2
+            currentFolder: viewer.folder
+            folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            onAccepted: {
+
+                // handle choose file
+                textInput2.text = folderDialog2.folder
+                folderListModel.folder = folderDialog2.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+            }
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog2.open();
+            }
         }
     }
 }

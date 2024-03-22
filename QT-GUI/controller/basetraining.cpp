@@ -4,13 +4,13 @@
 BaseTraining::BaseTraining(QObject *parent)
 {
     m_watcher.addPath(QString(PYTHON_BASE_TRAINING_RESULT));
-    setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
+    // setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
 
-    // Initial file list
-    updateFileList();
+    // // Initial file list
+    // updateFileList();
 
-    connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
-    m_base_training = new Process();
+    // connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
+    // m_base_training = new Process();
 }
 
 void BaseTraining::setDirectory(QString directoryPath)
@@ -53,8 +53,31 @@ void BaseTraining::updateFileList()
 
 void BaseTraining::execution(QString audioPath)
 {
+    m_base_training = new Process();
+    m_watcher = new QFileSystemWatcher();
+    m_watcher.addPath(QString(PYTHON_BASE_TRAINING_RESULT));
+    setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
+    // Initial file list
+    updateFileList();
+    connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
     qInfo() << "Hello Giang Dep trai " << audioPath;
-    QString statement ="cd /home/gianghandsome/IoT-AnomallySoundDetection/D-ESCA_v2/ \n python3 tools/base_training.py -cfg ./config/params.yaml";
+    QString statement ="cd /home/gianghandsome/training/D-ESCA_v2 \n python3 tools/base_training.py -cfg ./config/params.yaml";
     m_base_training->setStatement(statement);
     m_base_training->start();
+}
+
+void BaseTraining::inference(QString datasource, QString model)
+{
+    m_base_training = new Process();
+    m_watcher = new QFileSystemWatcher();
+    m_watcher.addPath(QString(PYTHON_BASE_TRAINING_RESULT));
+    setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
+    // Initial file list
+    updateFileList();
+    connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
+
+    qInfo() << "Inference " << datasource << model;
+    QString statement ="cd /home/gianghandsome/training/D-ESCA_v2 \n python3 tools/rt_test.py -cfg ./config/params.yaml";
+    // m_base_training->setStatement(statement);
+    // m_base_training->start();
 }

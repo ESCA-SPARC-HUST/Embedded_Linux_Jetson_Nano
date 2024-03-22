@@ -122,7 +122,7 @@ Rectangle {
 
     Image {
         id: image1
-        x: 677
+        x: 142
         y: 119
         width: 248
         height: 103
@@ -132,33 +132,34 @@ Rectangle {
 
     Image {
         id: image2
-        x: 211
-        y: 112
-        width: 110
-        height: 116
+        x: 444
+        y: 104
+        width: 137
+        height: 135
         source: "../assets/hust-logo.jpg"
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image3
-        x: 161
+        x: 385
         y: 42
         width: 712
         height: 257
         source: "../assets/sparc-lab-logo.png"
         fillMode: Image.PreserveAspectFit
 
-        Text {
-            id: text4
-            x: 77
-            y: 243
-            color: "#ffffff"
-            text: qsTr("Environmental Sound Collection and Analysis embedded applications")
-            font.pixelSize: 18
-        }
+
     }
 
+    Text {
+        id: text4
+        x: 237
+        y: 287
+        color: "#ffffff"
+        text: qsTr("Environmental Sound Collection and Analysis embedded applications")
+        font.pixelSize: 18
+    }
     Text {
         id: text5
         x: 270

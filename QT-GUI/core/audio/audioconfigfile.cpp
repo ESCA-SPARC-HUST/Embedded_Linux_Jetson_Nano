@@ -3,9 +3,9 @@
 
 AudioConfigFile::AudioConfigFile(QObject *parent) : FileManipulation(parent)
 {
-    filePath = "/home/gianghandsome/esca-main/Embedded_Linux_Jetson_Nano/shared-file/recording.txt";
+    filePath = "/home/sparc/ESCA/shared-file/recording.txt";
     //    connect(this, &ConfigAudio::saveConfigSignal, this, &ConfigAudio::saveConfig);
-    qDebug () << "ConfigAudio constructor done!";
+    // qDebug () << "ConfigAudio constructor done!";
 }
 
 void AudioConfigFile::writeFile(const QString filePath, const QVector<QString> &data)

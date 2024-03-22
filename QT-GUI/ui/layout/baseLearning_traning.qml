@@ -175,6 +175,7 @@ Rectangle {
             cursorShape: Qt.WaitCursor
             onClicked: {
                 console.log("minhgay is here");
+                BaseTraining.execution("Hanoi")
             }
         }
     }

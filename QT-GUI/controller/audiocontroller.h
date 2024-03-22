@@ -36,6 +36,7 @@ public:
     Q_INVOKABLE QVector<QString> loadParametersConfigure();
     Q_INVOKABLE void saveParametersConfigure(const QVector<QString> &configValue);
 
+    void updateAudioPath();
 public slots:
     void sendDataToQml(const QString &data) {
         emit dataSent(data);

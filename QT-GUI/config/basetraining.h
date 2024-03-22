@@ -4,6 +4,6 @@
 #endif // BASETRAINING_H
 
 
-#define PYTHON_BASE_TRAINING_CODE "/home/gianghandsome/gammatone/spafe/src"
-#define PYTHON_BASE_TRAINING_RESULT "/home/gianghandsome/gammatone/spafe/src"
+#define PYTHON_BASE_TRAINING_CODE "/home/giang/record/data"
+#define PYTHON_BASE_TRAINING_RESULT "/home/giang/record/data"
 

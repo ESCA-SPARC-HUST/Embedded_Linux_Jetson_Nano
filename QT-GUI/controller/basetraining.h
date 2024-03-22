@@ -23,6 +23,8 @@ public:
 
     Q_INVOKABLE void execution(QString audioPath);
 
+    Q_INVOKABLE void inference(QString datasource, QString model);
+
 public slots:
     void directoryChanged(const QString &path);
 
@@ -33,7 +35,7 @@ signals:
 private:
     // FeatureAudioExtractor* m_audio_extractor = nullptr;
     Process* m_base_training = nullptr;
-    QFileSystemWatcher m_watcher;
+    QFileSystemWatcher* m_watcher = nullptr;
     QString m_directory_result;
     QSet<QString> m_previousFiles;
 

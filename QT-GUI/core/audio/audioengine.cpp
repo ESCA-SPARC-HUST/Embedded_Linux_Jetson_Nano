@@ -31,10 +31,10 @@ AudioEngine::AudioEngine(const QAudioDeviceInfo &deviceInfoInput, QAudioFormat f
     }
 
 
-    for(int i =0; i < m_inputDevice.size(); ++i) {
-        //        qDebug() << "Input Giang: " << m_inputDevice[i];
+    // for(int i =0; i < m_inputDevice.size(); ++i) {
+    //            qDebug() << "Input Giang: " << m_inputDevice[i];
 
-    }
+    // }
 
 
     m_audioInput = new QAudioInput(deviceInfoInput, formatAudioInput, this);// tạo một obj mới dùng để thu âm thanh từ loa

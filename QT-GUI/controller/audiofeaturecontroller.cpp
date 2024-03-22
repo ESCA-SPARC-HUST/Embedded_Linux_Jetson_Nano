@@ -58,3 +58,16 @@ void AudioFeatureController::extractMFCC(QString audioPath)
     m_audio_extractor->setStatement(statement);
     m_audio_extractor->start();
 }
+
+void AudioFeatureController::splitAudio(QString source, QString destination, QString duration)
+{
+    QString statement ="cd /home/gianghandsome/training/D-ESCA_v2 \n python3 helper/split_audio_qt.py -s ";
+    statement.append(source);
+    statement.append(" -d ");
+    statement.append(destination);
+    statement.append(" -du ");
+    statement.append(duration);
+    qInfo() << statement;
+    m_audio_extractor->setStatement(statement);
+    m_audio_extractor->start();
+}

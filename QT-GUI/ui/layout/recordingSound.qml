@@ -230,7 +230,7 @@ Rectangle {
         width: 225
         height: 26
         color: "#ffffff"
-        text: "default"
+        text: device_name
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -267,7 +267,7 @@ Rectangle {
             id: file_manager_ma
             anchors.fill: parent
             onClicked: {
-                flag = !flag;
+                loader.source = "/ui/layout/fileManager.qml"
             }
         }
     }

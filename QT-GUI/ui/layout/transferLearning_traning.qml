@@ -142,7 +142,6 @@ Rectangle {
     }
     Rectangle {
         id: rectangle5
-
         x: 798
         y: 420
         width: 179
@@ -153,7 +152,7 @@ Rectangle {
         Text {
             id: start_stop_Btn
             color: "#ffffff"
-            text: qsTr("Excution")
+            text: qsTr("Execution")
             anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -170,7 +169,8 @@ Rectangle {
             anchors.leftMargin: 0
             cursorShape: Qt.WaitCursor
             onClicked: {
-                console.log("minhgay is here");
+                console.log("Base training is executed");
+                BaseTraining.execution();
             }
         }
     }

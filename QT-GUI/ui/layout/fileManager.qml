@@ -431,7 +431,7 @@ Rectangle {
                 model: FolderListModel {
                     id: folderListModel
                     showDirsFirst: true
-
+                    folder: "file:///home/sparc/ESCA/data"
                     // If add filters then remove
                     // nameFilters: ["*.mp3", "*.flac"]
 

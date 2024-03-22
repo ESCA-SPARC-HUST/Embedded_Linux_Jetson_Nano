@@ -11,7 +11,8 @@ Rectangle {
     height: 500
     color: "#262e4b"
 
-    property int device_name: 0
+    property string device_name: 'default'
+    property int choose_device: 0
     property string bits_per_sample: 'bits_per_sample'
     property string channels: 'channels'
     property string codec: 'codec'
@@ -24,6 +25,19 @@ Rectangle {
         let test = [];
         test = AudioObject.loadParametersConfigure();
         console.log(test);
+        console.log(test[0])
+        if(test[0] == "default")
+        {
+            console.log("Default")
+            choose_device = 0
+
+         }
+        else {
+            console.log("external microphone")
+            choose_device = 1
+        }
+
+
         device_name = test[0];
         sample_rate_ne = test[1];
         bits_per_sample = test[2];
@@ -303,7 +317,9 @@ Rectangle {
                 codec = codec_textedit.text;
                 duration = duration_textedit.text;
                 file_to_store = folder_to_store.text;
-                device_name = choose_device_combobox.currentIndex;
+                device_name = choose_device_combobox.currentText;
+
+                console.log(choose_device_combobox);
 
                 stringList.push(device_name);
                 stringList.push(sample_rate_ne);
@@ -311,8 +327,15 @@ Rectangle {
                 stringList.push(channels);
                 stringList.push(codec);
                 stringList.push(duration);
-                stringList.push(file_to_store);
+                stringList.push(file_to_store.substring(7));
                 stringList.push(number_of_channels);
+
+                if(choose_device_combobox.currentIndex == 0)
+                    stringList.push("default");
+                else
+                    stringList.push("hw:2,0");
+
+                stringList.push(duration.charAt(0));
 
                 console.log(stringList);
                 AudioObject.saveParametersConfigure(stringList);
@@ -397,7 +420,7 @@ Rectangle {
         font.weight: Font.Normal
         font.family: "Courier"
         font.pointSize: 13
-        currentIndex: device_name
+        currentIndex: choose_device
         background: Rectangle {
             color: "#f8c3dab8"
             border.color: "#435493"

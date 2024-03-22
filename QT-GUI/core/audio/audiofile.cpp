@@ -26,6 +26,12 @@ void AudioFile::writeFile(const QString filePath, const QVector<QString> &data)
 
 }
 
+void AudioFile::writeInferenceFile(const QString filePath, const QVector<QString> &configValue)
+{
+
+
+}
+
 QVector<QString> AudioFile::readFile(const QString &filePath)
 {
     qInfo() << "Reading lines";
