@@ -124,95 +124,96 @@ Rectangle {
     // filemanager
 
 
-    Rectangle {
-        id: mainRect
-        x: 25
-        y: 110
-        width: 448
-        height: 323
-//        border.color: "black"
-        color: "#272d37"
-        ListView {
-            id: listView
-            // Initialization Selected Item For Hightlight
-            property int selectedItemIndex: -1
+    // List folder
+//    Rectangle {
+//        id: mainRect
+//        x: 25
+//        y: 110
+//        width: 448
+//        height: 323
+////        border.color: "black"
+//        color: "#272d37"
+//        ListView {
+//            id: listView
+//            // Initialization Selected Item For Hightlight
+//            property int selectedItemIndex: -1
 
-            // property of list View
-            x: 0
-            y: 17
-            width: parent.width
-            height: parent.height
-            clip: true
-            model: FolderListModel {
-                id: folderListModel
-                showDirsFirst: true
+//            // property of list View
+//            x: 0
+//            y: 17
+//            width: parent.width
+//            height: parent.height
+//            clip: true
+//            model: FolderListModel {
+//                id: folderListModel
+//                showDirsFirst: true
 
-                // If add filters then remove
-                // nameFilters: ["*.mp3", "*.flac"]
+//                // If add filters then remove
+//                // nameFilters: ["*.mp3", "*.flac"]
 
 
-                // ------------------ Hander forward feature ------------------
-                // Add a stack property to store navigation history
-                property var folderStack: []
+//                // ------------------ Hander forward feature ------------------
+//                // Add a stack property to store navigation history
+//                property var folderStack: []
 
-                onFolderChanged: {
-                    // Push the current folder onto the stack when it changes
-                    folderStack.push(folder)
-                }
+//                onFolderChanged: {
+//                    // Push the current folder onto the stack when it changes
+//                    folderStack.push(folder)
+//                }
 
-                function popFolderFromStack() {
-                    // Pop a folder from the stack
-                    if (folderStack.length > 1) {
-                        folderStack.pop();
-                        folder = folderStack[folderStack.length - 1];
-                    }
-                }
+//                function popFolderFromStack() {
+//                    // Pop a folder from the stack
+//                    if (folderStack.length > 1) {
+//                        folderStack.pop();
+//                        folder = folderStack[folderStack.length - 1];
+//                    }
+//                }
 
-                // ------------------------- end ------------------------------
-            }
+//                // ------------------------- end ------------------------------
+//            }
 
-            delegate: Rectangle {
-                width: parent.width
-                height: 66
-                border.color: "black"
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: 20
-                    width: 158
-                    height: 22
-                    color: "#ffffff"
-                    text: fileName
-                    font.pixelSize: 20
-                }
+//            delegate: Rectangle {
+//                width: parent.width
+//                height: 66
+//                border.color: "black"
+//                Text {
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    anchors.left: parent.left
+//                    anchors.leftMargin: 20
+//                    width: 158
+//                    height: 22
+//                    color: "#ffffff"
+//                    text: fileName
+//                    font.pixelSize: 20
+//                }
 
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    anchors.rightMargin: 20
-                    width: 158
-                    height: 22
-                    color: "#ffffff"
-                    text: fileIsDir ? "" : ((fileSize / 1024).toFixed(2) + " KB")
-                    font.pixelSize: 20
-                    horizontalAlignment: Text.AlignRight
-                }
+//                Text {
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    anchors.right: parent.right
+//                    anchors.rightMargin: 20
+//                    width: 158
+//                    height: 22
+//                    color: "#ffffff"
+//                    text: fileIsDir ? "" : ((fileSize / 1024).toFixed(2) + " KB")
+//                    font.pixelSize: 20
+//                    horizontalAlignment: Text.AlignRight
+//                }
 
-                // --------------------- Hander hightlight clicked item ---------------------
-                // Thêm MouseArea để bắt sự kiện nhấp chuột
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        // Đặt màu nền cho item được chọn
-                        listView.selectedItemIndex = index;
-                    }
-                }
-                // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
-                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#394251" : "#394251")
-                // --------------------------- END --------------------------------------------
-            }
-        }
-    }
+//                // --------------------- Hander hightlight clicked item ---------------------
+//                // Thêm MouseArea để bắt sự kiện nhấp chuột
+//                MouseArea {
+//                    anchors.fill: parent
+//                    onClicked: {
+//                        // Đặt màu nền cho item được chọn
+//                        listView.selectedItemIndex = index;
+//                    }
+//                }
+//                // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
+//                color: listView.selectedItemIndex  === index ? "#aaddff" : (fileIsDir ? "#394251" : "#394251")
+//                // --------------------------- END --------------------------------------------
+//            }
+//        }
+//    }
 
     // Image render
     Image {
@@ -281,6 +282,62 @@ Rectangle {
                 rectangle5.border.width = 2
                 rectangle5.border.color = "#ffffff"
                 folderListModel.folder = "/ui/temp/"
+            }
+        }
+    }
+
+    Rectangle {
+        id: rectangle6
+        x: 37
+        y: 149
+        width: 211
+        height: 43
+        color: "#69000822"
+        radius: 8
+        border.color: "#000000"
+        border.width: 1
+        Text {
+            id: text6
+            color: "#ffffff"
+            text: qsTr("Website 1")
+            anchors.fill: parent
+            font.pixelSize: 25
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                loader.source = "aiTaskMonitor_browser1.qml"
+            }
+        }
+    }
+
+    Rectangle {
+        id: rectangle7
+        x: 254
+        y: 149
+        width: 211
+        height: 43
+        color: "#69000822"
+        radius: 8
+        border.color: "#000000"
+        border.width: 1
+        Text {
+            id: text7
+            color: "#ffffff"
+            text: qsTr("Website 2")
+            anchors.fill: parent
+            font.pixelSize: 25
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                loader.source = "aiTaskMonitor_browser2.qml"
             }
         }
     }
