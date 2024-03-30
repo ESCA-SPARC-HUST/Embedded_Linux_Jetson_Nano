@@ -4,6 +4,7 @@ import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Dialogs 1.0
 // import Qt.labs.platform 1.0
 
+
 Rectangle {
     id: frame_1
     width: 1024
@@ -42,6 +43,7 @@ Rectangle {
             onClicked: {
                 loader.source = "baseLearning_data.qml"
             }
+
         }
     }
 
@@ -70,7 +72,6 @@ Rectangle {
             }
         }
     }
-
     Rectangle {
         id: rectangle
         x: 615
@@ -232,7 +233,6 @@ Rectangle {
         font.weight: Font.Normal
         font.family: "Itim"
     }
-
     TextInput {
         id: textInput1
         x: 46
@@ -253,7 +253,6 @@ Rectangle {
         height: 36
         color: "#6935416c"
         radius: 8
-
         Text {
             color: "#ffffff"
             text: qsTr("Browser")
@@ -264,7 +263,6 @@ Rectangle {
             font.weight: Font.Light
             font.family: "Josefin Sans"
         }
-
         FileDialog {
             id: folderDialog3
             folder: "/home"
@@ -291,8 +289,6 @@ Rectangle {
             }
         }
     }
-
-
     TextInput {
         id: textInput2
         x: 46
@@ -324,7 +320,6 @@ Rectangle {
             font.family: "Josefin Sans"
             anchors.horizontalCenter: parent.horizontalCenter
         }
-
         FileDialog {
             id: folderDialog2
             folder: "/home"

@@ -2,21 +2,9 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Dialogs 1.0
-
 import QtCharts 2.6
 import QtMultimedia 5.15
 
-
-
-
-
-Rectangle {
-    id: frame_1
-    width: 1024
-    height: 500
-    color: "transparent"
-
-    property int  latch: 0
 
     Rectangle {
         id: rectangle_55
@@ -181,10 +169,10 @@ Rectangle {
             onClicked: {
                 console.log("minhgay is here");
                 BaseTraining.execution("Hanoi")
+
             }
         }
     }
-
     ChartView {
         x: 111
         y: 60
@@ -240,4 +228,37 @@ Rectangle {
             }
         }
     }
-}
+
+    Rectangle {
+        id: rectangle6
+        x: 38
+        y: 215
+        width: 52
+        height: 99
+        color: "#a9acc6"
+        radius: 50
+        Text {
+            id: text4
+            text: qsTr("<")
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 70
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+
+    Rectangle {
+        id: rectangle8
+        x: 935
+        y: 215
+        width: 52
+        height: 99
+        color: "#a9acc6"
+        radius: 50
+        Text {
+            id: text6
+            text: qsTr(">")
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 70
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }

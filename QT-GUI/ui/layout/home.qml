@@ -177,7 +177,6 @@ Rectangle {
             fillMode: Image.PreserveAspectFit
             source: "/ui/assets/microchip-solid.svg"
         }
-
         MouseArea {
             id: base_learning_ma
             anchors.fill: parent

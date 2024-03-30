@@ -95,7 +95,6 @@
         <file>ui/component/RamFrame.qml</file>
         <file>ui/component/TopBar.qml</file>
         <file>ui/component/UsageTextElement.qml</file>
-        <file>ui/layout/baseLearning.qml</file>
         <file>ui/layout/home.qml</file>
         <file>ui/layout/processData.qml</file>
         <file>ui/layout/recordingSound.qml</file>
@@ -137,6 +136,10 @@
         <file>ui/assets/hust-logo.jpg</file>
         <file>ui/assets/si-synergy-logo.png</file>
         <file>ui/assets/sparc-lab-logo.png</file>
+        <file>ui/layout/baseLearning_data.qml</file>
+        <file>ui/layout/baseLearning_parameterConfigure.qml</file>
+        <file>ui/layout/baseLearning_result.qml</file>
+        <file>ui/layout/baseLearning_traning.qml</file>
         <file>images/image 23.png</file>
         <file>images/image 25.png</file>
         <file>ui/assets/defaultLearningImg.png</file>

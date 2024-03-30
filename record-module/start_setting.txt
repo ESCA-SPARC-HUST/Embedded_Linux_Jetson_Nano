@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 hw:1,0
 /home/gianghandsome/esca-main/Embedded_Linux_Jetson_Nano/record-module
+=======
+hw:2,0
+/home/minkeisme/Desktop/Workplace/ESCA/Embedded_Linux_Jetson_Nano/record-module/data
+>>>>>>> main
 44100
 16
 2
