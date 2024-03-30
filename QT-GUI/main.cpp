@@ -15,11 +15,13 @@
 
 
 #include "component/chart/audiochart.h"
+#include "component/chart/losschart.h"
 
 
 #include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
 #include "controller/configaudio.h"
+#include "core/resultcontroller.h"
 
 
 
@@ -33,7 +35,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     app.setOrganizationName("D-ESCA3");
-    app.setOrganizationDomain("sparc.com");
+    app.setOrganizationDomain("sparc.hust.edu.com");
     app.setApplicationName("D-ESCA3");
 
     QQmlApplicationEngine engine;
@@ -48,12 +50,15 @@ int main(int argc, char *argv[])
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
     AudioFeatureController* audioExtractor = new AudioFeatureController();
+
+    ResultController* displayResult = new ResultController();
+    engine.rootContext()->setContextProperty("DisplayResult", displayResult);
+
     BaseTraining* baseTrainingController = new BaseTraining();
 
 
     AudioEngine* audioEngine;
-    FileWatcher fileWatcher("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
-    fileWatcher.setDirectory("/home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image");
+
 
     ConfigAudio *configAudio = new ConfigAudio();
     engine.rootContext()->setContextProperty("ConfigAudio", configAudio);
@@ -61,7 +66,7 @@ int main(int argc, char *argv[])
 
 
     //    QObject::connect(imageWatcher.fileWatcher, &QFileSystemWatcher::fileChanged, imageWatcher.fileWatcher, &ImageWatcher::handleFileChanged);
-    engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
+    // engine.rootContext()->setContextProperty("fileWatcher", &fileWatcher);
 
 
     //---------------------------
@@ -88,6 +93,15 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("BaseTraining", baseTrainingController);
 
+    // LossCharts* losschart = new LossCharts();
+    // QObject::connect(losschart, &LossCharts::totalLossChanged, [&](const QVector<float>& newBuffer) {
+    //     // Dữ liệu trong buffer đã được cập nhật
+    //     //bufferData = newBuffer;
+    //     // audioController->setbufferData(newBuffer);
+    //     QQmlEngine::setObjectOwnership(losschart, QQmlEngine::CppOwnership);
+    //     engine.rootContext()->setContextProperty("LossFromCpp", QVariant::fromValue(newBuffer));
+    // });
+
 
 
 
@@ -100,7 +114,6 @@ int main(int argc, char *argv[])
 
     });
 
-//    imageWatcher.setWatchedFolder("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
 
 
     return app.exec();

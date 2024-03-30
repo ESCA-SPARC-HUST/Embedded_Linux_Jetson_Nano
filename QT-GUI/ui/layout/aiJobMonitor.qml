@@ -24,7 +24,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("About")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -49,7 +49,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("System Infomation")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -75,7 +75,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Real-time monitor")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -98,9 +98,9 @@ Rectangle {
         Text {
             id: text2
             color: "#ffffff"
-            text: qsTr("AI job monitor")
+            text: qsTr("AI tasks monitor")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -146,6 +146,7 @@ Rectangle {
             model: FolderListModel {
                 id: folderListModel
                 showDirsFirst: true
+                folder: "file:///home/sparc/ESCA/result/monitor"
 
                 // If add filters then remove
                 // nameFilters: ["*.mp3", "*.flac"]
@@ -205,6 +206,9 @@ Rectangle {
                     onClicked: {
                         // Đặt màu nền cho item được chọn
                         listView.selectedItemIndex = index;
+                        let source = folderListModel.folder + '/' + fileName;
+                        console.log(source);
+                        DisplayResult.selectMonitorResult(source);
                     }
                 }
                 // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
@@ -221,8 +225,17 @@ Rectangle {
         y: 81
         width: 535
         height: 365
-        source: "/ui/assets/exResourceMonitoring.png"
+        source: "/ui/assets/no_image.jpg"
         fillMode: Image.PreserveAspectFit
+        Connections {
+            target: DisplayResult
+
+            function onSetMonitorImage(imageName) {
+                // console.log("Hi Giang")
+                console.log(imageName);
+                image.source =imageName;
+            }
+        }
     }
     Rectangle {
         id: rectangle4
@@ -237,9 +250,9 @@ Rectangle {
         Text {
             id: text4
             color: "#ffffff"
-            text: qsTr("AI Job Monitor")
+            text: qsTr("Base Training")
             anchors.fill: parent
-            font.pixelSize: 25
+            font.pixelSize: 23
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -250,7 +263,7 @@ Rectangle {
                 rectangle5.border.width = 1
                 rectangle4.border.width = 2
                 rectangle4.border.color = "#ffffff"
-                folderListModel.folder = "/ui/layout/"
+                folderListModel.folder = "file:///home/sparc/ESCA/result/monitor"
             }
         }
     }
@@ -267,9 +280,9 @@ Rectangle {
         Text {
             id: text5
             color: "#ffffff"
-            text: qsTr("AI Job Monitor")
+            text: qsTr("Transfer Learning")
             anchors.fill: parent
-            font.pixelSize: 25
+            font.pixelSize: 23
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -280,7 +293,7 @@ Rectangle {
                 rectangle4.border.width = 1
                 rectangle5.border.width = 2
                 rectangle5.border.color = "#ffffff"
-                folderListModel.folder = "/ui/component/"
+                folderListModel.folder = "file:///home/sparc/ESCA/result/transferlearning"
             }
         }
     }

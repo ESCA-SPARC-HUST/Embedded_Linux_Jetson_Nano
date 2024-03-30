@@ -3,14 +3,14 @@
 
 BaseTraining::BaseTraining(QObject *parent)
 {
-    m_watcher.addPath(QString(PYTHON_BASE_TRAINING_RESULT));
-    setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
+    // m_watcher.addPath(QString(PYTHON_BASE_TRAINING_RESULT));
+    // setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
 
-    // Initial file list
-    updateFileList();
+    // // Initial file list
+    // updateFileList();
 
-    connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
-    m_base_training = new Process();
+    // connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
+    // m_base_training = new Process();
 }
 
 void BaseTraining::setDirectory(QString directoryPath)
@@ -53,8 +53,50 @@ void BaseTraining::updateFileList()
 
 void BaseTraining::execution(QString audioPath)
 {
+    m_base_training = new Process();
+    // m_watcher = new QFileSystemWatcher();
+    // m_watcher.addPath(QString(PYTHON_BASE_TRAINING_RESULT));
+    // setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
+    // // Initial file list
+    // updateFileList();
+    // connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
     qInfo() << "Hello Giang Dep trai " << audioPath;
-    QString statement ="cd /home/gianghandsome/IoT-AnomallySoundDetection/D-ESCA_v2/ \n python3 tools/base_training.py -cfg ./config/params.yaml";
+    // QString statement ="cd /home/sparc/giang/IoT-AnomallySoundDetection/D-ESCA_v2 \n python3 tools/base_training.py -cfg ./config/params.yaml";
+    QString statement ="cd /home/gianghandsome/training/D-ESCA_v2 \n python3 tools/base_training.py -cfg ./config/params.yaml";
     m_base_training->setStatement(statement);
     m_base_training->start();
+}
+
+void BaseTraining::inference(QString datasource, QString model)
+{
+    // m_delete = new Process();
+    // QString deleteStatement = "cd /home/sparc/ESCA/realtime_result \n rm temp.csv";
+    // m_delete->setStatement(deleteStatement);
+    // m_delete->start();
+
+
+
+    m_base_training = new Process();
+    // m_watcher = new QFileSystemWatcher();
+    // m_watcher.addPath(QString(PYTHON_BASE_TRAINING_RESULT));
+    // setDirectory(QString(PYTHON_BASE_TRAINING_RESULT));
+    // // Initial file list
+    // updateFileList();
+    // connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &BaseTraining::directoryChanged);
+
+    qInfo() << "Inference " << datasource << model;
+    QString statement ="cd /home/sparc/giang/IoT-AnomallySoundDetection/D-ESCA_v2 \n python3 tools/rt_test.py -cfg ./config/params.yaml -f ";
+    statement.append(datasource);
+    m_base_training->setStatement(statement);
+    m_base_training->start();
+}
+
+void BaseTraining::showChart()
+{
+    m_show_chart = new Process();
+    QString statement ="cd /home/sparc/giang/IoT-AnomallySoundDetection/D-ESCA_v2 \n python3 helper/plotting_graph.py -th 0.00044163066195324063 -csv /home/sparc/ESCA/realtime_result/temp1.csv";
+
+    qInfo() << statement;
+    m_show_chart->setStatement(statement);
+    m_show_chart->start();
 }

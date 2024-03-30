@@ -13,6 +13,21 @@ Rectangle {
 
     property bool flag: false
 
+
+    property string device_name: ''
+    property string duration: 'duration'
+    property string file_to_store: 'file_to_store'
+
+    Component.onCompleted: {
+        let test = [];
+        test = AudioObject.loadParametersConfigure();
+        console.log("Hi Giang, I'm here to load information to recording")
+        console.log(test);
+        device_name = test[0];
+        duration = test[5];
+        file_to_store = test[6];
+    }
+
     Text {
         id: select_folder_to_store
         x: 23
@@ -34,7 +49,7 @@ Rectangle {
         width: 545
         height: 70
         color: "#ffffff"
-        text: "/home/gianghandsome/esca-main/data"
+        text: file_to_store
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -186,6 +201,10 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 flag = !flag;
+                if(flag)
+                    AudioObject.startRecord();
+                else
+                    AudioObject.stopRecord();
             }
         }
     }
@@ -211,7 +230,7 @@ Rectangle {
         width: 225
         height: 26
         color: "#ffffff"
-        text: "default"
+        text: device_name
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -248,7 +267,7 @@ Rectangle {
             id: file_manager_ma
             anchors.fill: parent
             onClicked: {
-                flag = !flag;
+                loader.source = "/ui/layout/fileManager.qml"
             }
         }
     }
@@ -260,7 +279,7 @@ Rectangle {
         width: 189
         height: 26
         color: "#ffffff"
-        text: "60"
+        text: duration
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -279,7 +298,7 @@ Rectangle {
         width: 19
         height: 26
         color: "#ffffff"
-        text: "seconds"
+        text: ""
         font.pixelSize: 23
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter

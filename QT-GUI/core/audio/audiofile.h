@@ -12,6 +12,8 @@ public:
     void setFilePath();
 
     void writeFile(const QString filePath, const QVector<QString> &configValue) override;
+
+    void writeInferenceFile(const QString filePath, const QVector<QString> &configValue);
     QVector<QString> readFile(const QString &filePath) override;
 };
 

@@ -1,7 +1,9 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Dialogs 1.0
+// import Qt.labs.platform 1.0
+
 
 Rectangle {
     id: frame_1
@@ -39,8 +41,9 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                    loader.source = "baseLearning_data.qml"
-                }
+                loader.source = "baseLearning_data.qml"
+            }
+
         }
     }
 
@@ -65,8 +68,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                    loader.source = "baseLearning_parameterConfigure.qml"
-                }
+                loader.source = "baseLearning_parameterConfigure.qml"
+            }
         }
     }
     Rectangle {
@@ -90,8 +93,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                    loader.source = "baseLearning_traning.qml"
-                }
+                loader.source = "baseLearning_traning.qml"
+            }
         }
     }
 
@@ -199,7 +202,7 @@ Rectangle {
             width: 168
             height: 68
             color: "#ffffff"
-            text: qsTr("Excution")
+            text: qsTr("Execution")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.pointSize: 22
@@ -208,13 +211,9 @@ Rectangle {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 0
-            anchors.topMargin: 0
-            anchors.leftMargin: 0
             cursorShape: Qt.WaitCursor
             onClicked: {
-                console.log("minhgay is here");
+                console.log("minh is here");
             }
         }
     }
@@ -234,30 +233,6 @@ Rectangle {
         font.weight: Font.Normal
         font.family: "Itim"
     }
-
-    Rectangle {
-        id: rectangle_84
-        x: 800
-        y: 225
-        width: 170
-        height: 36
-        color: "#6935416c"
-        radius: 8
-        Text {
-            id: browser1
-            color: "#ffffff"
-            text: qsTr("Browser")
-            anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 26
-            wrapMode: Text.Wrap
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.weight: Font.Light
-            font.family: "Josefin Sans"
-        }
-    }
-
-
-
     TextInput {
         id: textInput1
         x: 46
@@ -265,11 +240,55 @@ Rectangle {
         width: 565
         height: 30
         color: "#ffffff"
-        text: qsTr("home/nguyen-lam-nghia")
+        text: qsTr("/home/opt")
         font.pixelSize: 20
         font.italic: true
     }
 
+    Rectangle {
+        id: open_file_rec
+        x: 800
+        y: 225
+        width: 170
+        height: 36
+        color: "#6935416c"
+        radius: 8
+        Text {
+            color: "#ffffff"
+            text: qsTr("Browser")
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 22
+            wrapMode: Text.Wrap
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.weight: Font.Light
+            font.family: "Josefin Sans"
+        }
+        FileDialog {
+            id: folderDialog3
+            folder: "/home"
+            selectFolder: true
+            title: "Please choose a file"
+
+            onAccepted: {
+
+                console.log("You choose: " + folderDialog3.folder)
+
+                // handle choose file
+                textInput1.text = folderDialog3.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+                //                Qt.quit()
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog3.open()
+            }
+        }
+    }
     TextInput {
         id: textInput2
         x: 46
@@ -277,7 +296,7 @@ Rectangle {
         width: 565
         height: 30
         color: "#ffffff"
-        text: qsTr("home/nguyen-lam-nghia")
+        text: qsTr("/home/usr")
         font.pixelSize: 20
         font.italic: true
     }
@@ -295,11 +314,36 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Browser")
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 26
+            font.pixelSize: 22
             wrapMode: Text.Wrap
             font.weight: Font.Light
             font.family: "Josefin Sans"
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+        FileDialog {
+            id: folderDialog2
+            folder: "/home"
+            selectFolder: true
+            title: "Please choose a file"
+
+            onAccepted: {
+
+                console.log("You choose: " + folderDialog2.folder)
+
+                // handle choose file
+                textInput2.text = folderDialog2.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+                //                Qt.quit()
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog2.open()
+            }
         }
     }
 }

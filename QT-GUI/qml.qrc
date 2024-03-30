@@ -123,6 +123,16 @@
         <file>ui/layout/gpuMonitor.qml</file>
         <file>ui/layout/ramMonitor.qml</file>
         <file>ui/layout/about.qml</file>
+        <file>ui/layout/baseLearning_data.qml</file>
+        <file>ui/layout/baseLearning_parameterConfigure.qml</file>
+        <file>ui/layout/baseLearning_result.qml</file>
+        <file>ui/layout/baseLearning_traning.qml</file>
+        <file>ui/layout/transferLearning_data.qml</file>
+        <file>ui/layout/transferLearning_parameterConfigure.qml</file>
+        <file>ui/layout/transferLearning_result.qml</file>
+        <file>ui/layout/transferLearning_traning.qml</file>
+        <file>ui/layout/realTimeInference_data.qml</file>
+        <file>ui/layout/realTimeInference_result.qml</file>
         <file>ui/assets/hust-logo.jpg</file>
         <file>ui/assets/si-synergy-logo.png</file>
         <file>ui/assets/sparc-lab-logo.png</file>
@@ -135,5 +145,17 @@
         <file>ui/assets/defaultLearningImg.png</file>
         <file>ui/assets/exResourceMonitoring.png</file>
         <file>ui/layout/setTimer.qml</file>
+        <file>ui/assets/chart-line-solid.svg</file>
+        <file>ui/assets/laptop-file-solid.svg</file>
+        <file>ui/assets/shuffle-solid.svg</file>
+        <file>ui/assets/microphone-solid.svg</file>
+        <file>ui/assets/lightbulb-regular.svg</file>
+        <file>ui/assets/microchip-solid.svg</file>
+        <file>ui/assets/folder-open-regular.svg</file>
+        <file>ui/assets/no_image.jpg</file>
+        <file>ui/assets/gear-solid.svg</file>
+        <file>ui/layout/loss_curve_display.qml</file>
+        <file>ui/layout/pr_curve_display.qml</file>
+        <file>ui/layout/roc_curve_display.qml</file>
     </qresource>
 </RCC>

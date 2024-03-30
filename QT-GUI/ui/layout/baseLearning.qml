@@ -34,11 +34,12 @@ Rectangle {
             source: "/ui/assets/defaultLearningImg.png"    // default img
 
             Connections {
-                target: fileWatcher
+                target: DisplayResult
 
-                function onSetImage(imageName) {
-                    console.log("file:///home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image/" + imageName);
-                    image_render.source = "file:///home/gianghandsome/code/Embedded_Linux_Jetson_Nano/image/" + imageName;
+                function onSetLossImage(imageName) {
+                    // console.log("Hi Giang")
+                    console.log(imageName);
+                    image_render.source ="file://" + imageName;
                 }
             }
         }
@@ -73,7 +74,7 @@ Rectangle {
 
                 onClicked: {
                     connected = !connected;
-                    BaseTraining.execution('Hanoi');
+                    DisplayResult.selectResult('Hanoi');
 
 //                    if (connected) {
 //                        fileWatcher.connect(onSetImage);

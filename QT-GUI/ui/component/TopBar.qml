@@ -28,7 +28,7 @@ Rectangle {
     Text {
         id: text5
         color: "#ffffff"
-        text: qsTr("Environmental sound collection and analysis embedded application")
+        text: qsTr("Environmental Sound Collection and Analysis embedded application")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 18
         anchors.horizontalCenter: parent.horizontalCenter

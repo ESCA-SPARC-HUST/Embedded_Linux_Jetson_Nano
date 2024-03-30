@@ -2,12 +2,9 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Dialogs 1.0
+import QtCharts 2.6
+import QtMultimedia 5.15
 
-Rectangle {
-    id: frame_1
-    width: 1024
-    height: 500
-    color: "transparent"
 
     Rectangle {
         id: rectangle_55
@@ -153,7 +150,7 @@ Rectangle {
         Text {
             id: start_stop_Btn
             color: "#ffffff"
-            text: qsTr("Excution")
+            text: qsTr("Execution")
             anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -171,6 +168,63 @@ Rectangle {
             cursorShape: Qt.WaitCursor
             onClicked: {
                 console.log("minhgay is here");
+                BaseTraining.execution("Hanoi")
+
+            }
+        }
+    }
+    ChartView {
+        x: 111
+        y: 60
+        title: "Loss Training Chart"
+        width: 800
+        height: 360
+        anchors.centerIn: parent
+        antialiasing: true
+
+        LineSeries {
+            id: series
+            name: "Total Loss in Base Training pharse"
+            axisX: ValueAxis {
+                id: axisX
+                min: 1
+                max: 50  // Giá trị tối đa hiển thị trên trục X
+                tickCount: 30
+            }
+            axisY: ValueAxis {
+                id: axisY
+                min: 0
+                max: 0.15
+                tickCount: 11
+            }
+        }
+
+        Timer {
+            interval: 5000 // Mỗi 10ms cập nhật một lần // em chua biet dung nhieu cho toi uu
+            running: true
+            repeat: true
+            onTriggered: {
+
+
+                // var xValue = series.count;
+                // var yValue = Math.sin(xValue / 10);
+                // // var yValue = Math.lo
+
+                // series.append(xValue, yValue);
+
+                // if (xValue >= 100 && xValue % 100 == 0)
+                //     axisX.max += 100;
+
+
+                console.log(LossFromCpp);
+                series.clear();
+                for(let i = 1; i < LossFromCpp.length; i++) {
+                    let xValue = i;
+                    let yValue = LossFromCpp[i];
+                    series.append(xValue, yValue);
+                   if(xValue > axisX.max)
+                       axisX.max += 20;
+                }
             }
         }
     }
@@ -208,6 +262,3 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
-
-
-}

@@ -2,7 +2,7 @@
 
 ConfigAudio::ConfigAudio(QObject *parent) : FileManipulation(parent)
 {
-    filePath = "/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/shared-file/recording.txt";
+    filePath = "/home/gianghandsome/esca/Embedded_Linux_Jetson_Nano/shared-file/recording.txt";
 //    connect(this, &ConfigAudio::saveConfigSignal, this, &ConfigAudio::saveConfig);
     qDebug () << "ConfigAudio constructor done!";
 }
@@ -10,6 +10,7 @@ ConfigAudio::ConfigAudio(QObject *parent) : FileManipulation(parent)
 void ConfigAudio::writeFile(const QString filePath, const QVector<QString> &data)
 {
     QFile file(filePath);
+    qInfo() << filePath;
     if (file.open(QIODevice::WriteOnly))
     {       
         QTextStream out(&file);

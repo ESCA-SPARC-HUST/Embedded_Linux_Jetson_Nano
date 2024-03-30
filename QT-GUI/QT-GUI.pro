@@ -11,7 +11,9 @@ QT += network
 
 SOURCES += \
         component/chart/audiochart.cpp \
+        component/chart/losscharts.cpp \
         component/file/filemanipulation.cpp \
+        component/file/fileyamlmanipulation.cpp \
         component/process/process.cpp \
         component/socket/socket.cpp \
         controller/audiocontroller.cpp \
@@ -23,6 +25,8 @@ SOURCES += \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
         core/filewatcher.cpp \
+        core/resultcontroller.cpp \
+        core/training/inferencefile.cpp \
         main.cpp
 
 RESOURCES += qml.qrc \
@@ -41,7 +45,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     component/chart/audiochart.h \
+    component/chart/losscharts.h \
     component/file/filemanipulation.h \
+    component/file/fileyamlmanipulation.h \
     component/process/process.h \
     component/socket/socket.h \
     config/audioconfig.h \
@@ -58,7 +64,9 @@ HEADERS += \
     core/audio/audiofile.h \
     core/audiochart.h \
     core/audio/audioengine.h \
-    core/filewatcher.h
+    core/filewatcher.h \
+    core/resultcontroller.h \
+    core/training/inferencefile.h
 
 DISTFILES += \
     ../../../tessnewDESC/UI-D-ESCA-3/UI/cppImports/QtQuick/Studio/Components/ArcArrow.qml \

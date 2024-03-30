@@ -26,6 +26,9 @@ public:
     void setDirectory(QString directoryPath);
 
     Q_INVOKABLE void extractMFCC(QString audioPath);
+    Q_INVOKABLE void extractGFCC(QString audioPath);
+    Q_INVOKABLE void extractFrequency(QString audioPath);
+    Q_INVOKABLE void splitAudio(QString source, QString destination, QString duration);
 
 public slots:
     void directoryChanged(const QString &path);
