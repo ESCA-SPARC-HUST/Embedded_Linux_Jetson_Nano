@@ -22,7 +22,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("About")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -47,7 +47,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("System Infomation")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -73,7 +73,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Real-time monitor")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -98,7 +98,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("AI job monitor")
             anchors.fill: parent
-            font.pixelSize: 33
+            font.pixelSize: 28
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }

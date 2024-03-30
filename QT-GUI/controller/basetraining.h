@@ -25,6 +25,9 @@ public:
 
     Q_INVOKABLE void inference(QString datasource, QString model);
 
+
+    Q_INVOKABLE void showChart();
+
 public slots:
     void directoryChanged(const QString &path);
 
@@ -35,6 +38,8 @@ signals:
 private:
     // FeatureAudioExtractor* m_audio_extractor = nullptr;
     Process* m_base_training = nullptr;
+    Process* m_show_chart = nullptr;
+    Process* m_delete = nullptr;
     QFileSystemWatcher* m_watcher = nullptr;
     QString m_directory_result;
     QSet<QString> m_previousFiles;

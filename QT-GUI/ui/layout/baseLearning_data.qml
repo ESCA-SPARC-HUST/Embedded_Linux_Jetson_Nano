@@ -1,18 +1,14 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import "qrc:/ui/component/QtQuick/Studio/Components"
 import QtQuick.Dialogs 1.0
-import Qt.labs.platform 1.0
+// import Qt.labs.platform 1.0
 
 Rectangle {
     id: frame_1
     width: 1024
     height: 500
     color: "transparent"
-
-    property string source: ''
-    property string destination: ''
-    property  string duration: ''
 
     Rectangle {
         id: rectangle_55
@@ -44,8 +40,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                    loader.source = "baseLearning_data.qml"
-                }
+                loader.source = "baseLearning_data.qml"
+            }
         }
     }
 
@@ -70,10 +66,11 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                    loader.source = "baseLearning_parameterConfigure.qml"
-                }
+                loader.source = "baseLearning_parameterConfigure.qml"
+            }
         }
     }
+
     Rectangle {
         id: rectangle
         x: 615
@@ -95,8 +92,8 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                    loader.source = "baseLearning_traning.qml"
-                }
+                loader.source = "baseLearning_traning.qml"
+            }
         }
     }
 
@@ -141,7 +138,7 @@ Rectangle {
         width: 312
         height: 24
         color: "#ffffff"
-        text: qsTr("Data source")
+        text: qsTr("Select folder to store")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -180,7 +177,7 @@ Rectangle {
             color: "#ffffff"
             width: 99
             height: 30
-            text: qsTr("10 seconds")
+            text: qsTr("10 minutes")
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 20
             anchors.horizontalCenter: parent.horizontalCenter
@@ -213,19 +210,9 @@ Rectangle {
         MouseArea {
             id: mouseArea
             anchors.fill: parent
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 0
-            anchors.topMargin: 0
-            anchors.leftMargin: 0
             cursorShape: Qt.WaitCursor
             onClicked: {
-                duration = textInput.text
-                source = textInput1.text
-                destination = textInput2.text
-                let temp = duration.split(' ')
-                console.log(temp)
-                duration = temp[0]
-                FeatureAudioExtractor.splitAudio(source.substring(7), destination.substring(7), duration);
+                console.log("minh is here");
             }
         }
     }
@@ -237,7 +224,7 @@ Rectangle {
         width: 422
         height: 24
         color: "#ffffff"
-        text: qsTr("Folder to store file after split")
+        text: qsTr("Select folder to store file after split")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -246,49 +233,6 @@ Rectangle {
         font.family: "Itim"
     }
 
-    Rectangle {
-        id: rectangle_84
-        x: 800
-        y: 225
-        width: 170
-        height: 36
-        color: "#6935416c"
-        radius: 8
-        Text {
-            id: browser1
-            color: "#ffffff"
-            text: qsTr("Browser")
-            anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 26
-            wrapMode: Text.Wrap
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.weight: Font.Light
-            font.family: "Josefin Sans"
-        }
-        FolderDialog {
-            id: folderDialog3
-            currentFolder: viewer.folder
-            folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-            onAccepted: {
-
-                // handle choose file
-                textInput1.text = folderDialog3.folder
-                folderListModel.folder = folderDialog3.folder
-            }
-            onRejected: {
-                console.log("Canceled")
-            }
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                folderDialog3.open();
-            }
-        }
-    }
-
-
-
     TextInput {
         id: textInput1
         x: 46
@@ -296,10 +240,58 @@ Rectangle {
         width: 565
         height: 30
         color: "#ffffff"
-        text: qsTr("")
+        text: qsTr("/home/opt")
         font.pixelSize: 20
         font.italic: true
     }
+
+    Rectangle {
+        id: open_file_rec
+        x: 800
+        y: 225
+        width: 170
+        height: 36
+        color: "#6935416c"
+        radius: 8
+
+        Text {
+            color: "#ffffff"
+            text: qsTr("Browser")
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 22
+            wrapMode: Text.Wrap
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.weight: Font.Light
+            font.family: "Josefin Sans"
+        }
+
+        FileDialog {
+            id: folderDialog3
+            folder: "/home"
+            selectFolder: true
+            title: "Please choose a file"
+
+            onAccepted: {
+
+                console.log("You choose: " + folderDialog3.folder)
+
+                // handle choose file
+                textInput1.text = folderDialog3.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+                //                Qt.quit()
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog3.open()
+            }
+        }
+    }
+
 
     TextInput {
         id: textInput2
@@ -308,7 +300,7 @@ Rectangle {
         width: 565
         height: 30
         color: "#ffffff"
-        text: qsTr("")
+        text: qsTr("/home/usr")
         font.pixelSize: 20
         font.italic: true
     }
@@ -326,30 +318,36 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Browser")
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 26
+            font.pixelSize: 22
             wrapMode: Text.Wrap
             font.weight: Font.Light
             font.family: "Josefin Sans"
             anchors.horizontalCenter: parent.horizontalCenter
         }
-        FolderDialog {
+
+        FileDialog {
             id: folderDialog2
-            currentFolder: viewer.folder
-            folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            folder: "/home"
+            selectFolder: true
+            title: "Please choose a file"
+
             onAccepted: {
+
+                console.log("You choose: " + folderDialog2.folder)
 
                 // handle choose file
                 textInput2.text = folderDialog2.folder
-                folderListModel.folder = folderDialog2.folder
             }
             onRejected: {
                 console.log("Canceled")
+                //                Qt.quit()
             }
         }
+
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                folderDialog2.open();
+                folderDialog2.open()
             }
         }
     }

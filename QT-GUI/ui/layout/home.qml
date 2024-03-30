@@ -183,7 +183,7 @@ Rectangle {
             anchors.fill: parent
             anchors.leftMargin: 0
             onClicked: {
-                loader.source = "/ui/layout/baseLearning_data.qml"
+                loader.source = "/ui/layout/loss_curve_display.qml"
             }
         }
     }
@@ -393,7 +393,7 @@ Rectangle {
             anchors.fill: parent
             anchors.leftMargin: 0
             onClicked: {
-                loader.source = "/ui/layout/systemInformation.qml"
+                loader.source = "/ui/layout/about.qml"
             }
         }
     }

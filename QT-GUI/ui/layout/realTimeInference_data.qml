@@ -1,22 +1,31 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Dialogs 1.0
-import Qt.labs.platform 1.0
-import QtMultimedia 5.15
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import "qrc:/ui/component/QtQuick/Studio/Components"
+import QtQuick.Dialogs 1.0
+// import Qt.labs.platform 1.0
+
+
+
+
 
 Rectangle {
-    id: rectangle
-    x: 0
-    y: -1
+    id: frame_1
     width: 1024
     height: 500
-    color: "#272d37"
+    color: "transparent"
 
     property string datasource: ''
     property string model: ''
 
+    Rectangle {
+        id: rectangle_55
+        x: 0
+        y: 0
+        width: 1024
+        height: 500
+        color: "#272D37"
+    }
+    // HEADER
     Rectangle {
         id: rectangle3
         x: 82
@@ -67,14 +76,7 @@ Rectangle {
             }
         }
     }
-    Rectangle {
-        id: rectangle2
-        x: 50
-        y: 65
-        width: 934
-        height: 2
-        color: "#ffffff"
-    }
+    // End header
 
     Text {
         id: select_folder_to_store
@@ -83,83 +85,196 @@ Rectangle {
         width: 312
         height: 24
         color: "#ffffff"
-        text: qsTr("Data to inference")
+        text: qsTr("Select data source to inference")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.Wrap
         font.weight: Font.Normal
         font.family: "Itim"
+    }
 
-        Text {
-            id: select_folder_to_store1
-            x: 0
-            y: 105
-            width: 363
-            height: 24
-            color: "#ffffff"
-            text: qsTr("Choose the model\n")
-            font.pixelSize: 24
-            horizontalAlignment: Text.AlignLeft
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-            font.weight: Font.Normal
-            font.family: "Itim"
-        }
+    Text {
+        id: set_time_to_start_record
+        x: 41
+        y: 330
+        width: 321
+        height: 24
+        color: "#ffffff"
+        text: qsTr("Time to split")
+        font.pixelSize: 24
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.Wrap
+        font.weight: Font.Normal
+        font.family: "Itim"
+    }
+
+    Rectangle {
+        id: rectangle_64
+        x: 804
+        y: 317
+        width: 166
+        height: 37
+        color: "#6935416c"
+        radius: 8
 
         TextInput {
-            id: textInput3
-            x: 0
-            y: 144
-            width: 565
-            height: 30
+            id: textInput
             color: "#ffffff"
-            text: qsTr("")
+            width: 99
+            height: 30
+            text: qsTr("10 minutes")
+            anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 20
-            font.italic: true
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+
+
+    Rectangle {
+
+        x: 766
+        y: 412
+        width: 216
+        height: 52
+        color: "#f30b0836"
+        radius: 22
+
+        Text {
+            id: start_stop_Btn
+            x: 24
+            y: -10
+            width: 168
+            height: 68
+            color: "#ffffff"
+            text: qsTr("Execution")
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.pointSize: 22
         }
 
-        Rectangle {
-            id: rectangle_86
-            x: 756
-            y: 105
-            width: 170
-            height: 36
-            color: "#6935416c"
-            radius: 8
-            Text {
-                id: browser3
-                color: "#ffffff"
-                text: qsTr("Browser")
-                anchors.verticalCenter: parent.verticalCenter
-                font.pixelSize: 26
-                wrapMode: Text.Wrap
-                font.weight: Font.Light
-                font.family: "Josefin Sans"
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-            FolderDialog {
-                id: folderDialog2
-                currentFolder: viewer.folder
-                folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-                onAccepted: {
-
-                    // handle choose file
-                    textInput3.text = folderDialog2.folder
-                    folderListModel.folder = folderDialog2.folder
-                }
-                onRejected: {
-                    console.log("Canceled")
-                }
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    folderDialog2.open();
-                }
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            cursorShape: Qt.WaitCursor
+            onClicked: {
+                console.log("minh is here");
+                datasource = textInput2.text;
+                model = textInput1.text;
+                BaseTraining.inference(datasource.substring(7), model);
             }
         }
     }
+
+
+    Rectangle {
+
+        x: 535
+        y: 412
+        width: 216
+        height: 52
+        color: "#f30b0836"
+        radius: 22
+
+        Text {
+            id: showChart
+            x: 34
+            y: -10
+            width: 168
+            height: 68
+            color: "#ffffff"
+            text: qsTr("Show Chart")
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            font.pointSize: 22
+        }
+
+        MouseArea {
+            id: mouseArea1
+            anchors.fill: parent
+            cursorShape: Qt.WaitCursor
+            onClicked: {
+                BaseTraining.showChart();
+            }
+        }
+    }
+
+    Text {
+        id: select_folder_to_store1
+        x: 43
+        y: 231
+        width: 422
+        height: 24
+        color: "#ffffff"
+        text: qsTr("Slect the model to inference")
+        font.pixelSize: 24
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
+        wrapMode: Text.Wrap
+        font.weight: Font.Normal
+        font.family: "Itim"
+    }
+
+    TextInput {
+        id: textInput1
+        x: 46
+        y: 270
+        width: 565
+        height: 30
+        color: "#ffffff"
+        text: qsTr("")
+        font.pixelSize: 20
+        font.italic: true
+    }
+
+    Rectangle {
+        id: open_file_rec
+        x: 800
+        y: 225
+        width: 170
+        height: 36
+        color: "#6935416c"
+        radius: 8
+
+        Text {
+            color: "#ffffff"
+            text: qsTr("Browser")
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: 22
+            wrapMode: Text.Wrap
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.weight: Font.Light
+            font.family: "Josefin Sans"
+        }
+
+        FileDialog {
+            id: folderDialog3
+            folder: "/home"
+            selectFolder: true
+            title: "Please choose a file"
+
+            onAccepted: {
+
+                console.log("You choose: " + folderDialog3.folder)
+
+                // handle choose file
+                textInput1.text = folderDialog3.folder
+            }
+            onRejected: {
+                console.log("Canceled")
+                //                Qt.quit()
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                folderDialog3.open()
+            }
+        }
+    }
+
 
     TextInput {
         id: textInput2
@@ -186,71 +301,38 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Browser")
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 26
+            font.pixelSize: 22
             wrapMode: Text.Wrap
             font.weight: Font.Light
             font.family: "Josefin Sans"
             anchors.horizontalCenter: parent.horizontalCenter
         }
-        FolderDialog {
-            id: folderDialog3
-            currentFolder: viewer.folder
-            folder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+
+        FileDialog {
+            id: folderDialog2
+            folder: "/home"
+            selectFolder: true
+            title: "Please choose a file"
+
             onAccepted: {
 
+                console.log("You choose: " + folderDialog2.folder)
+
                 // handle choose file
-                textInput2.text = folderDialog3.folder
-                folderListModel.folder = folderDialog3.folder
+                textInput2.text = folderDialog2.folder
+
             }
             onRejected: {
                 console.log("Canceled")
+                //                Qt.quit()
             }
         }
+
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                folderDialog3.open();
+                folderDialog2.open()
             }
-        }
-    }
-
-    Rectangle {
-        x: 766
-        y: 412
-        width: 216
-        height: 52
-        color: "#f30b0836"
-        radius: 22
-        Text {
-            id: start_stop_Btn
-            x: 24
-            y: -10
-            width: 168
-            height: 68
-            color: "#ffffff"
-            text: qsTr("Execution")
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pointSize: 22
-        }
-
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            onClicked: {
-                console.log("minhgay is here");
-                datasource = textInput3.text;
-                model = textInput2.text;
-
-                BaseTraining.inference(datasource, model);
-                }
-            cursorShape: Qt.WaitCursor
-            anchors.topMargin: 0
-            anchors.rightMargin: 0
-            anchors.leftMargin: 0
-            anchors.bottomMargin: 0
         }
     }
 }
-
-

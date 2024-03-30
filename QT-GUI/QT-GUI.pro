@@ -25,6 +25,7 @@ SOURCES += \
         core/audio/audioengine.cpp \
         core/audio/audiofile.cpp \
         core/filewatcher.cpp \
+        core/resultcontroller.cpp \
         core/training/inferencefile.cpp \
         main.cpp
 
@@ -64,6 +65,7 @@ HEADERS += \
     core/audiochart.h \
     core/audio/audioengine.h \
     core/filewatcher.h \
+    core/resultcontroller.h \
     core/training/inferencefile.h
 
 DISTFILES += \

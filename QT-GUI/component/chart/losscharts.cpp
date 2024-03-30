@@ -17,7 +17,7 @@ LossCharts::LossCharts(QObject *parent) : QObject(parent) {
 
 void LossCharts::getTotalLoss()
 {
-    FILE* file = fopen("/home/gianghandsome/python-learning/info.txt", "r");
+    FILE* file = fopen("//home/gianghandsome/python-learning/info.txt", "r");
     char loss_value[500];
     m_buffer.clear();
     while (fgets(loss_value, 64, file) != NULL){

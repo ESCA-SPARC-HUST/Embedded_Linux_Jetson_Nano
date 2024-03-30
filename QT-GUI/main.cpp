@@ -21,6 +21,7 @@
 #include "core/filewatcher.h"
 #include "core/audio/audioengine.h"
 #include "controller/configaudio.h"
+#include "core/resultcontroller.h"
 
 
 
@@ -49,12 +50,15 @@ int main(int argc, char *argv[])
     AudioController* audioController = new AudioController();
     MonitorBackend* minitorBackend = new MonitorBackend();
     AudioFeatureController* audioExtractor = new AudioFeatureController();
+
+    ResultController* displayResult = new ResultController();
+    engine.rootContext()->setContextProperty("DisplayResult", displayResult);
+
     BaseTraining* baseTrainingController = new BaseTraining();
 
 
     AudioEngine* audioEngine;
-    // FileWatcher fileWatcher("/opt/QT-GUI/bin");
-    // fileWatcher.setDirectory("/opt/QT-GUI/bin");
+
 
     ConfigAudio *configAudio = new ConfigAudio();
     engine.rootContext()->setContextProperty("ConfigAudio", configAudio);
@@ -110,7 +114,6 @@ int main(int argc, char *argv[])
 
     });
 
-//    imageWatcher.setWatchedFolder("/home/nguyen-hai-minh/BaseCodeESCA/Embedded_Linux_Jetson_Nano/QT-GUI/images");
 
 
     return app.exec();

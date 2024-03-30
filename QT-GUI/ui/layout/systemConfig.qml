@@ -574,9 +574,9 @@ Rectangle {
                     }
                 }
 
-                console.log("You choose: " + choose_file_save_record.folder)
-                console.log("You choose: " + truncateText(
-                                "" + choose_file_save_record.folder, 60))
+                // console.log("You choose: " + choose_file_save_record.folder)
+                // console.log("You choose: " + truncateText(
+                //                 "" + choose_file_save_record.folder, 60))
 
                 // handle choose file
                 folder_to_store.text = truncateText(

@@ -7,11 +7,16 @@ import QtCharts 2.6
 import QtMultimedia 5.15
 
 
+
+
+
 Rectangle {
     id: frame_1
     width: 1024
     height: 500
     color: "transparent"
+
+    property int  latch: 0
 
     Rectangle {
         id: rectangle_55
@@ -195,7 +200,7 @@ Rectangle {
             axisX: ValueAxis {
                 id: axisX
                 min: 1
-                max: 30  // Giá trị tối đa hiển thị trên trục X
+                max: 50  // Giá trị tối đa hiển thị trên trục X
                 tickCount: 30
             }
             axisY: ValueAxis {
@@ -207,21 +212,31 @@ Rectangle {
         }
 
         Timer {
-            interval: 10000 // Mỗi 10ms cập nhật một lần // em chua biet dung nhieu cho toi uu
+            interval: 5000 // Mỗi 10ms cập nhật một lần // em chua biet dung nhieu cho toi uu
             running: true
             repeat: true
             onTriggered: {
 
-                for (let i = 0; i <= 32; i++) {
-                    // var xValue = series.count; // truc x la thoi gian ( tai thoi diem chay trong for :3)
-                    var xValue = i+1;
-                    var yValue = LossFromCpp[i];
-//                  var yValue = Math.sin(xValue / 10);
+
+                // var xValue = series.count;
+                // var yValue = Math.sin(xValue / 10);
+                // // var yValue = Math.lo
+
+                // series.append(xValue, yValue);
+
+                // if (xValue >= 100 && xValue % 100 == 0)
+                //     axisX.max += 100;
+
+
+                console.log(LossFromCpp);
+                series.clear();
+                for(let i = 1; i < LossFromCpp.length; i++) {
+                    let xValue = i;
+                    let yValue = LossFromCpp[i];
                     series.append(xValue, yValue);
+                   if(xValue > axisX.max)
+                       axisX.max += 20;
                 }
-                // Cập nhật giá trị tối đa trên trục Y nếu cần
-                if (yValue > axisY.max)
-                    axisY.max = yValue;
             }
         }
     }

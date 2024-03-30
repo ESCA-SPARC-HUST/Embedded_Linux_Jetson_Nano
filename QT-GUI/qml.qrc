@@ -149,6 +149,10 @@
         <file>ui/assets/lightbulb-regular.svg</file>
         <file>ui/assets/microchip-solid.svg</file>
         <file>ui/assets/folder-open-regular.svg</file>
+        <file>ui/assets/no_image.jpg</file>
         <file>ui/assets/gear-solid.svg</file>
+        <file>ui/layout/loss_curve_display.qml</file>
+        <file>ui/layout/pr_curve_display.qml</file>
+        <file>ui/layout/roc_curve_display.qml</file>
     </qresource>
 </RCC>

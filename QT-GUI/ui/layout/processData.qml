@@ -11,6 +11,8 @@ Rectangle {
     height: 500
     color: "transparent"
 
+    property string chooseFile: ""
+
     // BACKGOUND
     Rectangle {
         id: rectangle_55
@@ -70,8 +72,9 @@ Rectangle {
             clip: true
             model: FolderListModel {
                 id: folderListModel
-                showDirsFirst: true
                 folder: "file:///home/sparc/ESCA/data"
+                showDirsFirst: true
+
                 // If add filters then remove
                 // nameFilters: ["*.mp3", "*.flac"]
 
@@ -130,6 +133,8 @@ Rectangle {
                     onClicked: {
                         // Đặt màu nền cho item được chọn
                         listView.selectedItemIndex = index;
+                        chooseFile = fileName;
+
                     }
                 }
                 // Sử dụng biến selectedItemIndex để xác định xem item có được chọn hay không
@@ -202,9 +207,21 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Frequencies")
             anchors.fill: parent
-            font.pixelSize: 25
+            font.pixelSize: 20
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.topMargin: 0
+            anchors.leftMargin: 0
+            cursorShape: Qt.WaitCursor
+            onClicked: {
+                FeatureAudioExtractor.extractFrequency(chooseFile);
+            }
         }
     }
 
@@ -221,7 +238,7 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Spectrograms")
             anchors.fill: parent
-            font.pixelSize: 25
+            font.pixelSize: 20
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -240,18 +257,13 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Filter banks")
             anchors.fill: parent
-            font.pixelSize: 25
+            font.pixelSize: 20
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: 0
             anchors.bottomMargin: 0
             anchors.topMargin: 0
             anchors.leftMargin: 0
-            // cursorShape: Qt.WaitCursor
-            // onClicked: {
-                // console.log("minhgay is here");
-                // FeatureAudioExtractor.extractMFCC("Hanoi")
-            // }
         }
     }
 
@@ -268,9 +280,21 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Gammatone Frequency Cepstral Coefﬁcients")
             anchors.fill: parent
-            font.pixelSize: 23
+            font.pixelSize: 20
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            id: mouseArea1
+            anchors.fill: parent
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.topMargin: 0
+            anchors.leftMargin: 0
+            cursorShape: Qt.WaitCursor
+            onClicked: {
+                FeatureAudioExtractor.extractGFCC(chooseFile);
+            }
         }
     }
 
@@ -287,149 +311,23 @@ Rectangle {
             color: "#ffffff"
             text: qsTr("Mel-Frequency Cepstral Coefﬁcients")
             anchors.fill: parent
-            font.pixelSize: 23
+            font.pixelSize: 20
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
+        MouseArea {
+            id: mouseArea2
+            anchors.fill: parent
+            anchors.rightMargin: 0
+            anchors.bottomMargin: 0
+            anchors.topMargin: 0
+            anchors.leftMargin: 0
+            cursorShape: Qt.WaitCursor
+            onClicked: {
+                FeatureAudioExtractor.extractMFCC(chooseFile);
+            }
+        }
     }
-
-    // Rectangle {
-    //     id: rectangle12
-    //     x: 556
-    //     y: 400
-    //     width: 130
-    //     height: 43
-    //     color: "#394251"
-    //     radius: 8
-    //     Text {
-    //         id: text12
-    //         color: "#ffffff"
-    //         text: qsTr("psrcc.py")
-    //         anchors.fill: parent
-    //         font.pixelSize: 25
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //     }
-    // }
-
-    // Rectangle {
-    //     id: rectangle13
-    //     x: 715
-    //     y: 250
-    //     width: 130
-    //     height: 43
-    //     color: "#394251"
-    //     radius: 8
-    //     Text {
-    //         id: text13
-    //         color: "#ffffff"
-    //         text: qsTr("lpc.py")
-    //         anchors.fill: parent
-    //         font.pixelSize: 25
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //     }
-    // }
-
-    // Rectangle {
-    //     id: rectangle14
-    //     x: 715
-    //     y: 327
-    //     width: 130
-    //     height: 43
-    //     color: "#394251"
-    //     radius: 8
-    //     Text {
-    //         id: text14
-    //         color: "#ffffff"
-    //         text: qsTr("ngcc.py")
-    //         anchors.fill: parent
-    //         font.pixelSize: 25
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //     }
-    // }
-
-    // Rectangle {
-    //     id: rectangle15
-    //     x: 715
-    //     y: 400
-    //     width: 130
-    //     height: 43
-    //     color: "#394251"
-    //     radius: 8
-    //     Text {
-    //         id: text15
-    //         color: "#ffffff"
-    //         text: qsTr("rplr.py")
-    //         anchors.fill: parent
-    //         font.pixelSize: 25
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //     }
-    // }
-
-    // Rectangle {
-    //     id: rectangle16
-    //     x: 872
-    //     y: 250
-    //     width: 130
-    //     height: 43
-    //     color: "#394251"
-    //     radius: 8
-    //     Text {
-    //         id: text16
-    //         color: "#ffffff"
-    //         text: qsTr("mfcc.py")
-    //         anchors.fill: parent
-    //         font.pixelSize: 25
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //     }
-    // }
-
-    // Rectangle {
-    //     id: rectangle17
-    //     x: 872
-    //     y: 327
-    //     width: 130
-    //     height: 43
-    //     color: "#394251"
-    //     radius: 8
-    //     Text {
-    //         id: text17
-    //         color: "#ffffff"
-    //         text: qsTr("pncc.py")
-    //         anchors.fill: parent
-    //         font.pixelSize: 25
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //     }
-    // }
-
-    // Rectangle {
-    //     id: rectangle18
-    //     x: 872
-    //     y: 400
-    //     width: 130
-    //     height: 43
-    //     color: "#394251"
-    //     radius: 8
-    //     Text {
-    //         id: text18
-    //         color: "#ffffff"
-    //         text: qsTr("spfeats.py")
-    //         anchors.fill: parent
-    //         font.pixelSize: 25
-    //         horizontalAlignment: Text.AlignHCenter
-    //         verticalAlignment: Text.AlignVCenter
-    //     }
-    // }
-
 }
 
-/*##^##
-Designer {
-    D{i:0;uuid:"858b790d-cb73-5e2b-a692-48e572ab6f81"}D{i:3}
-}
-##^##*/
+
